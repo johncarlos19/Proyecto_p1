@@ -51,6 +51,21 @@ public class Principal extends JFrame {
 		setContentPane(contentPane);;
 		
 
+		JPanel panel = new JPanel();
+		panel.setVisible(false);
+		panel.setEnabled(false);
+		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JButton btnNba = new JButton();
+		btnNba.setIcon(new ImageIcon(Principal.class.getResource("/imagen/logoprincipal2.png")));
+		btnNba.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		panel.add(btnNba, BorderLayout.CENTER);
+		
+		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(null);
