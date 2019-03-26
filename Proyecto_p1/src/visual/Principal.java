@@ -16,6 +16,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JLabel;
+import java.awt.Color;
 
 public class Principal extends JFrame {
 
@@ -43,27 +46,29 @@ public class Principal extends JFrame {
 	public Principal() {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 1366, 811);
 	
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);;
 		
-
+		
 		JPanel panel = new JPanel();
-		panel.setVisible(false);
-		panel.setEnabled(false);
-		contentPane.add(panel, BorderLayout.CENTER);
+		contentPane.add(panel, BorderLayout.NORTH);
 		panel.setLayout(new BorderLayout(0, 0));
 		
 		JButton btnNba = new JButton();
 		btnNba.setIcon(new ImageIcon(Principal.class.getResource("/imagen/logoprincipal2.png")));
 		btnNba.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				panel.setVisible(false);
+				panel.setEnabled(false);
 			}
 		});
 		panel.add(btnNba, BorderLayout.CENTER);
+		
 		
 		
 		JPanel panel_1 = new JPanel();
@@ -102,15 +107,25 @@ public class Principal extends JFrame {
 		mnEstadisticas.add(mntmEstadisticaDelPartido);
 		
 		JButton btnJuego = new JButton("Juego");
-		btnJuego.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnJuego.setBounds(598, 248, 184, 167);
+		btnJuego.setForeground(Color.WHITE);
+		btnJuego.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnJuego.setIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd11i.gif")));
+		btnJuego.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		btnJuego.setBounds(559, 245, 184, 167);
 		panel_1.add(btnJuego);
-		dimention = super.getToolkit().getScreenSize();
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(Principal.class.getResource("/imagen/1530905.jpg")));
+		label.setBounds(0, 21, 1340, 741);
+		panel_1.add(label);
+
+		
+		/*dimention = super.getToolkit().getScreenSize();
 		super.setSize(dimention.width,(dimention.height-50));
 		setLocationRelativeTo(null);
 		
 		
 		dimention=super.getToolkit().getScreenSize();
-		super.setSize(dimention.width,(dimention.height-50));
+		super.setSize(dimention.width,(dimention.height-50));*/
 	}
 }
