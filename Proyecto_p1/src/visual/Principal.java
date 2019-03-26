@@ -17,7 +17,7 @@ public class Principal extends JFrame {
 
 	private JPanel contentPane;
 	private Dimension dimention;
-//gyg
+
 	
 	 
 	public static void main(String[] args) {
@@ -37,6 +37,7 @@ public class Principal extends JFrame {
 
 	 
 	public Principal() {
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 	
@@ -51,6 +52,14 @@ public class Principal extends JFrame {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
+		
+		JButton btnNba = new JButton();
+		btnNba.setIcon(new ImageIcon(Principal.class.getResource("/imagen/logoprincipal2.png")));
+		btnNba.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		panel.add(btnNba, BorderLayout.CENTER);
 		dimention=super.getToolkit().getScreenSize();
 		super.setSize(dimention.width,(dimention.height-50));
 	}
