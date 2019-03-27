@@ -90,7 +90,7 @@ public class Principal extends JFrame {
 		//
 		
 		
-		
+		/*
 		JPanel panelPantallaPotect = new JPanel();
 		 panelPantallaPotect.setBounds(5, 5, 1340, 792);
 		contentPane.add(panelPantallaPotect);
@@ -107,12 +107,12 @@ public class Principal extends JFrame {
 			}
 		});
 		panelPantallaPotect.add(btnNba, BorderLayout.CENTER);
-
+		*/
 		contentPane.setLayout(null);
 		
 
 		
-		
+		/*
 		
 		panelMenuPrinc = new JPanel();
 		panelMenuPrinc.setBounds(5, 5, 1340, 762);
@@ -169,7 +169,7 @@ public class Principal extends JFrame {
 		fondoPrin.setIcon(new ImageIcon(Principal.class.getResource("/imagen/1530905.jpg")));
 		fondoPrin.setBounds(0, 21, 1340, 741);
 		panelMenuPrinc.add(fondoPrin);
-		
+		*/
 		
 
 
@@ -236,7 +236,7 @@ public class Principal extends JFrame {
 		lblfondojuego.setBounds(0, 5, 1340, 757);
 		lblfondojuego.setHorizontalAlignment(SwingConstants.CENTER);
 		lblfondojuego.setHorizontalTextPosition(SwingConstants.CENTER);
-		Icon icono = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/1530966.jpg")).getImage().getScaledInstance(lblfondojuego.getWidth(), lblfondojuego.getHeight(), Image.SCALE_DEFAULT));
+		Icon icono = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/fondo-pvk-team-carbono-rojo-negro-1900x1092.jpg")).getImage().getScaledInstance(lblfondojuego.getWidth(), lblfondojuego.getHeight(), Image.SCALE_DEFAULT));
 		lblfondojuego.setIcon(icono);
 		panelInicioJuego.add(lblfondojuego);
 		//Este codigo listo para modificar al equipo
