@@ -17,7 +17,7 @@ import javax.swing.JScrollPane;
 import java.awt.SystemColor;
 import java.awt.Color;
 
-public class Cambios extends JDialog {
+public class Puntos extends JDialog {
 	private JTable table;
 	private JRadioButton radbotonequipo1;
 	private JRadioButton radbotonequipo2;
@@ -31,7 +31,7 @@ public class Cambios extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			Cambios dialog = new Cambios();
+			Puntos dialog = new Puntos();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -42,9 +42,9 @@ public class Cambios extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Cambios() {
+	public Puntos() {
 		setForeground(new Color(0, 0, 0));
-		setTitle("CAMBIO");
+		setTitle("PUNTOS");
 		getContentPane().setBackground(new Color(128, 0, 0));
 		setBounds(100, 100, 548, 433);
 		getContentPane().setLayout(null);
