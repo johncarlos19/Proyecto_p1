@@ -13,15 +13,14 @@ public class Jugador {
 	private ArrayList<Lesion> lesionJugador;
 	private Estadistica puntoJugador;
 	
-	public Jugador(String nombre, float peso, float estatura, String posicion, int numero,
-			ArrayList<Lesion> lesionJugador, Estadistica puntoJugador, String code) {
+	public Jugador(String nombre, float peso, float estatura, String posicion, int numero, Estadistica puntoJugador, String code) {
 		super();
 		this.nombre = nombre;
 		this.peso = peso;
 		this.estatura = estatura;
 		this.posicion = posicion;
 		this.numero = numero;
-		this.lesionJugador = lesionJugador;
+		this.lesionJugador = new ArrayList<Lesion>();
 		this.puntoJugador = puntoJugador;
 		this.code = code;
 	}

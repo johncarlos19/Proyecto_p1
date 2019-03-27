@@ -28,22 +28,24 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class AgregarEquipo extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField txtNombreEquipo;
+	private JTextField txtNombreCoach;
+	private JTextField txtNombreCancha;
 	
 	private JLabel lblImagen;
 	
 	private File fichero;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
+	private JTextField txtNombreJugador;
+	private JTextField txtPeso;
+	private JTextField txtEstatura;
+	private JTextField txtPosicion;
+	private JTextField txtCodigo;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -65,6 +67,7 @@ public class AgregarEquipo extends JDialog {
 		setTitle("Registrar Equipo");
 		setResizable(false);
 		setBounds(100, 100, 702, 515);
+		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -80,20 +83,20 @@ public class AgregarEquipo extends JDialog {
 			lblNombreDelEquipo.setBounds(10, 38, 151, 14);
 			panel.add(lblNombreDelEquipo);
 			
-			textField = new JTextField();
-			textField.setBounds(10, 63, 169, 20);
-			panel.add(textField);
-			textField.setColumns(10);
+			txtNombreEquipo = new JTextField();
+			txtNombreEquipo.setBounds(10, 63, 169, 20);
+			panel.add(txtNombreEquipo);
+			txtNombreEquipo.setColumns(10);
 			{
 				JLabel lblCoach = new JLabel("Nombre del Coach:");
 				lblCoach.setBounds(10, 94, 133, 14);
 				panel.add(lblCoach);
 			}
 			{
-				textField_1 = new JTextField();
-				textField_1.setBounds(10, 119, 169, 20);
-				panel.add(textField_1);
-				textField_1.setColumns(10);
+				txtNombreCoach = new JTextField();
+				txtNombreCoach.setBounds(10, 119, 169, 20);
+				panel.add(txtNombreCoach);
+				txtNombreCoach.setColumns(10);
 			}
 			{
 				JLabel lblCancha = new JLabel("Nombre de la cancha:");
@@ -101,10 +104,10 @@ public class AgregarEquipo extends JDialog {
 				panel.add(lblCancha);
 			}
 			{
-				textField_2 = new JTextField();
-				textField_2.setBounds(10, 175, 169, 20);
-				panel.add(textField_2);
-				textField_2.setColumns(10);
+				txtNombreCancha = new JTextField();
+				txtNombreCancha.setBounds(10, 175, 169, 20);
+				panel.add(txtNombreCancha);
+				txtNombreCancha.setColumns(10);
 			}
 			{
 				lblImagen = new JLabel("Imagen");
@@ -115,16 +118,16 @@ public class AgregarEquipo extends JDialog {
 				panel.add(lblImagen);
 			}
 			
-			Button button = new Button("Cargar Imagen");
+			Button btnCargar = new Button("Cargar Imagen");
 			
-			button.addActionListener(new ActionListener() {
+			btnCargar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					int resultado;
 					CargarImagen ventana = new CargarImagen();
 					FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG y PNG", "JPG", "PNG");
 					ventana.fileChooser.setFileFilter(filtro);
 					resultado = ventana.fileChooser.showOpenDialog(null);
-					if(JFileChooser.APPROVE_OPTION == resultado && ventana.fileChooser.getSelectedFile().getPath().equalsIgnoreCase("JPG")) {
+					if(JFileChooser.APPROVE_OPTION == resultado/* && ventana.fileChooser.getSelectedFile().getPath().equalsIgnoreCase("JPG")*/) {
 						fichero = ventana.fileChooser.getSelectedFile();
 						try {
 							ImageIcon icon = new ImageIcon(fichero.toString());
@@ -134,13 +137,13 @@ public class AgregarEquipo extends JDialog {
 						}catch(Exception ex) {
 							JOptionPane.showMessageDialog(null, "Error cargando la imagen "+ ex);
 						}
-					}else {
+					}/*else {
 						JOptionPane.showMessageDialog(null, "La imagen debe ser JPG o PNG", "Formato incorrecto", JOptionPane.WARNING_MESSAGE);
-					}
+					}*/
 				}
 			});
-			button.setBounds(199, 188, 144, 22);
-			panel.add(button);
+			btnCargar.setBounds(199, 188, 144, 22);
+			panel.add(btnCargar);
 		}
 		
 		JPanel panel = new JPanel();
@@ -154,10 +157,10 @@ public class AgregarEquipo extends JDialog {
 			panel.add(lblNombreDelJugador);
 		}
 		{
-			textField_3 = new JTextField();
-			textField_3.setBounds(66, 65, 251, 20);
-			panel.add(textField_3);
-			textField_3.setColumns(10);
+			txtNombreJugador = new JTextField();
+			txtNombreJugador.setBounds(66, 65, 251, 20);
+			panel.add(txtNombreJugador);
+			txtNombreJugador.setColumns(10);
 		}
 		{
 			JLabel lblPeso = new JLabel("Peso:");
@@ -165,10 +168,10 @@ public class AgregarEquipo extends JDialog {
 			panel.add(lblPeso);
 		}
 		{
-			textField_4 = new JTextField();
-			textField_4.setBounds(66, 98, 80, 20);
-			panel.add(textField_4);
-			textField_4.setColumns(10);
+			txtPeso = new JTextField();
+			txtPeso.setBounds(66, 98, 80, 20);
+			panel.add(txtPeso);
+			txtPeso.setColumns(10);
 		}
 		{
 			JLabel lblPosicin = new JLabel("Posici\u00F3n:");
@@ -176,10 +179,10 @@ public class AgregarEquipo extends JDialog {
 			panel.add(lblPosicin);
 		}
 		{
-			textField_5 = new JTextField();
-			textField_5.setBounds(237, 96, 80, 20);
-			panel.add(textField_5);
-			textField_5.setColumns(10);
+			txtEstatura = new JTextField();
+			txtEstatura.setBounds(237, 96, 80, 20);
+			panel.add(txtEstatura);
+			txtEstatura.setColumns(10);
 		}
 		{
 			JLabel lblEstatura = new JLabel("Estatura:");
@@ -187,10 +190,10 @@ public class AgregarEquipo extends JDialog {
 			panel.add(lblEstatura);
 		}
 		{
-			textField_6 = new JTextField();
-			textField_6.setBounds(66, 136, 80, 20);
-			panel.add(textField_6);
-			textField_6.setColumns(10);
+			txtPosicion = new JTextField();
+			txtPosicion.setBounds(66, 136, 80, 20);
+			panel.add(txtPosicion);
+			txtPosicion.setColumns(10);
 		}
 		{
 			JLabel lblNmero = new JLabel("N\u00FAmero:");
@@ -198,21 +201,21 @@ public class AgregarEquipo extends JDialog {
 			panel.add(lblNmero);
 		}
 		
-		JSpinner spinner = new JSpinner();
-		spinner.setModel(new SpinnerNumberModel(new Integer(0), new Integer(0), null, new Integer(1)));
-		spinner.setBounds(237, 136, 80, 20);
-		panel.add(spinner);
+		JSpinner spnNumero = new JSpinner();
+		spnNumero.setModel(new SpinnerNumberModel(0, 0, 99, 1));
+		spnNumero.setBounds(237, 136, 80, 20);
+		panel.add(spnNumero);
 		{
 			JLabel lblCdigo = new JLabel("C\u00F3digo:");
 			lblCdigo.setBounds(10, 34, 46, 14);
 			panel.add(lblCdigo);
 		}
 		{
-			textField_7 = new JTextField();
-			textField_7.setEditable(false);
-			textField_7.setBounds(66, 31, 251, 20);
-			panel.add(textField_7);
-			textField_7.setColumns(10);
+			txtCodigo = new JTextField();
+			txtCodigo.setEditable(false);
+			txtCodigo.setBounds(66, 31, 251, 20);
+			panel.add(txtCodigo);
+			txtCodigo.setColumns(10);
 		}
 		{
 			JPanel panel_1 = new JPanel();
@@ -223,6 +226,9 @@ public class AgregarEquipo extends JDialog {
 			
 			JScrollPane scrollPane = new JScrollPane();
 			panel_1.add(scrollPane, BorderLayout.CENTER);
+			
+			table = new JTable();
+			scrollPane.setViewportView(table);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -230,19 +236,31 @@ public class AgregarEquipo extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			
 			JButton btnAgregarJugador = new JButton("Agregar Jugador");
-			btnAgregarJugador.setEnabled(false);
+			btnAgregarJugador.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					String nombreJugador = txtNombreJugador.getText();
+					float peso = (float) Double.parseDouble(txtPeso.getText());
+					String code = txtCodigo.getText();
+					
+				}
+			});
 			buttonPane.add(btnAgregarJugador);
 			{
-				JButton okButton = new JButton("Registrar Equipo");
-				okButton.setEnabled(false);
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				JButton btnRegistrar = new JButton("Registrar Equipo");
+				btnRegistrar.setEnabled(false);
+				btnRegistrar.setActionCommand("OK");
+				buttonPane.add(btnRegistrar);
+				getRootPane().setDefaultButton(btnRegistrar);
 			}
 			{
-				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				JButton btnCancel = new JButton("Cancelar");
+				btnCancel.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						dispose();
+					}
+				});
+				btnCancel.setActionCommand("Cancel");
+				buttonPane.add(btnCancel);
 			}
 		}
 	}
