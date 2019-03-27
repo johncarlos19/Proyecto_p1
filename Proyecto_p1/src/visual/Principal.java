@@ -185,7 +185,7 @@ public class Principal extends JFrame {
 		panelInicioJuego.setLayout(null);
 		{
 		JPanel panel_equipo1 = new JPanel();
-		panel_equipo1.setBounds(72, 131, 390, 575);
+		panel_equipo1.setBounds(72, 229, 390, 506);
 		panel_equipo1.setOpaque(false);
 		panelInicioJuego.add(panel_equipo1);
 		panel_equipo1.setLayout(null);
@@ -227,7 +227,7 @@ public class Principal extends JFrame {
 		
 		JPanel panel_equipo2 = new JPanel();
 		panel_equipo2.setOpaque(false);
-		panel_equipo2.setBounds(863, 131, 395, 575);
+		panel_equipo2.setBounds(863, 229, 390, 506);
 		panelInicioJuego.add(panel_equipo2);
 		panel_equipo2.setLayout(null);
 		
@@ -270,11 +270,25 @@ public class Principal extends JFrame {
 		Icon icono = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/fondo-pvk-team-carbono-rojo-negro-1900x1092.jpg")).getImage().getScaledInstance(lblfondojuego.getWidth(), lblfondojuego.getHeight(), Image.SCALE_DEFAULT));
 		
 		JLabel lblversus = new JLabel("VS");
-		lblversus.setBounds(546, 53, 213, 128);
+		lblversus.setBounds(556, 262, 231, 128);
 		lblversus.setForeground(Color.WHITE);
 		lblversus.setFont(new Font("AbandoN", Font.PLAIN, 71));
 		lblversus.setHorizontalAlignment(SwingConstants.CENTER);
 		panelInicioJuego.add(lblversus);
+		
+		JLabel lblpuntequip1 = new JLabel("0");
+		lblpuntequip1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblpuntequip1.setForeground(Color.WHITE);
+		lblpuntequip1.setFont(new Font("Tahoma", Font.PLAIN, 50));
+		lblpuntequip1.setBounds(472, 390, 45, 55);
+		panelInicioJuego.add(lblpuntequip1);
+		
+		JLabel lblpuntequip12 = new JLabel("0");
+		lblpuntequip12.setHorizontalAlignment(SwingConstants.CENTER);
+		lblpuntequip12.setForeground(Color.WHITE);
+		lblpuntequip12.setFont(new Font("Tahoma", Font.PLAIN, 50));
+		lblpuntequip12.setBounds(808, 390, 45, 55);
+		panelInicioJuego.add(lblpuntequip12);
 		lblfondojuego.setIcon(icono);
 		panelInicioJuego.add(lblfondojuego);
 		//Este codigo listo para modificar al equipo
