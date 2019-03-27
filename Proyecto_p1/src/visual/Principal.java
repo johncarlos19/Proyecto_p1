@@ -29,12 +29,16 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import java.awt.Cursor;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class Principal extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panelMenuPrinc;
 	private JPanel panelInicioJuego;
+	private JTable table;
+	private JTable table_1;
 	//private Dimension dimention;
 
 	
@@ -181,52 +185,79 @@ public class Principal extends JFrame {
 		panelInicioJuego.setLayout(null);
 		{
 		JPanel panel_equipo1 = new JPanel();
-		panel_equipo1.setBounds(73, 76, 390, 575);
+		panel_equipo1.setBounds(72, 131, 390, 575);
+		panel_equipo1.setOpaque(false);
 		panelInicioJuego.add(panel_equipo1);
 		panel_equipo1.setLayout(null);
 		
 		JLabel lblEquipo1 = new JLabel("Equipo1");
+		lblEquipo1.setForeground(Color.WHITE);
 		lblEquipo1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblEquipo1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEquipo1.setBounds(123, 11, 131, 31);
 		panel_equipo1.add(lblEquipo1);
 		
 		JLabel lblLogoequip = new JLabel("logo_equip1");
+		lblLogoequip.setForeground(Color.WHITE);
 		lblLogoequip.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoequip.setBounds(100, 53, 177, 147);
 		panel_equipo1.add(lblLogoequip);
 		
 		JPanel panel_jugador_principal1 = new JPanel();
+		panel_jugador_principal1.setOpaque(false);
+		panel_jugador_principal1.setForeground(Color.WHITE);
 		panel_jugador_principal1.setBounds(42, 281, 292, 189);
 		panel_equipo1.add(panel_jugador_principal1);
+		panel_jugador_principal1.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane_equi1 = new JScrollPane();
+		scrollPane_equi1.setOpaque(false);
+		panel_jugador_principal1.add(scrollPane_equi1, BorderLayout.CENTER);
+		
+		table = new JTable();
+		table.setOpaque(false);
+		scrollPane_equi1.setColumnHeaderView(table);
 		
 		JLabel lblJugadoresEnJuego = new JLabel("Jugadores En juego");
+		lblJugadoresEnJuego.setForeground(Color.WHITE);
 		lblJugadoresEnJuego.setHorizontalAlignment(SwingConstants.CENTER);
 		lblJugadoresEnJuego.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblJugadoresEnJuego.setBounds(88, 232, 200, 31);
 		panel_equipo1.add(lblJugadoresEnJuego);
 		
 		JPanel panel_equipo2 = new JPanel();
-		panel_equipo2.setBounds(863, 76, 395, 575);
+		panel_equipo2.setOpaque(false);
+		panel_equipo2.setBounds(863, 131, 395, 575);
 		panelInicioJuego.add(panel_equipo2);
 		panel_equipo2.setLayout(null);
 		
 		JLabel lblEquipo2 = new JLabel("Equipo1");
+		lblEquipo2.setForeground(Color.WHITE);
 		lblEquipo2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEquipo2.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblEquipo2.setBounds(136, 11, 131, 31);
 		panel_equipo2.add(lblEquipo2);
 		
 		JLabel lblLogoequip2 = new JLabel("logo_equip2");
+		lblLogoequip2.setForeground(Color.WHITE);
 		lblLogoequip2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoequip2.setBounds(113, 53, 177, 147);
 		panel_equipo2.add(lblLogoequip2);
 		
 		JPanel panel_jugador_principal2 = new JPanel();
+		panel_jugador_principal2.setForeground(Color.WHITE);
 		panel_jugador_principal2.setBounds(55, 281, 292, 189);
 		panel_equipo2.add(panel_jugador_principal2);
+		panel_jugador_principal2.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane_equi2 = new JScrollPane();
+		panel_jugador_principal2.add(scrollPane_equi2, BorderLayout.CENTER);
+		
+		table_1 = new JTable();
+		scrollPane_equi2.setColumnHeaderView(table_1);
 		
 		JLabel lblJugadoresEnJuego2 = new JLabel("Jugadores En juego");
+		lblJugadoresEnJuego2.setForeground(Color.WHITE);
 		lblJugadoresEnJuego2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblJugadoresEnJuego2.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblJugadoresEnJuego2.setBounds(101, 232, 200, 31);
@@ -237,6 +268,13 @@ public class Principal extends JFrame {
 		lblfondojuego.setHorizontalAlignment(SwingConstants.CENTER);
 		lblfondojuego.setHorizontalTextPosition(SwingConstants.CENTER);
 		Icon icono = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/fondo-pvk-team-carbono-rojo-negro-1900x1092.jpg")).getImage().getScaledInstance(lblfondojuego.getWidth(), lblfondojuego.getHeight(), Image.SCALE_DEFAULT));
+		
+		JLabel lblversus = new JLabel("VS");
+		lblversus.setBounds(546, 53, 213, 128);
+		lblversus.setForeground(Color.WHITE);
+		lblversus.setFont(new Font("AbandoN", Font.PLAIN, 71));
+		lblversus.setHorizontalAlignment(SwingConstants.CENTER);
+		panelInicioJuego.add(lblversus);
 		lblfondojuego.setIcon(icono);
 		panelInicioJuego.add(lblfondojuego);
 		//Este codigo listo para modificar al equipo
