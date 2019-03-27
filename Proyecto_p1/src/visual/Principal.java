@@ -70,7 +70,6 @@ public class Principal extends JFrame {
 		panel.add(btnNba, BorderLayout.CENTER);
 		
 		
-		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
 		panel_1.setLayout(null);
