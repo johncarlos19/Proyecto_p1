@@ -144,7 +144,7 @@ public class Equipo {
 	
 	public void guardarLogo() throws IOException, ClassNotFoundException  {
 		
-		File archivoSalida = new File("/logo_equipo/"+nombre+".jpeg");
+		File archivoSalida = new File("src/logo_equipo/"+nombre+".jpeg");
 		FileInputStream lector = new FileInputStream(logoEquipo);
 	    FileOutputStream escritor = new FileOutputStream(archivoSalida);
 		 int unByte;     
