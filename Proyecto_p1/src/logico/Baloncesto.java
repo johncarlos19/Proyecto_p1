@@ -63,6 +63,10 @@ public class Baloncesto {
 		return y;
 	}
 	
+	public void agregarEquipo(Equipo aux) {
+		misEquipos.add(aux);
+	}
+	
 	public int calcCantJuego(ArrayList<Equipo> equipoTor) {
 		int cantJuegos = 0;
 		int cantEquipos = equipoTor.size();

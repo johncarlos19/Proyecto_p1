@@ -13,6 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import logico.Baloncesto;
+import logico.Equipo;
+import logico.Jugador;
+
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -21,7 +26,11 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Button;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.UIManager;
 import javax.swing.JSpinner;
@@ -29,6 +38,8 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class AgregarEquipo extends JDialog {
 
@@ -39,13 +50,21 @@ public class AgregarEquipo extends JDialog {
 	
 	private JLabel lblImagen;
 	
-	private File fichero;
+	private File fichero = null;
 	private JTextField txtNombreJugador;
 	private JTextField txtPeso;
 	private JTextField txtEstatura;
-	private JTextField txtPosicion;
 	private JTextField txtCodigo;
 	private JTable table;
+	
+	private JComboBox cbxPosicion;
+	private JSpinner spnNumero;
+	private JButton btnRegistrar;
+	
+	private boolean ficheroListo = false;
+	
+	private int ubica = 1;
+	private boolean noponer = true;
 
 	/**
 	 * Launch the application.
@@ -129,6 +148,7 @@ public class AgregarEquipo extends JDialog {
 					resultado = ventana.fileChooser.showOpenDialog(null);
 					if(JFileChooser.APPROVE_OPTION == resultado/* && ventana.fileChooser.getSelectedFile().getPath().equalsIgnoreCase("JPG")*/) {
 						fichero = ventana.fileChooser.getSelectedFile();
+						ficheroListo = true;
 						try {
 							ImageIcon icon = new ImageIcon(fichero.toString());
 							Icon icono = new ImageIcon(icon.getImage().getScaledInstance(lblImagen.getWidth(), lblImagen.getHeight(), Image.SCALE_DEFAULT));
@@ -169,41 +189,67 @@ public class AgregarEquipo extends JDialog {
 		}
 		{
 			txtPeso = new JTextField();
-			txtPeso.setBounds(66, 98, 80, 20);
+			txtPeso.addKeyListener(new KeyAdapter() {
+			      @Override
+			      public void keyTyped(KeyEvent e) {
+			        char c = e.getKeyChar();
+			        if (ubica!=1) {
+			          ubica=1;
+			          noponer=true;
+			        }
+			        if (!Character.isDigit(c) && (!(c==46) || noponer!=true)) {
+			          e.consume();
+			        }
+			        if ((c==46)) {
+			          noponer=false;
+			        }
+			      }
+			    });
+			txtPeso.setBounds(66, 98, 70, 20);
 			panel.add(txtPeso);
 			txtPeso.setColumns(10);
 		}
 		{
 			JLabel lblPosicin = new JLabel("Posici\u00F3n:");
-			lblPosicin.setBounds(10, 139, 62, 14);
+			lblPosicin.setBounds(158, 135, 62, 14);
 			panel.add(lblPosicin);
 		}
 		{
 			txtEstatura = new JTextField();
-			txtEstatura.setBounds(237, 96, 80, 20);
+			txtEstatura.addKeyListener(new KeyAdapter() {
+			      @Override
+			      public void keyTyped(KeyEvent e) {
+			        char c = e.getKeyChar();
+			        if (ubica!=2) {
+			          ubica=2;
+			          noponer=true;
+			        }
+			        if (!Character.isDigit(c) && (!(c==46) || noponer!=true)) {
+			          e.consume();
+			        }
+			        if ((c==46)) {
+			          noponer=false;
+			        }
+			      }
+			    });
+			txtEstatura.setBounds(210, 96, 107, 20);
 			panel.add(txtEstatura);
 			txtEstatura.setColumns(10);
 		}
 		{
 			JLabel lblEstatura = new JLabel("Estatura:");
-			lblEstatura.setBounds(159, 104, 68, 14);
+			lblEstatura.setBounds(158, 104, 54, 14);
 			panel.add(lblEstatura);
 		}
 		{
-			txtPosicion = new JTextField();
-			txtPosicion.setBounds(66, 136, 80, 20);
-			panel.add(txtPosicion);
-			txtPosicion.setColumns(10);
-		}
-		{
 			JLabel lblNmero = new JLabel("N\u00FAmero:");
-			lblNmero.setBounds(159, 139, 68, 14);
+			lblNmero.setBounds(10, 135, 54, 14);
 			panel.add(lblNmero);
 		}
 		
-		JSpinner spnNumero = new JSpinner();
+		spnNumero = new JSpinner();
 		spnNumero.setModel(new SpinnerNumberModel(0, 0, 99, 1));
-		spnNumero.setBounds(237, 136, 80, 20);
+		spnNumero.setBounds(66, 129, 70, 20);
 		panel.add(spnNumero);
 		{
 			JLabel lblCdigo = new JLabel("C\u00F3digo:");
@@ -217,6 +263,13 @@ public class AgregarEquipo extends JDialog {
 			panel.add(txtCodigo);
 			txtCodigo.setColumns(10);
 		}
+		
+		cbxPosicion = new JComboBox();
+		//String[] cbxPosi = {"<Seleccione>", "Base", "Escolta", "Alero", "Ala-Pivot", "Pivot"};
+		//cbxPosicion.setModel(new DefaultComboBoxModel(cbxPosi));
+		cbxPosicion.setBounds(210, 129, 107, 20);
+		panel.add(cbxPosicion);
+		cargarCbxPosi();
 		{
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new TitledBorder(null, "Jugadores:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -230,6 +283,7 @@ public class AgregarEquipo extends JDialog {
 			table = new JTable();
 			scrollPane.setViewportView(table);
 		}
+		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -238,15 +292,102 @@ public class AgregarEquipo extends JDialog {
 			JButton btnAgregarJugador = new JButton("Agregar Jugador");
 			btnAgregarJugador.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					boolean ready = true;
 					String nombreJugador = txtNombreJugador.getText();
-					float peso = (float) Double.parseDouble(txtPeso.getText());
+					
+					float peso = 0;
+					if(txtPeso.getText().equalsIgnoreCase(" ")){
+						peso = (float) Double.parseDouble(txtPeso.getText());
+						ready = false;
+					}
+					
 					String code = txtCodigo.getText();
 					
+					float estatura = 0;
+					if(txtEstatura.getText().equalsIgnoreCase(" ")) {
+						estatura = (float) Double.parseDouble(txtEstatura.getText());
+						ready = false;
+					}
+					
+					String posicion = cbxPosicion.getSelectedItem().toString();
+					int numero = Integer.parseInt(spnNumero.getValue().toString());
+					
+					if(!nombreJugador.equalsIgnoreCase(" ") && !posicion.equalsIgnoreCase("<Seleccione>") && !checkNumero(numero) && ready) {
+						Jugador aux = new Jugador(nombreJugador, peso, estatura, posicion, numero, code);
+						jugadores.add(aux);
+						JOptionPane.showMessageDialog(null, "Registro del jugador exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
+						cargarCbxPos();
+						cleanPlantillaJugadores();
+					}else if(checkNumero(numero)) {
+						JOptionPane.showMessageDialog(null, "El número del jugador ya está en uso", "Revise los campos", JOptionPane.WARNING_MESSAGE);
+					}else {
+						JOptionPane.showMessageDialog(null, "Llene correctamente los campos", "Revise los campos", JOptionPane.WARNING_MESSAGE);
+					}
+					
+					if(jugadores.size() == 1) {
+						btnRegistrar.setEnabled(true);
+					}
+					
+					if(jugadores.size() == 3) {
+						btnAgregarJugador.setEnabled(false);
+					}
+				}
+
+				private boolean checkNumero(int numero) {
+					boolean encontrado = false;
+					
+					for (Jugador player : jugadores) {
+						if(player.getNumero() == numero) {
+							encontrado = true;
+						}
+					}
+					
+					return encontrado;
 				}
 			});
 			buttonPane.add(btnAgregarJugador);
 			{
-				JButton btnRegistrar = new JButton("Registrar Equipo");
+				btnRegistrar = new JButton("Registrar Equipo");
+				btnRegistrar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						String nombreEquipo = txtNombreEquipo.getText();
+						String nombreCoach = txtNombreCoach.getText();
+						String nombreCancha = txtNombreCancha.getText();
+						
+						if((fichero != null) && !nombreEquipo.equalsIgnoreCase(" ") && !nombreCoach.equalsIgnoreCase(" ") && !nombreCancha.equalsIgnoreCase(" ") && !checkEquipos(nombreEquipo)) {
+							Equipo aux = new Equipo(nombreEquipo, nombreCoach, nombreCancha, fichero);
+							try {
+								aux.guardarLogo();
+							} catch (ClassNotFoundException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+							aux.setNominaJugadores(jugadores);
+							Baloncesto.getInstance().agregarEquipo(aux);
+							JOptionPane.showMessageDialog(null, "Registro de equipo exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
+							cleanPlantillaEquipo();
+						}else if(checkEquipos(nombreEquipo)) {
+							JOptionPane.showMessageDialog(null, "Ya existe un equipo con el mismo nombre", "Revise los campos", JOptionPane.WARNING_MESSAGE);
+						}else {
+							JOptionPane.showMessageDialog(null, "Llene correctamente los campos", "Revise los campos", JOptionPane.WARNING_MESSAGE);
+						}
+					}
+
+					private boolean checkEquipos(String nombreEquipo) {
+						boolean encontrado = false;
+						
+						for (Equipo team : Baloncesto.getInstance().getMisEquipos()) {
+							if(team.getNombre().equalsIgnoreCase(nombreEquipo)) {
+								encontrado = true;
+							}
+						}
+						
+						return encontrado;
+					}
+				});
 				btnRegistrar.setEnabled(false);
 				btnRegistrar.setActionCommand("OK");
 				buttonPane.add(btnRegistrar);
@@ -263,5 +404,44 @@ public class AgregarEquipo extends JDialog {
 				buttonPane.add(btnCancel);
 			}
 		}
+	}
+
+	private void cargarCbxPosi() {
+		String[] cbxPos = {"<Seleccione>", "Base", "Escolta", "Alero", "Ala-Pivot", "Pivot"};
+		
+		for(int i = 0; i <= 5; i++) {
+			cbxPosicion.addItem(cbxPos[i]);
+		}
+	}
+
+	private void cargarCbxPos() {
+		cbxPosicion.removeAllItems();
+		String[] cbxPos = {"<Seleccione>", "Base", "Escolta", "Alero", "Ala-Pivot", "Pivot"};
+		cbxPosicion.addItem(new String("<Seleccione>"));
+		
+		/*for(int i = 1; i <= 5; i++) {
+			if(!cbxPosicion.getSelectedItem().toString().equalsIgnoreCase(cbxPos[i])) {
+				cbxPosicion.addItem(cbxPos[i]);
+			}
+		}*/
+	}
+
+	protected void cleanPlantillaEquipo() {
+		txtNombreEquipo.setText("");
+		txtNombreCoach.setText("");
+		txtNombreCancha.setText("");
+		fichero = null;
+		lblImagen.setIcon(null);
+		lblImagen.setText("Imagen");
+		btnRegistrar.setEnabled(false);
+	}
+
+	protected void cleanPlantillaJugadores() {
+		txtNombreJugador.setText("");
+		txtPeso.setText("");
+		txtCodigo.setText("");
+		txtEstatura.setText("");
+		cbxPosicion.setSelectedIndex(0);
+		spnNumero.setValue(Integer.parseInt("1"));
 	}
 }

@@ -13,7 +13,7 @@ public class Jugador {
 	private ArrayList<Lesion> lesionJugador;
 	private Estadistica puntoJugador;
 	
-	public Jugador(String nombre, float peso, float estatura, String posicion, int numero, Estadistica puntoJugador, String code) {
+	public Jugador(String nombre, float peso, float estatura, String posicion, int numero, String code) {
 		super();
 		this.nombre = nombre;
 		this.peso = peso;
@@ -21,7 +21,7 @@ public class Jugador {
 		this.posicion = posicion;
 		this.numero = numero;
 		this.lesionJugador = new ArrayList<Lesion>();
-		this.puntoJugador = puntoJugador;
+		this.puntoJugador = new Estadistica();
 		this.code = code;
 	}
 
