@@ -1,10 +1,19 @@
 package logico;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 
-public class Baloncesto {
+public class Baloncesto implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6369141671291306568L;
 	private ArrayList<Equipo> misEquipos;
 	private ArrayList<Juego> juegoRecord;
 	private int cantJuegosTorneo;
@@ -14,6 +23,7 @@ public class Baloncesto {
 	 * @param miCliente
 	 * @param miQuesos
 	 */
+	
 	 public static Baloncesto getInstance(){
 		 if(mibaloncesto == null){
 			 mibaloncesto = new Baloncesto();
@@ -174,6 +184,33 @@ public class Baloncesto {
 		Date fechaNueva = new Date(year, month, date);
 		return fechaNueva;
 	}
+	
+	
+	private void escribirDatos()
+	{
+		
+		try
+		{
+			FileOutputStream f = new FileOutputStream("src/Baloncesto.dat");
+			ObjectOutputStream os = new ObjectOutputStream(f);
+			os.writeObject(misEquipos);
+			os.writeObject(juegoRecord);
+			os.writeInt(cantJuegosTorneo);
+			
+		}
+		catch(FileNotFoundException ex)
+		{
+			System.err.println(" Error "+ex);
+		}catch (IOException ex){
+			System.err.println(" Error "+ex);
+			ex.printStackTrace();
+		}
+		
+	
+		
+	}
+	
+	
 	
 	public void agregarLesion(String codeAux, String equipo, Lesion lesion) {
 		boolean found = false;

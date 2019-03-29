@@ -1,9 +1,14 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Jugador {
+public class Jugador implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3834684781329387617L;
 	private String nombre;
 	private float peso;
 	private String code;

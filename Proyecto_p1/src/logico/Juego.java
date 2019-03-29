@@ -1,8 +1,13 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Juego {
+public class Juego implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2700358167077251146L;
 	private Equipo [] equipoJuego;
 	private Date fechaJuego;
 	

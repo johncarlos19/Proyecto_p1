@@ -1,8 +1,13 @@
 package logico;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Lesion {
+public class Lesion implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1550564490440332723L;
 	private String tipoLesion;
 	private Date fechaLesion;
 	private String detalleLesion;

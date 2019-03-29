@@ -1,6 +1,12 @@
 package logico;
 
-public class Estadistica {
+import java.io.Serializable;
+
+public class Estadistica implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8910922322328217594L;
 	private int asistencia;
 	private int cantebote;
 	private int tiroDoble;

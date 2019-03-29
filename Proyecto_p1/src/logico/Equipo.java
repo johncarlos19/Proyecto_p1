@@ -4,12 +4,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-public class Equipo {
+public class Equipo implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9050316527821816246L;
 	private String nombre;
 	private ArrayList<Jugador> nominaJugadores;
 	private String coach;
