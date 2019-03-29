@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 import logico.Baloncesto;
 import logico.Equipo;
@@ -21,6 +22,7 @@ import logico.Jugador;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -28,6 +30,8 @@ import java.awt.Button;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -56,6 +60,8 @@ public class AgregarEquipo extends JDialog {
 	private JTextField txtEstatura;
 	private JTextField txtCodigo;
 	private JTable table;
+	private static DefaultTableModel model;
+	private static Object[] fila;
 	
 	private JComboBox cbxPosicion;
 	private JSpinner spnNumero;
@@ -65,6 +71,10 @@ public class AgregarEquipo extends JDialog {
 	
 	private int ubica = 1;
 	private boolean noponer = true;
+	
+	private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
+	private JButton btnBorrar;
+	private String identificador = "";
 
 	/**
 	 * Launch the application.
@@ -211,7 +221,7 @@ public class AgregarEquipo extends JDialog {
 		}
 		{
 			JLabel lblPosicin = new JLabel("Posici\u00F3n:");
-			lblPosicin.setBounds(158, 135, 62, 14);
+			lblPosicin.setBounds(146, 135, 54, 14);
 			panel.add(lblPosicin);
 		}
 		{
@@ -238,7 +248,7 @@ public class AgregarEquipo extends JDialog {
 		}
 		{
 			JLabel lblEstatura = new JLabel("Estatura:");
-			lblEstatura.setBounds(158, 104, 54, 14);
+			lblEstatura.setBounds(146, 104, 54, 14);
 			panel.add(lblEstatura);
 		}
 		{
@@ -269,7 +279,7 @@ public class AgregarEquipo extends JDialog {
 		//cbxPosicion.setModel(new DefaultComboBoxModel(cbxPosi));
 		cbxPosicion.setBounds(210, 129, 107, 20);
 		panel.add(cbxPosicion);
-		cargarCbxPosi();
+		cargarCbxPos();
 		{
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new TitledBorder(null, "Jugadores:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -280,10 +290,29 @@ public class AgregarEquipo extends JDialog {
 			JScrollPane scrollPane = new JScrollPane();
 			panel_1.add(scrollPane, BorderLayout.CENTER);
 			
+			String[] header = {"Nombre"};
+			model = new DefaultTableModel();
+			model.setColumnIdentifiers(header);
+			
 			table = new JTable();
+			table.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if(table.getSelectedRow()>=0){
+						btnBorrar.setEnabled(true);
+						int index = table.getSelectedRow();
+						identificador = (String)table.getModel().getValueAt(index, 0);
+		
+					}
+				}
+			});
+			
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			table.setModel(model);
+			cargarTabla();
 			scrollPane.setViewportView(table);
 		}
-		ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
+		
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -316,6 +345,7 @@ public class AgregarEquipo extends JDialog {
 						Jugador aux = new Jugador(nombreJugador, peso, estatura, posicion, numero, code);
 						jugadores.add(aux);
 						JOptionPane.showMessageDialog(null, "Registro del jugador exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
+						cargarTabla();
 						cargarCbxPos();
 						cleanPlantillaJugadores();
 					}else if(checkNumero(numero)) {
@@ -388,6 +418,23 @@ public class AgregarEquipo extends JDialog {
 						return encontrado;
 					}
 				});
+				
+				btnBorrar = new JButton("Eliminar Jugador");
+				btnBorrar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						if(!identificador.equalsIgnoreCase("")) {
+							int option = JOptionPane.showConfirmDialog(null, "¿Está segur@ que desea eliminar el jugador?","Información",JOptionPane.WARNING_MESSAGE);
+							if(option == JOptionPane.OK_OPTION) {
+								jugadores.remove(indicePorNombre(identificador));
+								cargarTabla();
+								cargarCbxPos();
+								btnBorrar.setEnabled(false);
+							}
+						}
+					}
+				});
+				btnBorrar.setEnabled(false);
+				buttonPane.add(btnBorrar);
 				btnRegistrar.setEnabled(false);
 				btnRegistrar.setActionCommand("OK");
 				buttonPane.add(btnRegistrar);
@@ -406,24 +453,55 @@ public class AgregarEquipo extends JDialog {
 		}
 	}
 
-	private void cargarCbxPosi() {
-		String[] cbxPos = {"<Seleccione>", "Base", "Escolta", "Alero", "Ala-Pivot", "Pivot"};
+	protected int indicePorNombre(String identificador2) {
+		int indice = -1;
+		int i = 0;
+		boolean encontrado = false;
 		
-		for(int i = 0; i <= 5; i++) {
-			cbxPosicion.addItem(cbxPos[i]);
+		while(!encontrado && i < jugadores.size()) {
+			if(jugadores.get(i).getNombre().equalsIgnoreCase(identificador2)) {
+				indice = i;
+			}
+			
+			i++;
 		}
+		
+		return indice;
+	}
+
+	private void cargarTabla() {
+		model.setRowCount(0);
+		fila = new Object[model.getColumnCount()];
+		for (int i = 0; i < jugadores.size(); i++) {
+			fila[0] = jugadores.get(i).getNombre();
+			model.addRow(fila);
+		}
+		
 	}
 
 	private void cargarCbxPos() {
 		cbxPosicion.removeAllItems();
 		String[] cbxPos = {"<Seleccione>", "Base", "Escolta", "Alero", "Ala-Pivot", "Pivot"};
-		cbxPosicion.addItem(new String("<Seleccione>"));
+		cbxPosicion.addItem(cbxPos[0]);
+		boolean encontrado = false;
+		int y = 0;
 		
-		/*for(int i = 1; i <= 5; i++) {
-			if(!cbxPosicion.getSelectedItem().toString().equalsIgnoreCase(cbxPos[i])) {
-				cbxPosicion.addItem(cbxPos[i]);
+		for(int i = 1; i <= 5; i++) {
+			while(!encontrado && i < jugadores.size()) {
+				if(jugadores.get(y).getPosicion().equalsIgnoreCase(cbxPos[i])) {
+					encontrado = true;
+				}
+				y++;
 			}
-		}*/
+			
+			y = 0;
+			
+			if(!encontrado) {
+				cbxPosicion.addItem(cbxPos[i]);
+			}else {
+				encontrado = false;
+			}
+		}
 	}
 
 	protected void cleanPlantillaEquipo() {
