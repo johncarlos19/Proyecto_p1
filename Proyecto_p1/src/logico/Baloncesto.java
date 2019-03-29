@@ -75,6 +75,7 @@ public class Baloncesto implements Serializable{
 	
 	public void agregarEquipo(Equipo aux) {
 		misEquipos.add(aux);
+		escribirDatos();
 	}
 	
 	public int calcCantJuego(ArrayList<Equipo> equipoTor) {
