@@ -39,6 +39,9 @@ public class Principal extends JFrame {
 	private JPanel panelInicioJuego;
 	private JTable table;
 	private JTable table_1;
+	private JButton btnFin;
+	private JButton btnCambio;
+	private JButton btnPunto;
 	//private Dimension dimention;
 
 	
@@ -94,15 +97,16 @@ public class Principal extends JFrame {
 		//
 		
 		
-		/*
+		
 		JPanel panelPantallaPotect = new JPanel();
 		 panelPantallaPotect.setBounds(5, 5, 1340, 792);
 		contentPane.add(panelPantallaPotect);
-		panelPantallaPotect.setLayout(new BorderLayout(0, 0));
 		
 		JButton btnNba = new JButton();
+		btnNba.setBounds(0, 0, 1340, 792);
 		btnNba.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-		btnNba.setIcon(new ImageIcon(Principal.class.getResource("/imagen/logoprincipal2.png")));
+		
+		btnNba.setOpaque(false);
 		btnNba.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
@@ -110,13 +114,16 @@ public class Principal extends JFrame {
 				//panelMenuPrinc.setVisible(true);
 			}
 		});
-		panelPantallaPotect.add(btnNba, BorderLayout.CENTER);
-		*/
+		Icon icon11 = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/1530966.jpg")).getImage().getScaledInstance(btnNba.getWidth(), btnNba.getHeight(), Image.SCALE_DEFAULT));
+		panelPantallaPotect.setLayout(null);
+		btnNba.setIcon(icon11);
+		panelPantallaPotect.add(btnNba);
+		
 		contentPane.setLayout(null);
 		
 
 		
-		/*
+		
 		
 		panelMenuPrinc = new JPanel();
 		panelMenuPrinc.setBounds(5, 5, 1340, 762);
@@ -160,6 +167,9 @@ public class Principal extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				panelMenuPrinc.setVisible(false);
 				panelInicioJuego.setVisible(true);
+				btnCambio.setVisible(true);
+				btnFin.setVisible(true);
+				btnPunto.setVisible(true);
 			}
 		});
 		btnJuego.setForeground(Color.WHITE);
@@ -173,7 +183,7 @@ public class Principal extends JFrame {
 		fondoPrin.setIcon(new ImageIcon(Principal.class.getResource("/imagen/1530905.jpg")));
 		fondoPrin.setBounds(0, 21, 1340, 741);
 		panelMenuPrinc.add(fondoPrin);
-		*/
+		
 		
 
 
@@ -185,7 +195,7 @@ public class Principal extends JFrame {
 		panelInicioJuego.setLayout(null);
 		{
 		JPanel panel_equipo1 = new JPanel();
-		panel_equipo1.setBounds(72, 229, 390, 506);
+		panel_equipo1.setBounds(72, 23, 390, 506);
 		panel_equipo1.setOpaque(false);
 		panelInicioJuego.add(panel_equipo1);
 		panel_equipo1.setLayout(null);
@@ -227,7 +237,7 @@ public class Principal extends JFrame {
 		
 		JPanel panel_equipo2 = new JPanel();
 		panel_equipo2.setOpaque(false);
-		panel_equipo2.setBounds(863, 229, 390, 506);
+		panel_equipo2.setBounds(863, 23, 390, 506);
 		panelInicioJuego.add(panel_equipo2);
 		panel_equipo2.setLayout(null);
 		
@@ -269,8 +279,29 @@ public class Principal extends JFrame {
 		lblfondojuego.setHorizontalTextPosition(SwingConstants.CENTER);
 		Icon icono = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/fondo-pvk-team-carbono-rojo-negro-1900x1092.jpg")).getImage().getScaledInstance(lblfondojuego.getWidth(), lblfondojuego.getHeight(), Image.SCALE_DEFAULT));
 		
+		btnPunto = new JButton("Punto");
+		btnPunto.setVisible(false);
+		btnPunto.setBackground(new Color(255, 99, 71));
+		btnPunto.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnPunto.setBounds(593, 236, 141, 49);
+		panelInicioJuego.add(btnPunto);
+		
+		btnCambio = new JButton("Cambio");
+		btnCambio.setVisible(false);
+		btnCambio.setBackground(new Color(255, 99, 71));
+		btnCambio.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnCambio.setBounds(593, 318, 141, 49);
+		panelInicioJuego.add(btnCambio);
+		
+		btnFin = new JButton("Fin");
+		btnFin.setVisible(false);
+		btnFin.setBackground(new Color(255, 99, 71));
+		btnFin.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnFin.setBounds(593, 405, 141, 49);
+		panelInicioJuego.add(btnFin);
+		
 		JLabel lblversus = new JLabel("VS");
-		lblversus.setBounds(556, 262, 231, 128);
+		lblversus.setBounds(543, 24, 231, 128);
 		lblversus.setForeground(Color.WHITE);
 		lblversus.setFont(new Font("AbandoN", Font.PLAIN, 71));
 		lblversus.setHorizontalAlignment(SwingConstants.CENTER);
@@ -280,14 +311,71 @@ public class Principal extends JFrame {
 		lblpuntequip1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblpuntequip1.setForeground(Color.WHITE);
 		lblpuntequip1.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		lblpuntequip1.setBounds(472, 390, 45, 55);
+		lblpuntequip1.setBounds(472, 145, 45, 55);
 		panelInicioJuego.add(lblpuntequip1);
+		
+		JLabel lblcanha = new JLabel("");
+		lblcanha.setHorizontalAlignment(SwingConstants.CENTER);
+		lblcanha.setBounds(333, 528, 682, 197);
+		Icon iconoCancha = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/d-basketball-field-white-background-illustration-49785575.gif")).getImage().getScaledInstance(lblcanha.getWidth(), lblcanha.getHeight(), Image.SCALE_DEFAULT));
+		
+		JLabel lblPivot = new JLabel("Example");
+		lblPivot.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+		lblPivot.setBounds(408, 563, 73, 34);
+		panelInicioJuego.add(lblPivot);
+		
+		JLabel lblPivotequip2 = new JLabel("Example");
+		lblPivotequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+		lblPivotequip2.setBounds(875, 563, 73, 34);
+		panelInicioJuego.add(lblPivotequip2);
+		
+		JLabel lblEscolta1 = new JLabel("Example");
+		lblEscolta1.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+		lblEscolta1.setBounds(472, 671, 73, 38);
+		panelInicioJuego.add(lblEscolta1);
+		
+		JLabel lblEscolta1equip2 = new JLabel("Example");
+		lblEscolta1equip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+		lblEscolta1equip2.setBounds(909, 660, 73, 38);
+		panelInicioJuego.add(lblEscolta1equip2);
+		
+		JLabel lblEscolta2 = new JLabel("Example");
+		lblEscolta2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+		lblEscolta2.setBounds(491, 538, 73, 38);
+		panelInicioJuego.add(lblEscolta2);
+		
+		JLabel lblEscolta2equip2 = new JLabel("Example");
+		lblEscolta2equip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+		lblEscolta2equip2.setBounds(766, 550, 73, 34);
+		panelInicioJuego.add(lblEscolta2equip2);
+		
+		JLabel lblBase = new JLabel("Example");
+		lblBase.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+		lblBase.setBounds(554, 600, 73, 34);
+		panelInicioJuego.add(lblBase);
+		
+		JLabel lblBaseEquip2 = new JLabel("Example");
+		lblBaseEquip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+		lblBaseEquip2.setBounds(722, 595, 73, 38);
+		panelInicioJuego.add(lblBaseEquip2);
+		
+		JLabel lblAlero = new JLabel("Example");
+		lblAlero.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+		lblAlero.setBounds(355, 660, 100, 49);
+		panelInicioJuego.add(lblAlero);
+		
+		JLabel lblAleroequi2 = new JLabel("Example");
+		lblAleroequi2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+		lblAleroequi2.setBounds(808, 670, 73, 41);
+		panelInicioJuego.add(lblAleroequi2);
+		lblcanha.setIcon(iconoCancha);
+		panelInicioJuego.add(lblcanha);
 		
 		JLabel lblpuntequip12 = new JLabel("0");
 		lblpuntequip12.setHorizontalAlignment(SwingConstants.CENTER);
 		lblpuntequip12.setForeground(Color.WHITE);
 		lblpuntequip12.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		lblpuntequip12.setBounds(808, 390, 45, 55);
+		lblpuntequip12.setBounds(808, 145, 45, 55);
 		panelInicioJuego.add(lblpuntequip12);
 		lblfondojuego.setIcon(icono);
 		panelInicioJuego.add(lblfondojuego);
