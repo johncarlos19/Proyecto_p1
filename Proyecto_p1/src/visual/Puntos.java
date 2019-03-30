@@ -45,60 +45,60 @@ public class Puntos extends JDialog {
 	public Puntos() {
 		setForeground(new Color(0, 0, 0));
 		setTitle("PUNTOS");
-		getContentPane().setBackground(new Color(128, 0, 0));
+		getContentPane().setBackground(SystemColor.control);
 		setBounds(100, 100, 548, 433);
 		getContentPane().setLayout(null);
 		{
 			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(new Color(128, 0, 0));
+			buttonPane.setBackground(Color.WHITE);
 			buttonPane.setBounds(0, 384, 532, 10);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane);
 		}
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(new Color(222, 184, 135));
+		panel.setBackground(SystemColor.menu);
 		panel.setBounds(10, 11, 512, 372);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblEquipo = new JLabel("Equipo 1");
-		lblEquipo.setFont(new Font("Lucida Fax", Font.PLAIN, 14));
+		lblEquipo.setFont(new Font("Lucida Fax", Font.BOLD | Font.ITALIC, 14));
 		lblEquipo.setBounds(111, 11, 73, 33);
 		panel.add(lblEquipo);
 		
 		JLabel lblEquipo_1 = new JLabel("Equipo 2");
-		lblEquipo_1.setFont(new Font("Lucida Fax", Font.PLAIN, 14));
-		lblEquipo_1.setBounds(335, 11, 64, 33);
+		lblEquipo_1.setFont(new Font("Lucida Fax", Font.BOLD | Font.ITALIC, 14));
+		lblEquipo_1.setBounds(335, 11, 89, 33);
 		panel.add(lblEquipo_1);
 		
 		radbotonequipo1 = new JRadioButton("");
-		radbotonequipo1.setBackground(new Color(222, 184, 135));
+		radbotonequipo1.setBackground(SystemColor.menu);
 		radbotonequipo1.setBounds(124, 51, 30, 23);
 		panel.add(radbotonequipo1);
 		
 		radbotonequipo2 = new JRadioButton("");
-		radbotonequipo2.setBackground(new Color(222, 184, 135));
+		radbotonequipo2.setBackground(SystemColor.menu);
 		radbotonequipo2.setBounds(355, 51, 30, 23);
 		panel.add(radbotonequipo2);
 		
 		btnLibre = new JButton("Libre");
-		btnLibre.setFont(new Font("Lucida Fax", Font.PLAIN, 11));
+		btnLibre.setFont(new Font("Lucida Fax", Font.BOLD, 12));
 		btnLibre.setBounds(318, 146, 89, 23);
 		panel.add(btnLibre);
 		
 		btnDoble = new JButton("Doble");
-		btnDoble.setFont(new Font("Lucida Fax", Font.PLAIN, 11));
+		btnDoble.setFont(new Font("Lucida Fax", Font.BOLD, 12));
 		btnDoble.setBounds(318, 196, 89, 23);
 		panel.add(btnDoble);
 		
 		btnTriple = new JButton("Triple");
-		btnTriple.setFont(new Font("Lucida Fax", Font.PLAIN, 11));
+		btnTriple.setFont(new Font("Lucida Fax", Font.BOLD, 12));
 		btnTriple.setBounds(318, 242, 89, 23);
 		panel.add(btnTriple);
 		
 		JLabel lblTiros = new JLabel("Tiros:");
-		lblTiros.setFont(new Font("Lucida Fax", Font.PLAIN, 12));
+		lblTiros.setFont(new Font("Lucida Fax", Font.ITALIC, 14));
 		lblTiros.setBounds(335, 106, 46, 14);
 		panel.add(lblTiros);
 		
@@ -114,7 +114,7 @@ public class Puntos extends JDialog {
 		scrollPane.setColumnHeaderView(table);
 		
 		JLabel lblJugadores = new JLabel("Jugadores:");
-		lblJugadores.setFont(new Font("Lucida Fax", Font.PLAIN, 13));
+		lblJugadores.setFont(new Font("Lucida Fax", Font.BOLD, 13));
 		lblJugadores.setBounds(27, 81, 127, 33);
 		panel.add(lblJugadores);
 	}
