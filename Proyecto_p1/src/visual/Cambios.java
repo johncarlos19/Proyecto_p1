@@ -44,10 +44,12 @@ public class Cambios extends JDialog {
 		contentPanel.setLayout(null);
 		
 		JButton buttonadd = new JButton(">");
+		buttonadd.setFont(new Font("Lucida Fax", Font.BOLD, 20));
 		buttonadd.setBounds(196, 211, 47, 33);
 		contentPanel.add(buttonadd);
 		
 		JButton buttonremove = new JButton("<");
+		buttonremove.setFont(new Font("Lucida Fax", Font.BOLD, 20));
 		buttonremove.setBounds(196, 273, 47, 33);
 		contentPanel.add(buttonremove);
 		
@@ -104,12 +106,14 @@ public class Cambios extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Cambiar");
+				okButton.setFont(new Font("Lucida Fax", Font.PLAIN, 12));
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.setFont(new Font("Lucida Fax", Font.PLAIN, 12));
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
