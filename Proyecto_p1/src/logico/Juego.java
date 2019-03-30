@@ -10,7 +10,7 @@ public class Juego implements Serializable{
 	private static final long serialVersionUID = -2700358167077251146L;
 	private Equipo [] equipoJuego;
 	private Date fechaJuego;
-	
+	private boolean jugo;
 	
 	/**
 	 * @param equipoJuego
@@ -21,6 +21,7 @@ public class Juego implements Serializable{
 		super();
 		this.equipoJuego = new Equipo[2];
 		this.fechaJuego = fechaJuego;
+		this.jugo = false;
 	}
 	public Equipo[] getEquipoJuego() {
 		return equipoJuego;
@@ -34,6 +35,13 @@ public class Juego implements Serializable{
 	public void setFechaJuego(Date fechaJuego) {
 		this.fechaJuego = fechaJuego;//jj
 	}
+	public boolean isJugo() {
+		return jugo;
+	}
+	public void setJugo(boolean jugo) {
+		this.jugo = jugo;
+	}
+	
 	
 	
 }

@@ -96,7 +96,7 @@ public class Baloncesto implements Serializable{
 		int j=0;
 		int k=j;
 		int posi=0;
-		int fech= 1;
+		int fech= 0;
 		while(i<(equipoTor.size()-1)) {
 			k+=1;
 			j=k;
@@ -125,13 +125,13 @@ public class Baloncesto implements Serializable{
 			}
 			i++;
 		}
-		
+		escribirDatos();
 	}
 	
 	private Date fechaTorneo(Date fechaAnterior, int fechaDescanso) {
 		int year = fechaAnterior.getYear();
 		int month = fechaAnterior.getMonth();
-		int date = fechaAnterior.getDay();
+		int date = fechaAnterior.getDate();
 		int numDias=0;
 		switch (month) {
         case 1: case 3: case 5: case 7: case 8: case 10: case 12:
@@ -194,9 +194,10 @@ public class Baloncesto implements Serializable{
 		{
 			FileOutputStream f = new FileOutputStream("src/Baloncesto.dat");
 			ObjectOutputStream os = new ObjectOutputStream(f);
+			os.writeInt(cantJuegosTorneo);
 			os.writeObject(misEquipos);
 			os.writeObject(juegoRecord);
-			os.writeInt(cantJuegosTorneo);
+			
 			
 		}
 		catch(FileNotFoundException ex)
