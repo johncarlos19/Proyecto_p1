@@ -17,7 +17,9 @@ import java.io.ObjectOutputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.swing.Icon;
 //import java.awt.Toolkit;
@@ -54,9 +56,15 @@ public class Principal extends JFrame {
 	private JButton btnFin;
 	private JButton btnCambio;
 	private JButton btnPunto;
+	private JLabel lblEquipo1;
+	private JLabel lblEquipo2;
+	private JLabel lblLogoequip;
+	private JLabel lblLogoequip2;
+	
 	private JButton btnJuego;
 	private boolean enJuego = false;
-	private Date fechaActual = new Date();
+	private JButton buttonBackSpace;
+	private static Date fechaActual = new Date();
 	//inicio fecha para iniciar torneo
 	private JSpinner spinnerDia;
 	private JSpinner spinnerMes;
@@ -81,6 +89,7 @@ public class Principal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					System.out.println("Fecha1 "+fechaActual.getMonth());
 						FileInputStream f= new FileInputStream("src/Baloncesto.dat");
 						ObjectInputStream os = new ObjectInputStream(f);
 						int punt = os.readInt();
@@ -121,7 +130,7 @@ public class Principal extends JFrame {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 811);
-	
+		fechaActual.setMonth(fechaActual.getMonth());
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -258,6 +267,18 @@ public class Principal extends JFrame {
 					btnCambio.setVisible(true);
 					btnFin.setVisible(true);
 					btnPunto.setVisible(true);
+					buttonBackSpace.setVisible(true);
+					buttonBackSpace.setEnabled(true);
+					btnJuego.setText("Renaudar\n Juego");
+					lblEquipo1.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre());
+					lblEquipo2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
+
+					Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
+					lblLogoequip.setIcon(icono);
+					lblLogoequip.setText(null);
+					Icon icono1 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
+					lblLogoequip2.setIcon(icono1);
+					lblLogoequip2.setText(null);
 					enJuego=true;
 				}else if (btnJuego.getText().toString().equalsIgnoreCase("Renaudar\n Juego") && enJuego==true) {
 					panelMenuPrinc.setVisible(false);
@@ -265,6 +286,8 @@ public class Principal extends JFrame {
 					btnCambio.setVisible(true);
 					btnFin.setVisible(true);
 					btnPunto.setVisible(true);
+					buttonBackSpace.setVisible(true);
+					buttonBackSpace.setEnabled(true);
 				}
 				
 				
@@ -425,7 +448,9 @@ public class Principal extends JFrame {
 		spinnerMes = new JSpinner();
 		spinnerMes.setEnabled(false);
 		spinnerMes.setVisible(false);
+		System.out.println("Fecha "+fechaActual.getMonth());
 		spinnerMes.setModel(new SpinnerNumberModel(fechaActual.getMonth(), 1, 12, 1));
+		System.out.println("Fecha "+fechaActual.getMonth());
 		spinnerMes.setBounds(627, 333, 46, 20);
 		panelMenuPrinc.add(spinnerMes);
 		
@@ -438,13 +463,13 @@ public class Principal extends JFrame {
 		
 		JLabel fondoPrin = new JLabel("");
 		fondoPrin.setIcon(new ImageIcon(Principal.class.getResource("/imagen/1530905.jpg")));
-		fondoPrin.setBounds(0, 21, 1340, 741);
+		fondoPrin.setBounds(10, 0, 1340, 741);
 		panelMenuPrinc.add(fondoPrin);
 		
 		
-
 		
-		/*
+		
+		
 		panelInicioJuego = new JPanel();
 		panelInicioJuego.setBounds(5, 5, 1340, 792);
 		//panelInicioJuego.setVisible(false);
@@ -458,14 +483,14 @@ public class Principal extends JFrame {
 		panelInicioJuego.add(panel_equipo1);
 		panel_equipo1.setLayout(null);
 		
-		JLabel lblEquipo1 = new JLabel("Equipo1");
+		lblEquipo1 = new JLabel("Equipo1");
 		lblEquipo1.setForeground(Color.WHITE);
 		lblEquipo1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblEquipo1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEquipo1.setBounds(123, 11, 131, 31);
 		panel_equipo1.add(lblEquipo1);
 		
-		JLabel lblLogoequip = new JLabel("logo_equip1");
+		lblLogoequip = new JLabel("logo_equip1");
 		lblLogoequip.setForeground(Color.WHITE);
 		lblLogoequip.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoequip.setBounds(100, 53, 177, 147);
@@ -499,14 +524,14 @@ public class Principal extends JFrame {
 		panelInicioJuego.add(panel_equipo2);
 		panel_equipo2.setLayout(null);
 		
-		JLabel lblEquipo2 = new JLabel("Equipo1");
+		lblEquipo2 = new JLabel("Equipo1");
 		lblEquipo2.setForeground(Color.WHITE);
 		lblEquipo2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblEquipo2.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblEquipo2.setBounds(136, 11, 131, 31);
 		panel_equipo2.add(lblEquipo2);
 		
-		JLabel lblLogoequip2 = new JLabel("logo_equip2");
+		lblLogoequip2 = new JLabel("logo_equip2");
 		lblLogoequip2.setForeground(Color.WHITE);
 		lblLogoequip2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLogoequip2.setBounds(113, 53, 177, 147);
@@ -635,9 +660,28 @@ public class Principal extends JFrame {
 		lblpuntequip12.setFont(new Font("Tahoma", Font.PLAIN, 50));
 		lblpuntequip12.setBounds(808, 145, 45, 55);
 		panelInicioJuego.add(lblpuntequip12);
+		
+		buttonBackSpace = new JButton("");
+		buttonBackSpace.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buttonBackSpace.setVisible(false);
+				buttonBackSpace.setEnabled(false);
+				panelMenuPrinc.setVisible(true);
+				panelInicioJuego.setVisible(false);
+				btnCambio.setVisible(false);
+				btnFin.setVisible(false);
+				btnPunto.setVisible(false);
+			}
+		});
+		buttonBackSpace.setIcon(new ImageIcon(Principal.class.getResource("/com/sun/javafx/scene/control/skin/caspian/fxvk-backspace-button.png")));
+		buttonBackSpace.setBounds(10, 23, 45, 27);
+		buttonBackSpace.setVisible(false);
+		buttonBackSpace.setEnabled(false);
+		
+		panelInicioJuego.add(buttonBackSpace);
 		lblfondojuego.setIcon(icono);
 		panelInicioJuego.add(lblfondojuego);
-		}*/
+		}
 		//Este codigo listo para modificar al equipo
 		
 		//File ic;
@@ -704,7 +748,7 @@ public class Principal extends JFrame {
 			}else if(Baloncesto.getInstance().getJuegoRecord().size()!=0) {
 				int dia = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate();
 				int mes = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth();
-				int year = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getYear()+1900;
+				int year = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getYear();
 				panelEquipoAJugar.setVisible(true);
 				btnJuego.setEnabled(false);
 				lblHoyFecha.setText(Integer.toString(dia)+"/"+Integer.toString(mes)+"/"+Integer.toString(year));
