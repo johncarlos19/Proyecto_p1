@@ -32,7 +32,7 @@ public class ListarEquipos extends JDialog {
 
 	/**
 	 * Launch the application.
-	 */
+	 *//*
 	public static void main(String[] args) {
 		try {
 			ListarEquipos dialog = new ListarEquipos();
@@ -41,7 +41,7 @@ public class ListarEquipos extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Create the dialog.

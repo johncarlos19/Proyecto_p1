@@ -34,6 +34,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import logico.Baloncesto;
 import logico.Equipo;
@@ -50,8 +51,10 @@ public class Principal extends JFrame {
 	private JPanel contentPane;
 	private JPanel panelMenuPrinc;
 	private JPanel panelInicioJuego;
-	private JTable table;
-	private JTable table_1;
+	private static JTable table;
+	private static DefaultTableModel tableModelEquip1;
+	private static JTable table_1;
+	private static DefaultTableModel tableModel_1Equip2;
 	private JPanel panelEquipoAJugar;
 	private JButton btnFin;
 	private JButton btnCambio;
@@ -214,6 +217,14 @@ public class Principal extends JFrame {
 		mnEquipo.add(mntmRegistrar);
 		
 		JMenuItem mntmLista = new JMenuItem("Lista");
+		mntmLista.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListarEquipos listequip = new ListarEquipos();
+				listequip.setModal(true);
+				listequip.setLocationRelativeTo(null);
+				listequip.setVisible(true);
+			}
+		});
 		mnEquipo.add(mntmLista);
 		
 		JMenu mnCalendario = new JMenu("Calendario");
