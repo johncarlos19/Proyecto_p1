@@ -88,7 +88,8 @@ public class ListarEquipos extends JDialog {
 								btnVer.setEnabled(true);
 								int index = table.getSelectedRow();
 								identificador = (String)table.getModel().getValueAt(index, 1);
-				
+								//identificador = ((JLabel)table.getModel().getValueAt(index, 1)).getText();
+
 							}
 						}
 					});

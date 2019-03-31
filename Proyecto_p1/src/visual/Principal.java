@@ -317,9 +317,12 @@ public class Principal extends JFrame {
 		//btnJuego.setBorderPainted(false);
 		btnJuego.setForeground(Color.WHITE);
 		btnJuego.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnJuego.setIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd1221i.gif")));
+		btnJuego.setBounds(553, 230, 207, 181);
+		Icon iconn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd1221i.gif")).getImage().getScaledInstance(btnJuego.getWidth(), btnJuego.getHeight(), Image.SCALE_DEFAULT));
+		
+		btnJuego.setIcon(iconn);
 		btnJuego.setFont(new Font("Tahoma", Font.PLAIN, 24));
-		btnJuego.setBounds(565, 214, 184, 167);
+		
 		
 		panelMenuPrinc.add(btnJuego);
 		
