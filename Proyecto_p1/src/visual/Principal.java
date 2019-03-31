@@ -203,6 +203,14 @@ public class Principal extends JFrame {
 		menuBar.add(mnEquipo);
 		
 		JMenuItem mntmRegistrar = new JMenuItem("Registrar");
+		mntmRegistrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AgregarEquipo agreEquipo = new AgregarEquipo();
+				agreEquipo.setModal(true);
+				agreEquipo.setLocationRelativeTo(null);
+				agreEquipo.setVisible(true);
+			}
+		});
 		mnEquipo.add(mntmRegistrar);
 		
 		JMenuItem mntmLista = new JMenuItem("Lista");
