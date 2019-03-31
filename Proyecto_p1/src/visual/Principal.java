@@ -463,7 +463,7 @@ public class Principal extends JFrame {
 		
 		JLabel fondoPrin = new JLabel("");
 		fondoPrin.setIcon(new ImageIcon(Principal.class.getResource("/imagen/1530905.jpg")));
-		fondoPrin.setBounds(10, 0, 1340, 741);
+		fondoPrin.setBounds(0, 21, 1340, 741);
 		panelMenuPrinc.add(fondoPrin);
 		
 		
