@@ -13,6 +13,7 @@ import java.awt.Font;
 import javax.swing.JRadioButton;
 import java.awt.Color;
 import java.awt.SystemColor;
+import javax.swing.JScrollPane;
 
 public class Cambios extends JDialog {
 
@@ -53,23 +54,16 @@ public class Cambios extends JDialog {
 		buttonremove.setBounds(196, 273, 47, 33);
 		contentPanel.add(buttonremove);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(10, 129, 157, 280);
-		contentPanel.add(panel);
-		panel.setLayout(null);
-		
-		table = new JTable();
-		table.setBounds(0, 0, 157, 280);
-		panel.add(table);
-		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(267, 129, 157, 280);
 		contentPanel.add(panel_1);
-		panel_1.setLayout(null);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		panel_1.add(scrollPane_1, BorderLayout.CENTER);
 		
 		table_1 = new JTable();
-		table_1.setBounds(0, 0, 157, 280);
-		panel_1.add(table_1);
+		scrollPane_1.setColumnHeaderView(table_1);
 		
 		JLabel label = new JLabel("Equipo 1");
 		label.setFont(new Font("Lucida Fax", Font.BOLD | Font.ITALIC, 14));
@@ -100,6 +94,17 @@ public class Cambios extends JDialog {
 		lblBanca.setFont(new Font("Lucida Fax", Font.BOLD, 13));
 		lblBanca.setBounds(267, 91, 157, 33);
 		contentPanel.add(lblBanca);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(15, 129, 152, 280);
+		contentPanel.add(panel);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		JScrollPane scrollPane = new JScrollPane();
+		panel.add(scrollPane, BorderLayout.CENTER);
+		
+		table = new JTable();
+		scrollPane.setColumnHeaderView(table);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

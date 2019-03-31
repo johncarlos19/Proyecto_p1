@@ -46,40 +46,33 @@ public class Puntos extends JDialog {
 		setForeground(new Color(0, 0, 0));
 		setTitle("PUNTOS");
 		getContentPane().setBackground(SystemColor.control);
-		setBounds(100, 100, 548, 433);
+		setBounds(100, 100, 494, 486);
 		getContentPane().setLayout(null);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setBackground(Color.WHITE);
-			buttonPane.setBounds(0, 384, 532, 10);
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane);
-		}
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(SystemColor.menu);
-		panel.setBounds(10, 11, 512, 372);
+		panel.setBounds(10, 11, 458, 425);
 		getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblEquipo = new JLabel("Equipo 1");
 		lblEquipo.setFont(new Font("Lucida Fax", Font.BOLD | Font.ITALIC, 14));
-		lblEquipo.setBounds(111, 11, 73, 33);
+		lblEquipo.setBounds(112, 0, 73, 33);
 		panel.add(lblEquipo);
 		
 		JLabel lblEquipo_1 = new JLabel("Equipo 2");
 		lblEquipo_1.setFont(new Font("Lucida Fax", Font.BOLD | Font.ITALIC, 14));
-		lblEquipo_1.setBounds(335, 11, 89, 33);
+		lblEquipo_1.setBounds(296, 0, 89, 33);
 		panel.add(lblEquipo_1);
 		
 		radbotonequipo1 = new JRadioButton("");
 		radbotonequipo1.setBackground(SystemColor.menu);
-		radbotonequipo1.setBounds(124, 51, 30, 23);
+		radbotonequipo1.setBounds(122, 31, 30, 23);
 		panel.add(radbotonequipo1);
 		
 		radbotonequipo2 = new JRadioButton("");
 		radbotonequipo2.setBackground(SystemColor.menu);
-		radbotonequipo2.setBounds(355, 51, 30, 23);
+		radbotonequipo2.setBounds(306, 31, 30, 23);
 		panel.add(radbotonequipo2);
 		
 		btnLibre = new JButton("Libre");
@@ -103,7 +96,7 @@ public class Puntos extends JDialog {
 		panel.add(lblTiros);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(27, 117, 220, 244);
+		panel_1.setBounds(27, 117, 220, 297);
 		panel.add(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
@@ -115,7 +108,7 @@ public class Puntos extends JDialog {
 		
 		JLabel lblJugadores = new JLabel("Jugadores:");
 		lblJugadores.setFont(new Font("Lucida Fax", Font.BOLD, 13));
-		lblJugadores.setBounds(27, 81, 127, 33);
+		lblJugadores.setBounds(58, 81, 127, 33);
 		panel.add(lblJugadores);
 	}
 }
