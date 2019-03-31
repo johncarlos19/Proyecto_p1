@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 
 public class Calendario extends JDialog {
 	private JTable table;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -59,7 +60,7 @@ public class Calendario extends JDialog {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
 		{
 			table = new JTable();

@@ -20,6 +20,12 @@ public class Cambios extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	private JTable table_1;
+	private JButton buttonadd;
+	private JButton buttonremove;
+	private JScrollPane scrollPane_1;
+	private JPanel buttonPane;
+	private JRadioButton radioButton1;
+	private JRadioButton radioButton2;
 
 	/**
 	 * Launch the application.
@@ -44,12 +50,12 @@ public class Cambios extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JButton buttonadd = new JButton(">");
+		buttonadd = new JButton(">");
 		buttonadd.setFont(new Font("Lucida Fax", Font.BOLD, 20));
 		buttonadd.setBounds(196, 211, 47, 33);
 		contentPanel.add(buttonadd);
 		
-		JButton buttonremove = new JButton("<");
+		buttonremove = new JButton("<");
 		buttonremove.setFont(new Font("Lucida Fax", Font.BOLD, 20));
 		buttonremove.setBounds(196, 273, 47, 33);
 		contentPanel.add(buttonremove);
@@ -59,7 +65,7 @@ public class Cambios extends JDialog {
 		contentPanel.add(panel_1);
 		panel_1.setLayout(new BorderLayout(0, 0));
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1 = new JScrollPane();
 		panel_1.add(scrollPane_1, BorderLayout.CENTER);
 		
 		table_1 = new JTable();
@@ -70,7 +76,7 @@ public class Cambios extends JDialog {
 		label.setBounds(88, 11, 79, 33);
 		contentPanel.add(label);
 		
-		JRadioButton radioButton1 = new JRadioButton("");
+		radioButton1 = new JRadioButton("");
 		radioButton1.setBackground(SystemColor.menu);
 		radioButton1.setBounds(109, 51, 30, 23);
 		contentPanel.add(radioButton1);
@@ -80,7 +86,7 @@ public class Cambios extends JDialog {
 		label_1.setBounds(258, 11, 79, 33);
 		contentPanel.add(label_1);
 		
-		JRadioButton radioButton2 = new JRadioButton("");
+		radioButton2 = new JRadioButton("");
 		radioButton2.setBackground(SystemColor.menu);
 		radioButton2.setBounds(278, 51, 30, 23);
 		contentPanel.add(radioButton2);
@@ -106,7 +112,7 @@ public class Cambios extends JDialog {
 		table = new JTable();
 		scrollPane.setColumnHeaderView(table);
 		{
-			JPanel buttonPane = new JPanel();
+			buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
