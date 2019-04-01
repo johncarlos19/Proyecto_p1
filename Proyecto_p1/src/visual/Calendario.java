@@ -3,6 +3,7 @@ package visual;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,8 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import javafx.scene.layout.Border;
 import logico.Baloncesto;
 
 import java.awt.Font;
@@ -20,6 +23,7 @@ import java.awt.Image;
 
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
+import java.io.Console;
 import java.awt.event.ActionEvent;
 
 public class Calendario extends JDialog {
@@ -67,23 +71,37 @@ public class Calendario extends JDialog {
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
-		panel.setLayout(new BorderLayout(0, 0));
+		panel.setOpaque(false);
+		panel.setLayout(null);
+		JLabel label = new JLabel("");
+			label.setIcon(new ImageIcon(Calendario.class.getResource("/imagen/1530905.jpg")));
+			label.setBounds(0, 0, 613, 388);
+			panel.add(label);
+			
+		scrollPane = new JScrollPane(label,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setBounds(0, 0, 613, 388);
+		//javax.swing.border.Border border1 = BorderFactory.createEmptyBorder(0,0,0,0);
+		//scrollPane.setBorder(null);
+		//scrollPane
 		
-		scrollPane = new JScrollPane();
-		panel.add(scrollPane, BorderLayout.CENTER);
+		panel.add(scrollPane);
 		{
 			table = new JTable();
+			table.setVisible(true);
 			table.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			table.setDefaultRenderer(Object.class, new ImgTabla());
 			String[] header = {"","", ""};
 			model = new DefaultTableModel(null,header);
-			table.setRowHeight(40);
+			table.setRowHeight(130);
 			table.setModel(model);
 			table.setOpaque(false);
 			cargarTabla();
 			scrollPane.setViewportView(table);
 			scrollPane.setOpaque(false);
 			//scrollPane.setColumnHeaderView(table);
+		}
+		{
+			
 		}
 	}
 	private void cargarTabla() {
@@ -92,14 +110,23 @@ public class Calendario extends JDialog {
 		for (int i = 0; i < Baloncesto.getInstance().getJuegoRecord().size(); i++) {
 			//
 					//.getImage().getScaledInstance(ColumnConst, lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
-			Icon icono111 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(i).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+			Icon icono111 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(i).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
 			JLabel log = new JLabel(Baloncesto.getInstance().getJuegoRecord().get(i).getEquipoJuego()[0].getNombre());
 			log.setIcon(icono111);
-			Icon icono222 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(i).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT));
+			log.setHorizontalAlignment(SwingConstants.CENTER);
+			log.setHorizontalTextPosition(SwingConstants.CENTER);
+			log.setVerticalTextPosition(SwingConstants.BOTTOM);
+			Icon icono222 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(i).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));
 			JLabel log1 = new JLabel(Baloncesto.getInstance().getJuegoRecord().get(i).getEquipoJuego()[1].getNombre());
 			log1.setIcon(icono222);
+			log1.setVerticalTextPosition(SwingConstants.BOTTOM);
+			log1.setHorizontalAlignment(SwingConstants.CENTER);
+			log1.setHorizontalTextPosition(SwingConstants.CENTER);
+			JLabel fecha = new JLabel(Baloncesto.getInstance().getJuegoRecord().get(i).getFechaJuego().getDate()+"/"+Baloncesto.getInstance().getJuegoRecord().get(i).getFechaJuego().getMonth()+"/"+(Baloncesto.getInstance().getJuegoRecord().get(i).getFechaJuego().getYear()));
+			fecha.setHorizontalAlignment(SwingConstants.CENTER);
+			fecha.setHorizontalTextPosition(SwingConstants.CENTER);
 			fila[0]= log;
-			fila[1] = Baloncesto.getInstance().getJuegoRecord().get(i).getFechaJuego().getDate()+"/"+Baloncesto.getInstance().getJuegoRecord().get(i).getFechaJuego().getMonth()+"/"+(Baloncesto.getInstance().getJuegoRecord().get(i).getFechaJuego().getYear());
+			fila[1] = fecha;
 			fila[2] = log1;
 			model.addRow(fila);
 		}
