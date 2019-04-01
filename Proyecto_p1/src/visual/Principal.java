@@ -231,6 +231,14 @@ public class Principal extends JFrame {
 		menuBar.add(mnCalendario);
 		
 		JMenuItem mntmVerCalendario = new JMenuItem("Ver Calendario");
+		mntmVerCalendario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			Calendario miCalen = new Calendario();
+			miCalen.setModal(true);
+			miCalen.setLocationRelativeTo(null);
+			miCalen.setVisible(true);
+			}
+		});
 		mnCalendario.add(mntmVerCalendario);
 		
 		JMenu mnEstadisticas = new JMenu("Estadisticas");
