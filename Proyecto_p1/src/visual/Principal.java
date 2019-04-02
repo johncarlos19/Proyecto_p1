@@ -133,7 +133,7 @@ public class Principal extends JFrame {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1366, 811);
-		fechaActual.setMonth(fechaActual.getMonth());
+		fechaActual.setMonth(fechaActual.getMonth()+1);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -492,8 +492,11 @@ public class Principal extends JFrame {
 		panelMenuPrinc.add(spinnerAno);
 		
 		JLabel fondoPrin = new JLabel("");
-		fondoPrin.setIcon(new ImageIcon(Principal.class.getResource("/imagen/1530905.jpg")));
+		
 		fondoPrin.setBounds(0, 21, 1340, 741);
+Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/videoplayback.gif")).getImage().getScaledInstance(fondoPrin.getWidth(), fondoPrin.getHeight(), Image.SCALE_DEFAULT));
+		
+		fondoPrin.setIcon(icon1o);
 		panelMenuPrinc.add(fondoPrin);
 		
 		

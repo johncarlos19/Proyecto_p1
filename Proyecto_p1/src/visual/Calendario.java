@@ -25,6 +25,7 @@ import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.io.Console;
 import java.awt.event.ActionEvent;
+import javax.swing.ScrollPaneConstants;
 
 public class Calendario extends JDialog {
 	private JTable table;
@@ -73,12 +74,14 @@ public class Calendario extends JDialog {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setOpaque(false);
 		panel.setLayout(null);
-		JLabel label = new JLabel("");
-			label.setIcon(new ImageIcon(Calendario.class.getResource("/imagen/1530905.jpg")));
-			label.setBounds(0, 0, 613, 388);
-			panel.add(label);
+		JLabel lblHhhh = new JLabel(new ImageIcon(Calendario.class.getResource("/imagen/1530905.jpg")));
+		lblHhhh.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblHhhh.setText("");
+			//label.setIcon();
+			lblHhhh.setBounds(0, 0, 613, 388);
+			panel.add(lblHhhh);
 			
-		scrollPane = new JScrollPane(label,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane = new JScrollPane(lblHhhh,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(0, 0, 613, 388);
 		//javax.swing.border.Border border1 = BorderFactory.createEmptyBorder(0,0,0,0);
 		//scrollPane.setBorder(null);
