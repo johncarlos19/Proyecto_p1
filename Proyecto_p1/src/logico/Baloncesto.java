@@ -8,6 +8,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+import visual.Principal;
+
 
 public class Baloncesto implements Serializable{
 	/**
@@ -194,9 +196,11 @@ public class Baloncesto implements Serializable{
 		{
 			FileOutputStream f = new FileOutputStream("src/Baloncesto.dat");
 			ObjectOutputStream os = new ObjectOutputStream(f);
+			Principal ob = new Principal();
 			os.writeInt(cantJuegosTorneo);
 			os.writeObject(misEquipos);
 			os.writeObject(juegoRecord);
+			os.writeBoolean(ob.enJuego);
 			
 			
 		}

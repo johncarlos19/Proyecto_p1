@@ -24,6 +24,7 @@ import java.awt.Image;
 import javax.swing.JScrollPane;
 import java.awt.event.ActionListener;
 import java.io.Console;
+import java.util.Date;
 import java.awt.event.ActionEvent;
 import javax.swing.ScrollPaneConstants;
 
@@ -32,6 +33,7 @@ public class Calendario extends JDialog {
 	private JScrollPane scrollPane;
 	private static DefaultTableModel model;
 	private static Object[] fila;
+	private Date fechaActual = new Date();
 	/**
 	 * Launch the application.
 	 *//*
@@ -52,6 +54,7 @@ public class Calendario extends JDialog {
 		setFont(new Font("Lucida Fax", Font.BOLD, 12));
 		setTitle("Calendario");
 		setBounds(100, 100, 629, 462);
+		
 		getContentPane().setLayout(new BorderLayout());
 		{
 			JPanel buttonPane = new JPanel();
@@ -69,7 +72,7 @@ public class Calendario extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		
+		fechaActual.setMonth(fechaActual.getMonth()+1);
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setOpaque(false);
@@ -125,11 +128,20 @@ public class Calendario extends JDialog {
 			log1.setVerticalTextPosition(SwingConstants.BOTTOM);
 			log1.setHorizontalAlignment(SwingConstants.CENTER);
 			log1.setHorizontalTextPosition(SwingConstants.CENTER);
-			JLabel fecha = new JLabel(Baloncesto.getInstance().getJuegoRecord().get(i).getFechaJuego().getDate()+"/"+Baloncesto.getInstance().getJuegoRecord().get(i).getFechaJuego().getMonth()+"/"+(Baloncesto.getInstance().getJuegoRecord().get(i).getFechaJuego().getYear()));
+			JLabel fecha = new JLabel();
+			fecha.setText(Baloncesto.getInstance().getJuegoRecord().get(i).getFechaJuego().getDate()+"/"+Baloncesto.getInstance().getJuegoRecord().get(i).getFechaJuego().getMonth()+"/"+(Baloncesto.getInstance().getJuegoRecord().get(i).getFechaJuego().getYear()));
 			fecha.setHorizontalAlignment(SwingConstants.CENTER);
 			fecha.setHorizontalTextPosition(SwingConstants.CENTER);
 			fila[0]= log;
-			fila[1] = fecha;
+			if (fechaActual.getDate()==Baloncesto.getInstance().getJuegoRecord().get(i).getFechaJuego().getDate()) {
+				fecha.setText("Hoy");
+				fila[1] = fecha;	
+			}else if(fechaActual.getDate()+1==Baloncesto.getInstance().getJuegoRecord().get(i).getFechaJuego().getDate()) {
+				fecha.setText("Mañana");
+				fila[1] = fecha;
+			}else {
+				fila[1] = fecha;
+			}
 			fila[2] = log1;
 			model.addRow(fila);
 		}

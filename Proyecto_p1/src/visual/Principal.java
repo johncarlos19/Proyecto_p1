@@ -14,6 +14,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -46,8 +47,12 @@ import javax.swing.JTable;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
-public class Principal extends JFrame {
+public class Principal extends JFrame implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2794504585051207407L;
 	private JPanel contentPane;
 	private JPanel panelMenuPrinc;
 	private JPanel panelInicioJuego;
@@ -65,7 +70,7 @@ public class Principal extends JFrame {
 	private JLabel lblLogoequip2;
 	
 	private JButton btnJuego;
-	private boolean enJuego = false;
+	public static boolean enJuego  = false;
 	private JButton buttonBackSpace;
 	private static Date fechaActual = new Date();
 	//inicio fecha para iniciar torneo
@@ -104,7 +109,8 @@ public class Principal extends JFrame {
 						ArrayList<Juego> aux1 = (ArrayList<Juego>) os.readObject();
 						Baloncesto.getInstance().setJuegoRecord(aux1);
 						System.out.println(Baloncesto.getInstance().getJuegoRecord().size());
-						
+						//boolean en = os.readBoolean();
+						//enJuego = en;
 					Principal frame = new Principal();
 					frame.setVisible(true);
 				} catch (FileNotFoundException ex) {
@@ -129,10 +135,11 @@ public class Principal extends JFrame {
 	
 
 	 
-	public Principal() throws IOException {
+	public Principal() throws IOException  {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 1366, 811);
+		setBounds(100, 100, 1351, 797);
+		setResizable(false);
 		fechaActual.setMonth(fechaActual.getMonth()+1);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -255,6 +262,7 @@ public class Principal extends JFrame {
 		
 		
 		btnJuego = new JButton("Juego");
+		btnJuego.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnJuego.setEnabled(false);
 		if (Baloncesto.getInstance().getJuegoRecord().size()==0 && Baloncesto.getInstance().getCantJuegos()==0) {
 			btnJuego.setText("Crear Torneo");
@@ -325,11 +333,11 @@ public class Principal extends JFrame {
 		//btnJuego.setBorderPainted(false);
 		btnJuego.setForeground(Color.WHITE);
 		btnJuego.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnJuego.setBounds(553, 230, 207, 181);
-		Icon iconn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd1221i.gif")).getImage().getScaledInstance(btnJuego.getWidth(), btnJuego.getHeight(), Image.SCALE_DEFAULT));
+		btnJuego.setBounds(561, 221, 197, 197);
+		Icon iconn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd1221i.gif")).getImage().getScaledInstance(187, 161, Image.SCALE_DEFAULT));
 		
 		btnJuego.setIcon(iconn);
-		btnJuego.setFont(new Font("Tahoma", Font.PLAIN, 24));
+		btnJuego.setFont(new Font("Swis721 BdCnOul BT", Font.PLAIN, 24));
 		
 		
 		panelMenuPrinc.add(btnJuego);
@@ -347,13 +355,13 @@ public class Principal extends JFrame {
 		lblLogoequipo11 = new JLabel("logoEquipo1");
 		lblLogoequipo11.setForeground(Color.WHITE);
 		lblLogoequipo11.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogoequipo11.setBounds(35, 128, 183, 178);
+		lblLogoequipo11.setBounds(35, 35, 183, 178);
 		panelEquipoAJugar.add(lblLogoequipo11);
 		
 		lblLogoequipo22 = new JLabel("logoEquipo2");
 		lblLogoequipo22.setForeground(Color.WHITE);
 		lblLogoequipo22.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogoequipo22.setBounds(578, 128, 183, 178);
+		lblLogoequipo22.setBounds(578, 35, 183, 178);
 		panelEquipoAJugar.add(lblLogoequipo22);
 		
 		
@@ -361,22 +369,22 @@ public class Principal extends JFrame {
 		lblNombre1 = new JLabel("nombre1");
 		lblNombre1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombre1.setForeground(Color.WHITE);
-		lblNombre1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNombre1.setBounds(61, 53, 121, 33);
+		lblNombre1.setFont(new Font("Alien Encounters", Font.PLAIN, 18));
+		lblNombre1.setBounds(66, 233, 121, 33);
 		panelEquipoAJugar.add(lblNombre1);
 		
 		lblNombre2 = new JLabel("nombre2");
 		lblNombre2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombre2.setForeground(Color.WHITE);
-		lblNombre2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblNombre2.setBounds(608, 53, 121, 33);
+		lblNombre2.setFont(new Font("Alien Encounters", Font.PLAIN, 18));
+		lblNombre2.setBounds(608, 233, 121, 33);
 		panelEquipoAJugar.add(lblNombre2);
 		
 		lblHoyFecha = new JLabel("example");
 		menuPrincipalJuegoMostrar();
 		
 		lblHoyFecha.setHorizontalAlignment(SwingConstants.CENTER);
-		lblHoyFecha.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblHoyFecha.setFont(new Font("2015 Cruiser Hollow", Font.BOLD, 34));
 		lblHoyFecha.setForeground(Color.WHITE);
 		lblHoyFecha.setBounds(284, 11, 236, 41);
 		panelEquipoAJugar.add(lblHoyFecha);
