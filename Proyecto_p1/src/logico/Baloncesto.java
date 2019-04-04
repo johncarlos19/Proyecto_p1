@@ -19,6 +19,7 @@ public class Baloncesto implements Serializable{
 	private ArrayList<Equipo> misEquipos;
 	private ArrayList<Juego> juegoRecord;
 	private int cantJuegosTorneo;
+	private boolean enJuego;
 	private static Baloncesto mibaloncesto=null;//jo
 	/**
 	 * @param miFactura
@@ -38,6 +39,7 @@ public class Baloncesto implements Serializable{
 		this.misEquipos = new ArrayList<Equipo>();
 		this.juegoRecord = new ArrayList<Juego>();
 		this.cantJuegosTorneo = 0;
+		this.enJuego  = false;
 	}
 	
 	public ArrayList<Equipo> getMisEquipos() {
@@ -61,6 +63,14 @@ public class Baloncesto implements Serializable{
 		this.cantJuegosTorneo = cantJuegos;
 	}
 	
+	public boolean isEnJuego() {
+		return enJuego;
+	}
+
+	public void setEnJuego(boolean enJuego) {
+		this.enJuego = enJuego;
+	}
+
 	private int factorial(int x) {
 		int y = x;
 		
@@ -112,6 +122,7 @@ public class Baloncesto implements Serializable{
 					aux.setEquipoJuego(auxEquipo);
 					posi=juegoRecord.size();
 					juegoRecord.add(aux);
+					fech+=1;
 				}else {
 					int des=0;
 					if (fech%3==0) {
@@ -189,18 +200,18 @@ public class Baloncesto implements Serializable{
 	}
 	
 	
-	private void escribirDatos()
+	public void escribirDatos()
 	{
 		
 		try
 		{
 			FileOutputStream f = new FileOutputStream("src/Baloncesto.dat");
 			ObjectOutputStream os = new ObjectOutputStream(f);
-			Principal ob = new Principal();
 			os.writeInt(cantJuegosTorneo);
+			os.writeBoolean(enJuego);
 			os.writeObject(misEquipos);
 			os.writeObject(juegoRecord);
-			os.writeBoolean(ob.enJuego);
+			
 			
 			
 		}

@@ -35,6 +35,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import logico.Baloncesto;
@@ -46,6 +47,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Principal extends JFrame implements Serializable {
 
@@ -56,21 +59,23 @@ public class Principal extends JFrame implements Serializable {
 	private JPanel contentPane;
 	private JPanel panelMenuPrinc;
 	private JPanel panelInicioJuego;
-	private static JTable table;
-	private static DefaultTableModel tableModelEquip1;
-	private static JTable table_1;
+	private static JTable table_Equip1;
+	private static DefaultTableModel tableModel_Equip1;
+	private static JTable table__Equip2;
 	private static DefaultTableModel tableModel_1Equip2;
 	private JPanel panelEquipoAJugar;
 	private JButton btnFin;
 	private JButton btnCambio;
-	private JButton btnPunto;
+	private JButton btnFalta;
+	private JButton btnLibre;
+	private JButton btnDoble;
+	private JButton btnTriple;
 	private JLabel lblEquipo1;
 	private JLabel lblEquipo2;
 	private JLabel lblLogoequip;
 	private JLabel lblLogoequip2;
 	
 	private JButton btnJuego;
-	public static boolean enJuego  = false;
 	private JButton buttonBackSpace;
 	private static Date fechaActual = new Date();
 	//inicio fecha para iniciar torneo
@@ -89,6 +94,14 @@ public class Principal extends JFrame implements Serializable {
 	private JLabel lblLogoequipo22;
 	private JLabel lblNombre1;
 	private JLabel lblNombre2;
+	private static DefaultTableModel model_Equip1;
+	private static Object[] fila_Equip1;
+	private static DefaultTableModel model_Equip2;
+	private static Object[] fila_Equip2;
+	private String nombreJugador;
+	private int equipoSeleccionado=-1;
+	private JLabel lblpuntequip1;
+	private JLabel lblpuntequip12;
 	//private Dimension dimention;
 
 	
@@ -102,6 +115,8 @@ public class Principal extends JFrame implements Serializable {
 						ObjectInputStream os = new ObjectInputStream(f);
 						int punt = os.readInt();
 						Baloncesto.getInstance().setCantJuegos(punt);
+						boolean en = os.readBoolean();
+						Baloncesto.getInstance().setEnJuego(en);
 						System.out.println(Baloncesto.getInstance().getCantJuegos());
 						ArrayList<Equipo> aux = (ArrayList<Equipo>) os.readObject();
 						Baloncesto.getInstance().setMisEquipos(aux);
@@ -109,8 +124,7 @@ public class Principal extends JFrame implements Serializable {
 						ArrayList<Juego> aux1 = (ArrayList<Juego>) os.readObject();
 						Baloncesto.getInstance().setJuegoRecord(aux1);
 						System.out.println(Baloncesto.getInstance().getJuegoRecord().size());
-						//boolean en = os.readBoolean();
-						//enJuego = en;
+						
 					Principal frame = new Principal();
 					frame.setVisible(true);
 				} catch (FileNotFoundException ex) {
@@ -267,9 +281,9 @@ public class Principal extends JFrame implements Serializable {
 		if (Baloncesto.getInstance().getJuegoRecord().size()==0 && Baloncesto.getInstance().getCantJuegos()==0) {
 			btnJuego.setText("Crear Torneo");
 			btnJuego.setEnabled(true);
-		}else if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && enJuego==false) {
+		}else if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().isEnJuego()==false) {
 			btnJuego.setText("Iniciar\n Juego");
-		}else if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && enJuego==true) {
+		}else if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().isEnJuego()==true) {
 			btnJuego.setText("Renaudar\n Juego");
 			btnJuego.setEnabled(true);
 		}
@@ -296,15 +310,22 @@ public class Principal extends JFrame implements Serializable {
 					spinnerDia.setEnabled(true);
 					spinnerMes.setEnabled(true);
 					
-				}else if (btnJuego.getText().toString().equalsIgnoreCase("Iniciar\n Juego") && enJuego==false) {
+				}else if (btnJuego.getText().toString().equalsIgnoreCase("Iniciar\n Juego") && Baloncesto.getInstance().isEnJuego()==false) {
 					panelMenuPrinc.setVisible(false);
 					panelInicioJuego.setVisible(true);
 					btnCambio.setVisible(true);
 					btnFin.setVisible(true);
-					btnPunto.setVisible(true);
+					btnDoble.setVisible(true);
+					btnFalta.setVisible(true);
+					btnLibre.setVisible(true);
+					btnTriple.setVisible(true);
 					buttonBackSpace.setVisible(true);
 					buttonBackSpace.setEnabled(true);
 					btnJuego.setText("Renaudar\n Juego");
+					cargarTabla(0);
+					cargarTabla(1);
+					cargarPantalla(0);
+					cargarPantalla(1);
 					lblEquipo1.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre());
 					lblEquipo2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
 
@@ -314,13 +335,29 @@ public class Principal extends JFrame implements Serializable {
 					Icon icono1 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
 					lblLogoequip2.setIcon(icono1);
 					lblLogoequip2.setText(null);
-					enJuego=true;
-				}else if (btnJuego.getText().toString().equalsIgnoreCase("Renaudar\n Juego") && enJuego==true) {
+					Baloncesto.getInstance().setEnJuego(true);
+				}else if (btnJuego.getText().toString().equalsIgnoreCase("Renaudar\n Juego") && Baloncesto.getInstance().isEnJuego()==true) {
 					panelMenuPrinc.setVisible(false);
 					panelInicioJuego.setVisible(true);
 					btnCambio.setVisible(true);
 					btnFin.setVisible(true);
-					btnPunto.setVisible(true);
+					btnDoble.setVisible(true);
+					btnFalta.setVisible(true);
+					btnLibre.setVisible(true);
+					btnTriple.setVisible(true);
+					cargarTabla(0);
+					cargarTabla(1);
+					cargarPantalla(0);
+					cargarPantalla(1);
+					lblEquipo1.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre());
+					lblEquipo2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
+
+					Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
+					lblLogoequip.setIcon(icono);
+					lblLogoequip.setText(null);
+					Icon icono1 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
+					lblLogoequip2.setIcon(icono1);
+					lblLogoequip2.setText(null);
 					buttonBackSpace.setVisible(true);
 					buttonBackSpace.setEnabled(true);
 				}
@@ -456,9 +493,9 @@ public class Principal extends JFrame implements Serializable {
 					if (Baloncesto.getInstance().getJuegoRecord().size()==0 && Baloncesto.getInstance().getCantJuegos()==0) {
 						btnJuego.setText("Crear Torneo");
 						btnJuego.setEnabled(true);
-					}else if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && enJuego==false) {
+					}else if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().isEnJuego()==false) {
 						btnJuego.setText("Iniciar\n Juego");
-					}else if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && enJuego==true) {
+					}else if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().isEnJuego()==true) {
 						btnJuego.setText("Renaudar\n Juego");
 					}
 				}else if(Baloncesto.getInstance().getMisEquipos().size()<2){
@@ -548,9 +585,42 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		scrollPane_equi1.setOpaque(false);
 		panel_jugador_principal1.add(scrollPane_equi1, BorderLayout.CENTER);
 		
-		table = new JTable();
-		table.setOpaque(false);
-		scrollPane_equi1.setColumnHeaderView(table);
+		table_Equip1 = new JTable();
+		table_Equip1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int index = table_Equip1.getSelectedRow();
+				//btnIngresarAlCarro.setEnabled(true);
+				//spinner.setEnabled(true);
+				//btnEliminar.setEnabled(false);
+				nombreJugador = (String)table_Equip1.getModel().getValueAt(index, 0);
+				equipoSeleccionado=0;
+			}
+		});
+		table_Equip1.setOpaque(false);
+		table_Equip1.setBackground(new Color(0,0,0,0));
+		//scrollPane_equi1.setColumnHeaderView(table_Equip1);
+		table_Equip1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		table_Equip1.setDefaultRenderer(Object.class, new ImgTabla());
+		((DefaultTableCellRenderer)table_Equip1.getDefaultRenderer(Object.class)).setBackground(new Color(0,0,0,0));
+		table_Equip1.setGridColor(Color.WHITE);
+		table_Equip1.setForeground(Color.WHITE);
+		String[] header = {"Nombre","Numero", "Posición","Puntos","Falta"};
+		model_Equip1 = new DefaultTableModel(null,header);
+		table_Equip1.setRowHeight(42);
+		table_Equip1.setModel(model_Equip1);
+		table_Equip1.setOpaque(false);
+		try {
+			cargarTabla(0);
+		} catch (IndexOutOfBoundsException e) {
+			// TODO: handle exception
+		}
+		scrollPane_equi1.setBackground(new Color(0,0,0,0));
+		((DefaultTableCellRenderer)table_Equip1.getDefaultRenderer(Object.class)).setOpaque(false);
+		table_Equip1.setShowGrid(true);
+		scrollPane_equi1.setViewportView(table_Equip1);
+		scrollPane_equi1.getViewport().setOpaque(false);
+		scrollPane_equi1.setOpaque(false);
 		
 		JLabel lblJugadoresEnJuego = new JLabel("Jugadores En juego");
 		lblJugadoresEnJuego.setForeground(Color.WHITE);
@@ -579,16 +649,57 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		panel_equipo2.add(lblLogoequip2);
 		
 		JPanel panel_jugador_principal2 = new JPanel();
+		panel_jugador_principal2.setOpaque(false);
 		panel_jugador_principal2.setForeground(Color.WHITE);
 		panel_jugador_principal2.setBounds(55, 281, 292, 189);
 		panel_equipo2.add(panel_jugador_principal2);
 		panel_jugador_principal2.setLayout(new BorderLayout(0, 0));
 		
 		JScrollPane scrollPane_equi2 = new JScrollPane();
+		scrollPane_equi2.setOpaque(false);
 		panel_jugador_principal2.add(scrollPane_equi2, BorderLayout.CENTER);
 		
-		table_1 = new JTable();
-		scrollPane_equi2.setColumnHeaderView(table_1);
+		table__Equip2 = new JTable();
+		table__Equip2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int index = table__Equip2.getSelectedRow();
+				//btnIngresarAlCarro.setEnabled(true);
+				//spinner.setEnabled(true);
+				//btnEliminar.setEnabled(false);
+				nombreJugador = (String)table__Equip2.getModel().getValueAt(index, 0);
+				equipoSeleccionado=1;
+				
+			}
+		});
+		table__Equip2.setVisible(true);
+		table__Equip2.setOpaque(false);
+		table__Equip2.setBackground(new Color(0,0,0,0));
+		table__Equip2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		table__Equip2.setDefaultRenderer(Object.class, new ImgTabla());
+		((DefaultTableCellRenderer)table__Equip2.getDefaultRenderer(Object.class)).setBackground(new Color(0,0,0,0));
+		table__Equip2.setGridColor(Color.WHITE);
+		table__Equip2.setForeground(Color.WHITE);
+		table__Equip2.setDefaultRenderer(Object.class, new ImgTabla());
+		String[] header1 = {"Nombre","Numero", "Posición","Puntos","Falta"};
+		model_Equip2 = new DefaultTableModel(null,header1);
+		table__Equip2.setRowHeight(42);
+		table__Equip2.setModel(model_Equip2);
+		table__Equip2.setOpaque(false);
+		try {
+			cargarTabla(1);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		scrollPane_equi2.setBackground(new Color(0,0,0,0));
+		((DefaultTableCellRenderer)table__Equip2.getDefaultRenderer(Object.class)).setOpaque(false);
+		table__Equip2.setShowGrid(true);
+		scrollPane_equi2.setViewportView(table__Equip2);
+		scrollPane_equi2.getViewport().setOpaque(false);
+		scrollPane_equi2.setOpaque(false);
+		
+		
+		//scrollPane_equi2.setColumnHeaderView(table__Equip2);
 		
 		JLabel lblJugadoresEnJuego2 = new JLabel("Jugadores En juego");
 		lblJugadoresEnJuego2.setForeground(Color.WHITE);
@@ -603,39 +714,106 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		lblfondojuego.setHorizontalTextPosition(SwingConstants.CENTER);
 		Icon icono = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/fondo-pvk-team-carbono-rojo-negro-1900x1092.jpg")).getImage().getScaledInstance(lblfondojuego.getWidth(), lblfondojuego.getHeight(), Image.SCALE_DEFAULT));
 		
-		btnPunto = new JButton("Punto");
-		btnPunto.setVisible(false);
-		btnPunto.setBackground(new Color(255, 99, 71));
-		btnPunto.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnPunto.setBounds(593, 236, 141, 49);
-		panelInicioJuego.add(btnPunto);
+		btnTriple = new JButton("Triple");
+		btnTriple.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				anotarPuntos(3, false);
+				cargarPantalla(0);
+				cargarPantalla(1);
+				cargarTabla(0);
+				cargarTabla(1);
+			}
+		});
+		btnTriple.setVisible(false);
+		btnTriple.setBackground(new Color(255, 99, 71));
+		btnTriple.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnTriple.setBounds(744, 258, 141, 54);
+		panelInicioJuego.add(btnTriple);
+		
+		btnDoble = new JButton("Doble");
+		btnDoble.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				anotarPuntos(2, false);
+				cargarPantalla(0);
+				cargarPantalla(1);
+				cargarTabla(0);
+				cargarTabla(1);
+			}
+		});
+		btnDoble.setVisible(false);
+		btnDoble.setBackground(new Color(255, 99, 71));
+		btnDoble.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnDoble.setBounds(593, 258, 141, 54);
+		panelInicioJuego.add(btnDoble);
+		
+		btnLibre = new JButton("Libre");
+		btnLibre.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				anotarPuntos(1, false);
+				cargarPantalla(0);
+				cargarPantalla(1);
+				cargarTabla(0);
+				cargarTabla(1);
+			}
+		});
+		btnLibre.setVisible(false);
+		btnLibre.setBackground(new Color(255, 99, 71));
+		btnLibre.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnLibre.setBounds(442, 258, 141, 54);
+		panelInicioJuego.add(btnLibre);
+		
+		
+		btnFalta = new JButton("Falta");
+		btnFalta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				anotarPuntos(1, true);
+				cargarPantalla(0);
+				cargarPantalla(1);
+				cargarTabla(0);
+				cargarTabla(1);
+			}
+		});
+		btnFalta.setVisible(false);
+		btnFalta.setBackground(new Color(255, 99, 71));
+		btnFalta.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnFalta.setBounds(593, 323, 141, 49);
+		panelInicioJuego.add(btnFalta);
 		
 		btnCambio = new JButton("Cambio");
+		btnCambio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnCambio.setVisible(false);
 		btnCambio.setBackground(new Color(255, 99, 71));
 		btnCambio.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnCambio.setBounds(593, 318, 141, 49);
+		btnCambio.setBounds(593, 383, 141, 49);
 		panelInicioJuego.add(btnCambio);
 		
 		btnFin = new JButton("Fin");
+		btnFin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		btnFin.setVisible(false);
 		btnFin.setBackground(new Color(255, 99, 71));
 		btnFin.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		btnFin.setBounds(593, 405, 141, 49);
+		btnFin.setBounds(593, 443, 141, 49);
 		panelInicioJuego.add(btnFin);
 		
 		JLabel lblversus = new JLabel("VS");
-		lblversus.setBounds(543, 24, 231, 128);
+		lblversus.setBounds(542, 23, 231, 128);
 		lblversus.setForeground(Color.WHITE);
 		lblversus.setFont(new Font("AbandoN", Font.PLAIN, 71));
 		lblversus.setHorizontalAlignment(SwingConstants.CENTER);
 		panelInicioJuego.add(lblversus);
 		
-		JLabel lblpuntequip1 = new JLabel("0");
+		lblpuntequip1 = new JLabel("0");
 		lblpuntequip1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblpuntequip1.setForeground(Color.WHITE);
 		lblpuntequip1.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		lblpuntequip1.setBounds(472, 145, 45, 55);
+		lblpuntequip1.setBounds(472, 145, 111, 55);
 		panelInicioJuego.add(lblpuntequip1);
 		
 		JLabel lblcanha = new JLabel("");
@@ -695,14 +873,17 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		lblcanha.setIcon(iconoCancha);
 		panelInicioJuego.add(lblcanha);
 		
-		JLabel lblpuntequip12 = new JLabel("0");
+		lblpuntequip12 = new JLabel("0");
 		lblpuntequip12.setHorizontalAlignment(SwingConstants.CENTER);
 		lblpuntequip12.setForeground(Color.WHITE);
 		lblpuntequip12.setFont(new Font("Tahoma", Font.PLAIN, 50));
-		lblpuntequip12.setBounds(808, 145, 45, 55);
+		lblpuntequip12.setBounds(744, 145, 109, 55);
 		panelInicioJuego.add(lblpuntequip12);
 		
 		buttonBackSpace = new JButton("");
+		buttonBackSpace.setOpaque(false);
+		buttonBackSpace.setContentAreaFilled(false);
+		buttonBackSpace.setBorderPainted(false);
 		buttonBackSpace.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buttonBackSpace.setVisible(false);
@@ -711,11 +892,15 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				panelInicioJuego.setVisible(false);
 				btnCambio.setVisible(false);
 				btnFin.setVisible(false);
-				btnPunto.setVisible(false);
+				btnFalta.setVisible(false);
+				btnDoble.setVisible(false);
+				btnFalta.setVisible(false);
+				btnLibre.setVisible(false);
+				btnTriple.setVisible(false);
 			}
 		});
 		buttonBackSpace.setIcon(new ImageIcon(Principal.class.getResource("/com/sun/javafx/scene/control/skin/caspian/fxvk-backspace-button.png")));
-		buttonBackSpace.setBounds(10, 23, 45, 27);
+		buttonBackSpace.setBounds(0, 5, 63, 38);
 		buttonBackSpace.setVisible(false);
 		buttonBackSpace.setEnabled(false);
 		
@@ -753,7 +938,9 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 			}catch(Exception ex) {
 				JOptionPane.showMessageDialog(null, "Error cargando la imagen "+ ex);
 			} */
-		
+
+
+
 	}
 	
 	private void menuPrincipalJuegoMostrar() {
@@ -819,5 +1006,84 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		
 	}
 	
+	private void anotarPuntos(int punt, Boolean falta) {
+		int i=0;
+		if (equipoSeleccionado!=-1) {
+			while (i<Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().size()) {
+				if (Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getNombre().equalsIgnoreCase(nombreJugador)) {
+					if (punt==1 && falta==false) {
+						Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().setTiroLibre(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().getTiroLibre()+1);
+					}
+					if (punt==1 && falta==true) {
+						Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().setCantFalta(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().getCantFalta()+1);
+					}
+					if (punt==2 && falta==false) {
+						Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().setTiroDoble(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().getTiroDoble()+1);
+					}
+					if (punt==3 && falta==false) {
+						Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().setTiroTriple(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().getTiroTriple()+1);
+					}
+				}
+				i++;
+			}
+		}
+	}
 	
+	private void cargarPantalla(int sele) {
+		int i=0;
+		int sumaPunto=0;
+		if (sele!=-1) {
+			while (i<Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[sele].getNominaJugadores().size()) {
+					sumaPunto+=Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[sele].getNominaJugadores().get(i).getPuntoJugador().cantPunto();
+					
+				i++;
+			}
+			if (sele==0) {
+				lblpuntequip1.setText(Integer.toString(sumaPunto));
+			}
+			if (sele==1) {
+				lblpuntequip12.setText(Integer.toString(sumaPunto));
+			}
+		}
+		equipoSeleccionado=-1;
+		nombreJugador=null;
+		Baloncesto.getInstance().escribirDatos();
+	}
+	
+	private void cargarTabla(int equip) {
+		if (equip==1) {
+			model_Equip2.setRowCount(0);
+			fila_Equip2 = new Object[model_Equip2.getColumnCount()];
+		}else if (equip==0) {
+			model_Equip1.setRowCount(0);
+			fila_Equip1 = new Object[model_Equip1.getColumnCount()];	
+		}
+		
+		
+		System.out.println("Equi[p"+equip+" "+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().size());
+		System.out.println("Equip0"+0+" "+Baloncesto.getInstance().getMisEquipos().get(0).getNominaJugadores().size());
+		System.out.println("Equip0"+1+" "+Baloncesto.getInstance().getMisEquipos().get(1).getNominaJugadores().size());
+		System.out.println("Equi[p"+equip+" "+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().size());
+		for (int i = 0; i < Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().size(); i++) {
+			if (equip==1) {
+				fila_Equip2[0]=Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getNombre();
+				fila_Equip2[1] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getNumero();
+
+				fila_Equip2[2] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getPosicion();
+				fila_Equip2[3] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getPuntoJugador().cantPunto();
+				fila_Equip2[4] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getPuntoJugador().getCantFalta();
+				model_Equip2.addRow(fila_Equip2);
+			}else if (equip==0){
+				fila_Equip1[0]=Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getNombre();
+				fila_Equip1[1] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getNumero();
+
+				fila_Equip1[2] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getPosicion();
+				fila_Equip1[3] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getPuntoJugador().cantPunto();
+				fila_Equip1[4] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getPuntoJugador().getCantFalta();
+				model_Equip1.addRow(fila_Equip1);
+			}
+		}
+		
+		
+	}
 }

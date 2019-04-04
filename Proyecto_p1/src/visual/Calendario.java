@@ -1,6 +1,7 @@
 package visual;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.BorderFactory;
@@ -13,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import javafx.scene.layout.Border;
@@ -77,14 +79,10 @@ public class Calendario extends JDialog {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setOpaque(false);
 		panel.setLayout(null);
-		JLabel lblHhhh = new JLabel(new ImageIcon(Calendario.class.getResource("/imagen/1530905.jpg")));
-		lblHhhh.setHorizontalTextPosition(SwingConstants.CENTER);
-		lblHhhh.setText("");
-			//label.setIcon();
-			lblHhhh.setBounds(0, 0, 613, 388);
-			panel.add(lblHhhh);
-			
-		scrollPane = new JScrollPane(lblHhhh,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		
+		
+		
+		scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(0, 0, 613, 388);
 		//javax.swing.border.Border border1 = BorderFactory.createEmptyBorder(0,0,0,0);
 		//scrollPane.setBorder(null);
@@ -96,19 +94,93 @@ public class Calendario extends JDialog {
 			table.setVisible(true);
 			table.setFont(new Font("Tahoma", Font.PLAIN, 18));
 			table.setDefaultRenderer(Object.class, new ImgTabla());
+			((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setBackground(new Color(0,0,0,0));
+			table.setGridColor(Color.WHITE);
+			table.setForeground(Color.WHITE);
+			table.setDefaultRenderer(Object.class, new ImgTabla());
 			String[] header = {"","", ""};
-			model = new DefaultTableModel(null,header);
+			model = new DefaultTableModel(null,header) {
+				@Override
+				public boolean isCellEditable(int filas, int columnas) {
+					if(columnas==4) {
+						return true;
+					}else {
+						return false;
+					}
+				}
+			};
+			
 			table.setRowHeight(130);
 			table.setModel(model);
 			table.setOpaque(false);
 			cargarTabla();
+			scrollPane.setBackground(new Color(0,0,0,0));
+			((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
+			table.setShowGrid(true);
 			scrollPane.setViewportView(table);
+			scrollPane.getViewport().setOpaque(false);
 			scrollPane.setOpaque(false);
 			//scrollPane.setColumnHeaderView(table);
 		}
 		{
-			
 		}
+		JLabel lblHhhh = new JLabel(new ImageIcon(Calendario.class.getResource("/imagen/1530905.jpg")));
+		lblHhhh.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblHhhh.setText("");
+			//label.setIcon();
+			lblHhhh.setBounds(0, 0, 613, 388);
+			panel.add(lblHhhh);
+			
+		
+		
+		/*
+		scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(0, 0, 613, 388);
+		panel.add(scrollPane);
+		table = new JTable();
+		table.setVisible(true);
+		
+		table.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		table.setDefaultRenderer(Object.class, new ImgTabla());
+		((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setBackground(new Color(0,0,0,0));
+		table.setGridColor(Color.WHITE);
+		table.setForeground(Color.WHITE);
+		//scrollPane.setColumnHeaderView(table);
+		String[] header = {"","", ""};
+		model = new DefaultTableModel(null,header) {
+			@Override
+			public boolean isCellEditable(int filas, int columnas) {
+				if(columnas==4) {
+					return true;
+				}else {
+					return false;
+				}
+			}
+		};
+		cargarTabla();
+		
+		table.setRowHeight(130);
+		
+		table.setModel(model);
+		table.setOpaque(false);
+		scrollPane.setBackground(new Color(0,0,0,0));
+		((DefaultTableCellRenderer)table.getDefaultRenderer(Object.class)).setOpaque(false);
+		table.setShowGrid(true);
+		
+		scrollPane.setViewportView(table);
+		scrollPane.getViewport().setOpaque(false);
+		scrollPane.setOpaque(false);
+		
+		
+		JLabel lblHhhh = new JLabel(new ImageIcon(Calendario.class.getResource("/imagen/1530905.jpg")));
+		
+		getContentPane().add(lblHhhh, BorderLayout.NORTH);
+		lblHhhh.setForeground(Color.WHITE);
+		lblHhhh.setHorizontalTextPosition(SwingConstants.CENTER);
+		lblHhhh.setText("");
+		{
+			
+		}*/
 	}
 	private void cargarTabla() {
 		model.setRowCount(0);

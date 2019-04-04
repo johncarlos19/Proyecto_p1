@@ -149,7 +149,7 @@ public class Equipo implements Serializable {
 	
 	public void guardarLogo() throws IOException, ClassNotFoundException  {
 		
-		File archivoSalida = new File("src/logo_equipo/"+nombre+".gif");
+		File archivoSalida = new File("src/logo_equipo/"+nombre+".jpeg");
 		FileInputStream lector = new FileInputStream(logoEquipo);
 	    FileOutputStream escritor = new FileOutputStream(archivoSalida);
 		 int unByte;     

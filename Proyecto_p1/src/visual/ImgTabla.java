@@ -1,5 +1,6 @@
 package visual;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 
@@ -15,6 +16,9 @@ public class ImgTabla extends DefaultTableCellRenderer {
 		if (o instanceof JLabel) {
 			JLabel lbl = (JLabel)o;
 			lbl.setFont(new Font("Tahoma", Font.PLAIN, 18));
+			lbl.setBackground(Color.WHITE);
+			lbl.setForeground(Color.WHITE);
+			lbl.setOpaque(false);
 			return lbl;
 		}
 		

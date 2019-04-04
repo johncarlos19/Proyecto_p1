@@ -7,8 +7,6 @@ public class Estadistica implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 8910922322328217594L;
-	private int asistencia;
-	private int cantebote;
 	private int tiroDoble;
 	private int tiroLibre;
 	private int tiroTriple;
@@ -23,24 +21,10 @@ public class Estadistica implements Serializable{
 	 */
 	public Estadistica() {
 		super();
-		this.asistencia = 0;
-		this.cantebote = 0;
 		this.tiroDoble = 0;
 		this.tiroLibre = 0;
 		this.tiroTriple = 0;;
 		this.cantFalta = 0;
-	}
-	public int getAsistencia() {
-		return asistencia;
-	}
-	public void setAsistencia(int asistencia) {
-		this.asistencia = asistencia;
-	}
-	public int getCantebote() {
-		return cantebote;
-	}
-	public void setCantebote(int cantebote) {
-		this.cantebote = cantebote;
 	}
 	public int getTiroDoble() {
 		return tiroDoble;
