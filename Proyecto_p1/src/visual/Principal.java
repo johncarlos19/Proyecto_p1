@@ -605,8 +605,17 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		((DefaultTableCellRenderer)table_Equip1.getDefaultRenderer(Object.class)).setBackground(new Color(0,0,0,0));
 		table_Equip1.setGridColor(Color.WHITE);
 		table_Equip1.setForeground(Color.WHITE);
-		String[] header = {"Nombre","Numero", "Posición","Puntos","Falta"};
-		model_Equip1 = new DefaultTableModel(null,header);
+		String[] header = {"Nombre","Numero", "Posición","Libre","Doble","Triple","Falta"};
+		model_Equip1 = new DefaultTableModel(null,header) {
+			@Override
+			public boolean isCellEditable(int filas, int columnas) {
+				if(columnas==8) {
+					return true;
+				}else {
+					return false;
+				}
+			}
+		};
 		table_Equip1.setRowHeight(42);
 		table_Equip1.setModel(model_Equip1);
 		table_Equip1.setOpaque(false);
@@ -681,8 +690,17 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		table__Equip2.setGridColor(Color.WHITE);
 		table__Equip2.setForeground(Color.WHITE);
 		table__Equip2.setDefaultRenderer(Object.class, new ImgTabla());
-		String[] header1 = {"Nombre","Numero", "Posición","Puntos","Falta"};
-		model_Equip2 = new DefaultTableModel(null,header1);
+		String[] header1 = {"Nombre","Numero", "Posición","Libre","Doble","Triple","Falta"};
+		model_Equip2 = new DefaultTableModel(null,header1) {
+			@Override
+			public boolean isCellEditable(int filas, int columnas) {
+				if(columnas==8) {
+					return true;
+				}else {
+					return false;
+				}
+			}
+		};
 		table__Equip2.setRowHeight(42);
 		table__Equip2.setModel(model_Equip2);
 		table__Equip2.setOpaque(false);
@@ -1060,26 +1078,25 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		}
 		
 		
-		System.out.println("Equi[p"+equip+" "+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().size());
-		System.out.println("Equip0"+0+" "+Baloncesto.getInstance().getMisEquipos().get(0).getNominaJugadores().size());
-		System.out.println("Equip0"+1+" "+Baloncesto.getInstance().getMisEquipos().get(1).getNominaJugadores().size());
-		System.out.println("Equi[p"+equip+" "+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().size());
+		
 		for (int i = 0; i < Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().size(); i++) {
 			if (equip==1) {
 				fila_Equip2[0]=Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getNombre();
 				fila_Equip2[1] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getNumero();
-
 				fila_Equip2[2] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getPosicion();
-				fila_Equip2[3] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getPuntoJugador().cantPunto();
-				fila_Equip2[4] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getPuntoJugador().getCantFalta();
+				fila_Equip2[3] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getPuntoJugador().getTiroLibre();
+				fila_Equip2[4] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getPuntoJugador().getTiroDoble();
+				fila_Equip2[5] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getPuntoJugador().getTiroTriple();
+				fila_Equip2[6] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getPuntoJugador().getCantFalta();
 				model_Equip2.addRow(fila_Equip2);
 			}else if (equip==0){
-				fila_Equip1[0]=Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getNombre();
+				fila_Equip1[0]= Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getNombre();
 				fila_Equip1[1] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getNumero();
-
 				fila_Equip1[2] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getPosicion();
-				fila_Equip1[3] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getPuntoJugador().cantPunto();
-				fila_Equip1[4] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getPuntoJugador().getCantFalta();
+				fila_Equip1[3] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getPuntoJugador().getTiroLibre();
+				fila_Equip1[4] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getPuntoJugador().getTiroDoble();
+				fila_Equip1[5] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getPuntoJugador().getTiroTriple();
+				fila_Equip1[6] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getPuntoJugador().getCantFalta();
 				model_Equip1.addRow(fila_Equip1);
 			}
 		}

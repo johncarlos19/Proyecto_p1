@@ -74,7 +74,7 @@ public class AgregarEquipo extends JDialog {
 	private int ubica = 1;
 	private boolean noponer = true;
 	
-	private ArrayList<Jugador> jugadores = new ArrayList<Jugador>();
+	private ArrayList<Jugador> jugadores = new ArrayList<>();
 	private JButton btnBorrar;
 	
 	private int minJugadores = 1;
@@ -342,6 +342,7 @@ public class AgregarEquipo extends JDialog {
 					if(!nombreJugador.equalsIgnoreCase("") && !posicion.equalsIgnoreCase("<Seleccione>") && !checkNumero(numero) && ready) {
 						Jugador aux = new Jugador(nombreJugador, peso, estatura, posicion, numero, code);
 						jugadores.add(aux);
+						System.out.println("Equi0aux "+jugadores.size());
 						JOptionPane.showMessageDialog(null, "Registro del jugador exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
 						cargarTabla();
 						cleanPlantillaJugadores();
@@ -377,6 +378,14 @@ public class AgregarEquipo extends JDialog {
 						
 						if((fichero != null) && !nombreEquipo.equalsIgnoreCase("") && !nombreCoach.equalsIgnoreCase("") && !nombreCancha.equalsIgnoreCase("") && !checkEquipos(nombreEquipo)) {
 							Equipo aux = new Equipo(nombreEquipo, nombreCoach, nombreCancha, fichero);
+							int i=0;
+							while (i<jugadores.size()) {
+								aux.agregarJugador(jugadores.get(i));
+								i++;
+								
+							}
+							//aux.setNominaJugadores(jugadores);
+							System.out.println("anteEqui0aux "+aux.getNominaJugadores().size());
 							try {
 								aux.guardarLogo();
 							} catch (ClassNotFoundException e1) {
@@ -386,10 +395,16 @@ public class AgregarEquipo extends JDialog {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-							aux.setNominaJugadores(jugadores);
+							
 							Baloncesto.getInstance().agregarEquipo(aux);
 							JOptionPane.showMessageDialog(null, "Registro de equipo exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
+							
+							System.out.println("Equi0aux "+aux.getNominaJugadores().size());
 							reset();
+							System.out.println("Equi[p0 "+Baloncesto.getInstance().getMisEquipos().get(0).getNominaJugadores().size());
+							
+							//System.out.println("Equi[p1 "+Baloncesto.getInstance().getMisEquipos().get(1).getNominaJugadores().size());
+							
 						}else if(checkEquipos(nombreEquipo)) {
 							JOptionPane.showMessageDialog(null, "Ya existe un equipo con el mismo nombre", "Revise los campos", JOptionPane.WARNING_MESSAGE);
 						}else {

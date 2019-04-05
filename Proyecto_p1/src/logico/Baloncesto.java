@@ -85,8 +85,8 @@ public class Baloncesto implements Serializable{
 		return y;
 	}
 	
-	public void agregarEquipo(Equipo aux) {
-		misEquipos.add(aux);
+	public void agregarEquipo(Equipo aux1) {
+		misEquipos.add(aux1);
 		escribirDatos();
 	}
 	
