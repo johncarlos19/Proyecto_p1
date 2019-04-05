@@ -211,7 +211,7 @@ public class Principal extends JFrame implements Serializable {
 		
 
 		
-		
+
 		
 		panelMenuPrinc = new JPanel();
 		panelMenuPrinc.setBounds(5, 5, 1340, 762);
@@ -543,7 +543,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		
 		fondoPrin.setIcon(icon1o);
 		panelMenuPrinc.add(fondoPrin);
-		
+
 		
 		
 		
@@ -556,7 +556,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		panelInicioJuego.setLayout(null);
 		{
 		JPanel panel_equipo1 = new JPanel();
-		panel_equipo1.setBounds(72, 23, 390, 506);
+		panel_equipo1.setBounds(27, 23, 435, 506);
 		panel_equipo1.setOpaque(false);
 		panelInicioJuego.add(panel_equipo1);
 		panel_equipo1.setLayout(null);
@@ -565,19 +565,19 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		lblEquipo1.setForeground(Color.WHITE);
 		lblEquipo1.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblEquipo1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEquipo1.setBounds(123, 11, 131, 31);
+		lblEquipo1.setBounds(158, 11, 131, 31);
 		panel_equipo1.add(lblEquipo1);
 		
 		lblLogoequip = new JLabel("logo_equip1");
 		lblLogoequip.setForeground(Color.WHITE);
 		lblLogoequip.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogoequip.setBounds(100, 53, 177, 147);
+		lblLogoequip.setBounds(133, 53, 177, 147);
 		panel_equipo1.add(lblLogoequip);
 		
 		JPanel panel_jugador_principal1 = new JPanel();
 		panel_jugador_principal1.setOpaque(false);
 		panel_jugador_principal1.setForeground(Color.WHITE);
-		panel_jugador_principal1.setBounds(42, 281, 292, 189);
+		panel_jugador_principal1.setBounds(42, 281, 355, 189);
 		panel_equipo1.add(panel_jugador_principal1);
 		panel_jugador_principal1.setLayout(new BorderLayout(0, 0));
 		
@@ -600,7 +600,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		table_Equip1.setOpaque(false);
 		table_Equip1.setBackground(new Color(0,0,0,0));
 		//scrollPane_equi1.setColumnHeaderView(table_Equip1);
-		table_Equip1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		table_Equip1.setFont(new Font("Tahoma", Font.BOLD, 13));
 		table_Equip1.setDefaultRenderer(Object.class, new ImgTabla());
 		((DefaultTableCellRenderer)table_Equip1.getDefaultRenderer(Object.class)).setBackground(new Color(0,0,0,0));
 		table_Equip1.setGridColor(Color.WHITE);
@@ -616,7 +616,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				}
 			}
 		};
-		table_Equip1.setRowHeight(42);
+		table_Equip1.setRowHeight(32);
 		table_Equip1.setModel(model_Equip1);
 		table_Equip1.setOpaque(false);
 		try {
@@ -635,32 +635,32 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		lblJugadoresEnJuego.setForeground(Color.WHITE);
 		lblJugadoresEnJuego.setHorizontalAlignment(SwingConstants.CENTER);
 		lblJugadoresEnJuego.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblJugadoresEnJuego.setBounds(88, 232, 200, 31);
+		lblJugadoresEnJuego.setBounds(123, 232, 200, 31);
 		panel_equipo1.add(lblJugadoresEnJuego);
 		
 		JPanel panel_equipo2 = new JPanel();
 		panel_equipo2.setOpaque(false);
-		panel_equipo2.setBounds(863, 23, 390, 506);
+		panel_equipo2.setBounds(863, 23, 447, 506);
 		panelInicioJuego.add(panel_equipo2);
 		panel_equipo2.setLayout(null);
 		
 		lblEquipo2 = new JLabel("Equipo1");
 		lblEquipo2.setForeground(Color.WHITE);
 		lblEquipo2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblEquipo2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblEquipo2.setBounds(136, 11, 131, 31);
+		lblEquipo2.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblEquipo2.setBounds(160, 11, 131, 31);
 		panel_equipo2.add(lblEquipo2);
 		
 		lblLogoequip2 = new JLabel("logo_equip2");
 		lblLogoequip2.setForeground(Color.WHITE);
 		lblLogoequip2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogoequip2.setBounds(113, 53, 177, 147);
+		lblLogoequip2.setBounds(136, 53, 177, 147);
 		panel_equipo2.add(lblLogoequip2);
 		
 		JPanel panel_jugador_principal2 = new JPanel();
 		panel_jugador_principal2.setOpaque(false);
 		panel_jugador_principal2.setForeground(Color.WHITE);
-		panel_jugador_principal2.setBounds(55, 281, 292, 189);
+		panel_jugador_principal2.setBounds(55, 281, 357, 189);
 		panel_equipo2.add(panel_jugador_principal2);
 		panel_jugador_principal2.setLayout(new BorderLayout(0, 0));
 		
@@ -684,7 +684,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		table__Equip2.setVisible(true);
 		table__Equip2.setOpaque(false);
 		table__Equip2.setBackground(new Color(0,0,0,0));
-		table__Equip2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		table__Equip2.setFont(new Font("Tahoma", Font.BOLD, 13));
 		table__Equip2.setDefaultRenderer(Object.class, new ImgTabla());
 		((DefaultTableCellRenderer)table__Equip2.getDefaultRenderer(Object.class)).setBackground(new Color(0,0,0,0));
 		table__Equip2.setGridColor(Color.WHITE);
@@ -701,7 +701,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				}
 			}
 		};
-		table__Equip2.setRowHeight(42);
+		table__Equip2.setRowHeight(32);
 		table__Equip2.setModel(model_Equip2);
 		table__Equip2.setOpaque(false);
 		try {
@@ -723,7 +723,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		lblJugadoresEnJuego2.setForeground(Color.WHITE);
 		lblJugadoresEnJuego2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblJugadoresEnJuego2.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		lblJugadoresEnJuego2.setBounds(101, 232, 200, 31);
+		lblJugadoresEnJuego2.setBounds(125, 232, 200, 31);
 		panel_equipo2.add(lblJugadoresEnJuego2);
 		
 		JLabel lblfondojuego = new JLabel("");
@@ -811,7 +811,37 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		btnFin = new JButton("Fin");
 		btnFin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Baloncesto.getInstance().setEnJuego(false);
+				Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).setJugo(true);
+				agregarPuntoJugador(0);
+				agregarPuntoJugador(1);
+				Baloncesto.getInstance().setCantJuegos(Baloncesto.getInstance().getCantJuegos()+1);
+				btnJuego.setText("Iniciar\n Juego");
+				if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().isEnJuego()==false) {
+					btnJuego.setText("Iniciar\n Juego");
+				}
+				menuPrincipalJuegoMostrar();
+				btnJuego.setVisible(true);
+				if (fechaActual.getDate()==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate() && Baloncesto.getInstance().getJuegoRecord().size()!=0) {
+					btnJuego.setEnabled(true);
+				}else {
+					btnJuego.setEnabled(false);
+				}
+				cargarPantalla(0);
+				cargarPantalla(1);
+				cargarTabla(0);
+				cargarTabla(1);
+				buttonBackSpace.setVisible(false);
+				buttonBackSpace.setEnabled(false);
+				panelMenuPrinc.setVisible(true);
+				panelInicioJuego.setVisible(false);
+				btnCambio.setVisible(false);
+				btnFin.setVisible(false);
+				btnFalta.setVisible(false);
+				btnDoble.setVisible(false);
+				btnFalta.setVisible(false);
+				btnLibre.setVisible(false);
+				btnTriple.setVisible(false);
 			}
 		});
 		btnFin.setVisible(false);
@@ -841,33 +871,33 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		
 		JLabel lblPivot = new JLabel("Example");
 		lblPivot.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblPivot.setBounds(408, 563, 73, 34);
+		lblPivot.setBounds(408, 574, 73, 34);
 		panelInicioJuego.add(lblPivot);
 		
 		JLabel lblPivotequip2 = new JLabel("Example");
 		lblPivotequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblPivotequip2.setBounds(875, 563, 73, 34);
+		lblPivotequip2.setBounds(882, 574, 73, 34);
 		panelInicioJuego.add(lblPivotequip2);
 		
-		JLabel lblEscolta1 = new JLabel("Example");
-		lblEscolta1.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblEscolta1.setBounds(472, 671, 73, 38);
-		panelInicioJuego.add(lblEscolta1);
+		JLabel lblAlas_Pivot = new JLabel("Example");
+		lblAlas_Pivot.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+		lblAlas_Pivot.setBounds(471, 631, 73, 38);
+		panelInicioJuego.add(lblAlas_Pivot);
 		
-		JLabel lblEscolta1equip2 = new JLabel("Example");
-		lblEscolta1equip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblEscolta1equip2.setBounds(909, 660, 73, 38);
-		panelInicioJuego.add(lblEscolta1equip2);
+		JLabel lblAla_Pivotequip2 = new JLabel("Example");
+		lblAla_Pivotequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+		lblAla_Pivotequip2.setBounds(845, 631, 73, 38);
+		panelInicioJuego.add(lblAla_Pivotequip2);
 		
-		JLabel lblEscolta2 = new JLabel("Example");
-		lblEscolta2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblEscolta2.setBounds(491, 538, 73, 38);
-		panelInicioJuego.add(lblEscolta2);
+		JLabel lblEscolta = new JLabel("Example");
+		lblEscolta.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+		lblEscolta.setBounds(491, 548, 73, 38);
+		panelInicioJuego.add(lblEscolta);
 		
-		JLabel lblEscolta2equip2 = new JLabel("Example");
-		lblEscolta2equip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblEscolta2equip2.setBounds(766, 550, 73, 34);
-		panelInicioJuego.add(lblEscolta2equip2);
+		JLabel lblEscoltaequip2 = new JLabel("Example");
+		lblEscoltaequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+		lblEscoltaequip2.setBounds(766, 550, 73, 34);
+		panelInicioJuego.add(lblEscoltaequip2);
 		
 		JLabel lblBase = new JLabel("Example");
 		lblBase.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
@@ -881,12 +911,12 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		
 		JLabel lblAlero = new JLabel("Example");
 		lblAlero.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblAlero.setBounds(355, 660, 100, 49);
+		lblAlero.setBounds(365, 660, 100, 38);
 		panelInicioJuego.add(lblAlero);
 		
 		JLabel lblAleroequi2 = new JLabel("Example");
 		lblAleroequi2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblAleroequi2.setBounds(808, 670, 73, 41);
+		lblAleroequi2.setBounds(899, 659, 73, 41);
 		panelInicioJuego.add(lblAleroequi2);
 		lblcanha.setIcon(iconoCancha);
 		panelInicioJuego.add(lblcanha);
@@ -977,10 +1007,27 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				lblLogoequipo22.setIcon(icono1);
 				lblLogoequipo22.setText(null);
 				lblNombre2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
-			}else if(fechaActual.getDate()+1==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate()) {
+			}else if(fechaActual.getDate()+1==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate() || (1==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate() && fechaActual.getMonth()+1==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth())) {
 				panelEquipoAJugar.setVisible(true);
 				lblHoyFecha.setText("Mañana");
 				btnJuego.setEnabled(false);
+				//Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo()
+				Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
+				lblLogoequipo11.setIcon(icono);
+				lblLogoequipo11.setText(null);
+				lblNombre1.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre());
+				Icon icono1 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
+				lblLogoequipo22.setIcon(icono1);
+				lblLogoequipo22.setText(null);
+				lblNombre2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
+			
+			}else if(Baloncesto.getInstance().getJuegoRecord().size()!=0 && !btnJuego.getText().toString().equalsIgnoreCase("Renaudar\n Juego")) {
+				int dia = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate();
+				int mes = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth();
+				int year = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getYear();
+				panelEquipoAJugar.setVisible(true);
+				btnJuego.setEnabled(false);
+				lblHoyFecha.setText(Integer.toString(dia)+"/"+Integer.toString(mes)+"/"+Integer.toString(year));
 				//Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo()
 				Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
 				lblLogoequipo11.setIcon(icono);
@@ -996,7 +1043,6 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				int mes = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth();
 				int year = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getYear();
 				panelEquipoAJugar.setVisible(true);
-				btnJuego.setEnabled(false);
 				lblHoyFecha.setText(Integer.toString(dia)+"/"+Integer.toString(mes)+"/"+Integer.toString(year));
 				//Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo()
 				Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
@@ -1065,6 +1111,36 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		}
 		equipoSeleccionado=-1;
 		nombreJugador=null;
+		Baloncesto.getInstance().escribirDatos();
+	}
+	
+	private void agregarPuntoJugador(int posi) {
+		int i=0;
+		while (i<Baloncesto.getInstance().getMisEquipos().size()) {
+			if (Baloncesto.getInstance().getMisEquipos().get(i).getNombre().equalsIgnoreCase(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNombre())) {
+				int k=0;
+				while (k<Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().size()) {
+					int j=0;
+					while (j<Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNominaJugadores().size()) {
+						if (Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getNombre().equalsIgnoreCase(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNominaJugadores().get(j).getNombre())) {
+							int tiroLibre=Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().getTiroLibre();
+							int tiroDoble=Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().getTiroDoble();
+							int tiroTriple=Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().getTiroTriple();
+							int cantFalta=Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().getCantFalta();
+							
+							Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().setTiroLibre(tiroLibre+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNominaJugadores().get(j).getPuntoJugador().getTiroLibre());
+							Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().setTiroDoble(tiroDoble+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNominaJugadores().get(j).getPuntoJugador().getTiroDoble());
+							Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().setTiroTriple(tiroTriple+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNominaJugadores().get(j).getPuntoJugador().getTiroTriple());
+							Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().setCantFalta(cantFalta+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNominaJugadores().get(j).getPuntoJugador().getCantFalta());
+							
+						}
+						j++;
+					}
+					k++;
+				}
+			}
+			i++;
+		}
 		Baloncesto.getInstance().escribirDatos();
 	}
 	

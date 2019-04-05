@@ -41,7 +41,9 @@ public class Juego implements Serializable{
 	public void setJugo(boolean jugo) {
 		this.jugo = jugo;
 	}
-	
+	public void agregarEquipoAJugar(Equipo aux, int posi) {
+		equipoJuego[posi]=aux;
+	}
 	
 	
 }

@@ -1,5 +1,6 @@
 package logico;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,6 +8,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+
+import javax.swing.ImageIcon;
 
 import visual.Principal;
 
@@ -114,12 +117,12 @@ public class Baloncesto implements Serializable{
 			j=k;
 			while(j<equipoTor.size()) {
 				Equipo [] auxEquipo = new Equipo[2];
-				auxEquipo[0]=equipoTor.get(i);
-				auxEquipo[1]=equipoTor.get(j);
+				auxEquipo[0]=devolverEquipo(equipoTor.get(i));
+				auxEquipo[1]=devolverEquipo(equipoTor.get(j));
 				Juego aux;
 				if (juegoRecord.size()==0) {
 					aux = new Juego(fechaInicio);
-					aux.setEquipoJuego(auxEquipo);
+					aux.setEquipoJuego(auxEquipo.clone());
 					posi=juegoRecord.size();
 					juegoRecord.add(aux);
 					fech+=1;
@@ -129,7 +132,7 @@ public class Baloncesto implements Serializable{
 						des=1;
 					}
 					aux = new Juego(fechaTorneo(juegoRecord.get(posi).getFechaJuego(), des));
-					aux.setEquipoJuego(auxEquipo);
+					aux.setEquipoJuego(auxEquipo.clone());
 					posi=juegoRecord.size();
 					juegoRecord.add(aux);
 					fech+=1;
@@ -139,6 +142,30 @@ public class Baloncesto implements Serializable{
 			i++;
 		}
 		escribirDatos();
+	}
+	
+	private Equipo devolverEquipo(Equipo aux) {
+		Equipo clone=null;
+		String nombre = aux.getNombre();
+		String coach = aux.getCoach();
+		String cancha = aux.getCancha();
+		File logoEquipo = aux.getLogoEquipo();
+		ImageIcon logo = aux.getLogo();
+		clone = new Equipo(nombre, coach, cancha, logoEquipo);
+		clone.setLogo(logo);
+		int i=0;
+		while (i<aux.getNominaJugadores().size()) {
+			String nombre1 = aux.getNominaJugadores().get(i).getNombre();
+			float peso = aux.getNominaJugadores().get(i).getPeso();
+			float estatura = aux.getNominaJugadores().get(i).getEstatura();
+			String posicion = aux.getNominaJugadores().get(i).getPosicion();
+			int numero = aux.getNominaJugadores().get(i).getNumero();
+			String code = aux.getNominaJugadores().get(i).getCode();
+			Jugador clonJuga= new Jugador(nombre1, peso, estatura, posicion, numero, code);
+			clone.agregarJugador(clonJuga);
+			i++;
+		}
+		return clone;
 	}
 	
 	private Date fechaTorneo(Date fechaAnterior, int fechaDescanso) {
