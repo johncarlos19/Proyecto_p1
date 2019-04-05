@@ -14,6 +14,8 @@ import javax.swing.JRadioButton;
 import java.awt.Color;
 import java.awt.SystemColor;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Cambios extends JDialog {
 
@@ -77,6 +79,11 @@ public class Cambios extends JDialog {
 		contentPanel.add(label);
 		
 		radioButton1 = new JRadioButton("");
+		radioButton1.setSelected(true);
+		radioButton1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		radioButton1.setBackground(SystemColor.menu);
 		radioButton1.setBounds(109, 51, 30, 23);
 		contentPanel.add(radioButton1);

@@ -102,6 +102,19 @@ public class Principal extends JFrame implements Serializable {
 	private int equipoSeleccionado=-1;
 	private JLabel lblpuntequip1;
 	private JLabel lblpuntequip12;
+	
+	//asignacion de equipo en el campo
+	private JLabel lblPivot;
+	private JLabel lblAlas_Pivot;
+	private JLabel lblEscolta;
+	private JLabel lblBase;
+	private JLabel lblAlero;
+	
+	private JLabel lblPivotequip2;
+	private JLabel lblAla_Pivotequip2;
+	private JLabel lblEscoltaequip2;
+	private JLabel lblBaseEquip2;
+	private JLabel lblAleroequi2;
 	//private Dimension dimention;
 
 	
@@ -212,7 +225,7 @@ public class Principal extends JFrame implements Serializable {
 
 		
 
-		
+		/*
 		panelMenuPrinc = new JPanel();
 		panelMenuPrinc.setBounds(5, 5, 1340, 762);
 		contentPane.add(panelMenuPrinc);
@@ -544,7 +557,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		fondoPrin.setIcon(icon1o);
 		panelMenuPrinc.add(fondoPrin);
 
-		
+		*/
 		
 		
 		
@@ -869,52 +882,53 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		lblcanha.setBounds(333, 528, 682, 197);
 		Icon iconoCancha = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/d-basketball-field-white-background-illustration-49785575.gif")).getImage().getScaledInstance(lblcanha.getWidth(), lblcanha.getHeight(), Image.SCALE_DEFAULT));
 		
-		JLabel lblPivot = new JLabel("Example");
+		
+		lblPivot = new JLabel("Example");
 		lblPivot.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
 		lblPivot.setBounds(408, 574, 73, 34);
 		panelInicioJuego.add(lblPivot);
 		
-		JLabel lblPivotequip2 = new JLabel("Example");
+		lblPivotequip2 = new JLabel("Example");
 		lblPivotequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
 		lblPivotequip2.setBounds(882, 574, 73, 34);
 		panelInicioJuego.add(lblPivotequip2);
 		
-		JLabel lblAlas_Pivot = new JLabel("Example");
+		lblAlas_Pivot = new JLabel("Example");
 		lblAlas_Pivot.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
 		lblAlas_Pivot.setBounds(471, 631, 73, 38);
 		panelInicioJuego.add(lblAlas_Pivot);
 		
-		JLabel lblAla_Pivotequip2 = new JLabel("Example");
+		lblAla_Pivotequip2 = new JLabel("Example");
 		lblAla_Pivotequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
 		lblAla_Pivotequip2.setBounds(845, 631, 73, 38);
 		panelInicioJuego.add(lblAla_Pivotequip2);
 		
-		JLabel lblEscolta = new JLabel("Example");
+		lblEscolta = new JLabel("Example");
 		lblEscolta.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
 		lblEscolta.setBounds(491, 548, 73, 38);
 		panelInicioJuego.add(lblEscolta);
 		
-		JLabel lblEscoltaequip2 = new JLabel("Example");
+		lblEscoltaequip2 = new JLabel("Example");
 		lblEscoltaequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
 		lblEscoltaequip2.setBounds(766, 550, 73, 34);
 		panelInicioJuego.add(lblEscoltaequip2);
 		
-		JLabel lblBase = new JLabel("Example");
+		lblBase = new JLabel("Example");
 		lblBase.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
 		lblBase.setBounds(554, 600, 73, 34);
 		panelInicioJuego.add(lblBase);
 		
-		JLabel lblBaseEquip2 = new JLabel("Example");
+		lblBaseEquip2 = new JLabel("Example");
 		lblBaseEquip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
 		lblBaseEquip2.setBounds(722, 595, 73, 38);
 		panelInicioJuego.add(lblBaseEquip2);
 		
-		JLabel lblAlero = new JLabel("Example");
+		lblAlero = new JLabel("Example");
 		lblAlero.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
 		lblAlero.setBounds(365, 660, 100, 38);
 		panelInicioJuego.add(lblAlero);
 		
-		JLabel lblAleroequi2 = new JLabel("Example");
+		lblAleroequi2 = new JLabel("Example");
 		lblAleroequi2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
 		lblAleroequi2.setBounds(899, 659, 73, 41);
 		panelInicioJuego.add(lblAleroequi2);
@@ -1154,9 +1168,9 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		}
 		
 		
-		
+
 		for (int i = 0; i < Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().size(); i++) {
-			if (equip==1) {
+			if (equip==1 && (Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Base") || Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Escolta") || Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Alero") || Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Ala-Pivot") || Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Pivot")) ) {
 				fila_Equip2[0]=Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getNombre();
 				fila_Equip2[1] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getNumero();
 				fila_Equip2[2] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getPosicion();
@@ -1165,7 +1179,12 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				fila_Equip2[5] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getPuntoJugador().getTiroTriple();
 				fila_Equip2[6] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getPuntoJugador().getCantFalta();
 				model_Equip2.addRow(fila_Equip2);
-			}else if (equip==0){
+				
+				//{"<Seleccione>", "Base", "Escolta", "Alero", "Ala-Pivot", "Pivot"}
+				if (Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Base")) {
+					lblPivotequip2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNominaJugadores().get(i).getNombre());
+				}
+			}else if (equip==0 && (Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Base") || Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Escolta") || Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Alero") || Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Ala-Pivot") || Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Pivot")) ) {
 				fila_Equip1[0]= Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getNombre();
 				fila_Equip1[1] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getNumero();
 				fila_Equip1[2] = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getPosicion();
