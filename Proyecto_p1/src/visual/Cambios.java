@@ -20,8 +20,8 @@ import java.awt.event.ActionEvent;
 public class Cambios extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
-	private JTable table;
-	private JTable table_1;
+	private JTable table_Juego;
+	private JTable table_Cola;
 	private JButton buttonadd;
 	private JButton buttonremove;
 	private JScrollPane scrollPane_1;
@@ -70,8 +70,8 @@ public class Cambios extends JDialog {
 		scrollPane_1 = new JScrollPane();
 		panel_1.add(scrollPane_1, BorderLayout.CENTER);
 		
-		table_1 = new JTable();
-		scrollPane_1.setColumnHeaderView(table_1);
+		table_Cola = new JTable();
+		scrollPane_1.setColumnHeaderView(table_Cola);
 		
 		JLabel label = new JLabel("Equipo 1");
 		label.setFont(new Font("Lucida Fax", Font.BOLD | Font.ITALIC, 14));
@@ -94,6 +94,10 @@ public class Cambios extends JDialog {
 		contentPanel.add(label_1);
 		
 		radioButton2 = new JRadioButton("");
+		radioButton2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		radioButton2.setBackground(SystemColor.menu);
 		radioButton2.setBounds(278, 51, 30, 23);
 		contentPanel.add(radioButton2);
@@ -116,8 +120,8 @@ public class Cambios extends JDialog {
 		JScrollPane scrollPane = new JScrollPane();
 		panel.add(scrollPane, BorderLayout.CENTER);
 		
-		table = new JTable();
-		scrollPane.setColumnHeaderView(table);
+		table_Juego = new JTable();
+		scrollPane.setColumnHeaderView(table_Juego);
 		{
 			buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));

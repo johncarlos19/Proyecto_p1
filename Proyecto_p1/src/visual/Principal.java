@@ -568,6 +568,56 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		contentPane.add(panelInicioJuego);;
 		panelInicioJuego.setLayout(null);
 		{
+			lblPivot = new JLabel("Example");
+			lblPivot.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+			lblPivot.setBounds(408, 574, 73, 34);
+			panelInicioJuego.add(lblPivot);
+			
+			lblPivotequip2 = new JLabel("Example");
+			lblPivotequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+			lblPivotequip2.setBounds(882, 574, 73, 34);
+			panelInicioJuego.add(lblPivotequip2);
+			
+			lblAlas_Pivot = new JLabel("Example");
+			lblAlas_Pivot.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+			lblAlas_Pivot.setBounds(471, 631, 73, 38);
+			panelInicioJuego.add(lblAlas_Pivot);
+			
+			lblAla_Pivotequip2 = new JLabel("Example");
+			lblAla_Pivotequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+			lblAla_Pivotequip2.setBounds(845, 631, 73, 38);
+			panelInicioJuego.add(lblAla_Pivotequip2);
+			
+			lblEscolta = new JLabel("Example");
+			lblEscolta.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+			lblEscolta.setBounds(491, 548, 73, 38);
+			panelInicioJuego.add(lblEscolta);
+			
+			lblEscoltaequip2 = new JLabel("Example");
+			lblEscoltaequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+			lblEscoltaequip2.setBounds(766, 550, 73, 34);
+			panelInicioJuego.add(lblEscoltaequip2);
+			
+			lblBase = new JLabel("Example");
+			lblBase.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+			lblBase.setBounds(554, 600, 73, 34);
+			panelInicioJuego.add(lblBase);
+			
+			lblBaseEquip2 = new JLabel("Example");
+			lblBaseEquip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+			lblBaseEquip2.setBounds(722, 595, 73, 38);
+			panelInicioJuego.add(lblBaseEquip2);
+			
+			lblAlero = new JLabel("Example");
+			lblAlero.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+			lblAlero.setBounds(365, 660, 100, 38);
+			panelInicioJuego.add(lblAlero);
+			
+			lblAleroequi2 = new JLabel("Example");
+			lblAleroequi2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
+			lblAleroequi2.setBounds(899, 659, 73, 41);
+			panelInicioJuego.add(lblAleroequi2);
+			
 		JPanel panel_equipo1 = new JPanel();
 		panel_equipo1.setBounds(27, 23, 435, 506);
 		panel_equipo1.setOpaque(false);
@@ -883,55 +933,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		Icon iconoCancha = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/d-basketball-field-white-background-illustration-49785575.gif")).getImage().getScaledInstance(lblcanha.getWidth(), lblcanha.getHeight(), Image.SCALE_DEFAULT));
 		
 		
-		lblPivot = new JLabel("Example");
-		lblPivot.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblPivot.setBounds(408, 574, 73, 34);
-		panelInicioJuego.add(lblPivot);
 		
-		lblPivotequip2 = new JLabel("Example");
-		lblPivotequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblPivotequip2.setBounds(882, 574, 73, 34);
-		panelInicioJuego.add(lblPivotequip2);
-		
-		lblAlas_Pivot = new JLabel("Example");
-		lblAlas_Pivot.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblAlas_Pivot.setBounds(471, 631, 73, 38);
-		panelInicioJuego.add(lblAlas_Pivot);
-		
-		lblAla_Pivotequip2 = new JLabel("Example");
-		lblAla_Pivotequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblAla_Pivotequip2.setBounds(845, 631, 73, 38);
-		panelInicioJuego.add(lblAla_Pivotequip2);
-		
-		lblEscolta = new JLabel("Example");
-		lblEscolta.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblEscolta.setBounds(491, 548, 73, 38);
-		panelInicioJuego.add(lblEscolta);
-		
-		lblEscoltaequip2 = new JLabel("Example");
-		lblEscoltaequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblEscoltaequip2.setBounds(766, 550, 73, 34);
-		panelInicioJuego.add(lblEscoltaequip2);
-		
-		lblBase = new JLabel("Example");
-		lblBase.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblBase.setBounds(554, 600, 73, 34);
-		panelInicioJuego.add(lblBase);
-		
-		lblBaseEquip2 = new JLabel("Example");
-		lblBaseEquip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblBaseEquip2.setBounds(722, 595, 73, 38);
-		panelInicioJuego.add(lblBaseEquip2);
-		
-		lblAlero = new JLabel("Example");
-		lblAlero.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblAlero.setBounds(365, 660, 100, 38);
-		panelInicioJuego.add(lblAlero);
-		
-		lblAleroequi2 = new JLabel("Example");
-		lblAleroequi2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-		lblAleroequi2.setBounds(899, 659, 73, 41);
-		panelInicioJuego.add(lblAleroequi2);
 		lblcanha.setIcon(iconoCancha);
 		panelInicioJuego.add(lblcanha);
 		
@@ -1183,6 +1185,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				//{"<Seleccione>", "Base", "Escolta", "Alero", "Ala-Pivot", "Pivot"}
 				if (Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Base")) {
 					lblBaseEquip2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getNombre());
+					System.out.println("Hecho");
 				}
 				if (Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Escolta")) {
 					lblEscoltaequip2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getNombre());
