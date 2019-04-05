@@ -225,7 +225,7 @@ public class Principal extends JFrame implements Serializable {
 
 		
 
-		/*
+		
 		panelMenuPrinc = new JPanel();
 		panelMenuPrinc.setBounds(5, 5, 1340, 762);
 		contentPane.add(panelMenuPrinc);
@@ -557,7 +557,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		fondoPrin.setIcon(icon1o);
 		panelMenuPrinc.add(fondoPrin);
 
-		*/
+		
 		
 		
 		
