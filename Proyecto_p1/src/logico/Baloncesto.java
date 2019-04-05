@@ -74,6 +74,8 @@ public class Baloncesto implements Serializable{
 		this.enJuego = enJuego;
 	}
 
+	//calcular factorial para calcular posibles combinaciones del calendario
+	
 	private int factorial(int x) {
 		int y = x;
 		
@@ -88,10 +90,14 @@ public class Baloncesto implements Serializable{
 		return y;
 	}
 	
+	//agregar aquipo en el listado
+	
 	public void agregarEquipo(Equipo aux1) {
 		misEquipos.add(aux1);
 		escribirDatos();
 	}
+	
+	//calcular cant de juegos a jugar
 	
 	public int calcCantJuego(ArrayList<Equipo> equipoTor) {
 		int cantJuegos = 0;
@@ -105,6 +111,8 @@ public class Baloncesto implements Serializable{
 		
 		return cantJuegos;
 	}
+	
+	//crear nuevo partido a partir de la fecha colocada y ya.
 	
 	public void crearPartido(ArrayList<Equipo> equipoTor, Date fechaInicio) {
 		int i=0;
@@ -144,6 +152,9 @@ public class Baloncesto implements Serializable{
 		escribirDatos();
 	}
 	
+	
+	//devolver equipo consiste en que se devolvera la puntuacion del equipo a su direccion de memoria
+	
 	private Equipo devolverEquipo(Equipo aux) {
 		Equipo clone=null;
 		String nombre = aux.getNombre();
@@ -167,6 +178,10 @@ public class Baloncesto implements Serializable{
 		}
 		return clone;
 	}
+	
+	// retorna la nueva fecha para el siguiente partido 
+	// un equipo no juega dos veces el mismo dia 
+	//tercer dia descanso de juego
 	
 	private Date fechaTorneo(Date fechaAnterior, int fechaDescanso) {
 		int year = fechaAnterior.getYear();
@@ -226,6 +241,7 @@ public class Baloncesto implements Serializable{
 		return fechaNueva;
 	}
 	
+	//guardar informaciones del programa
 	
 	public void escribirDatos()
 	{
@@ -254,7 +270,7 @@ public class Baloncesto implements Serializable{
 		
 	}
 	
-	
+	// agregar punto de lesión 
 	
 	public void agregarLesion(String codeAux, String equipo, Lesion lesion) {
 		boolean found = false;
