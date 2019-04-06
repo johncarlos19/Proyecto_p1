@@ -279,6 +279,14 @@ public class Principal extends JFrame implements Serializable {
 		menuBar.add(mnEstadisticas);
 		
 		JMenuItem mntmEstadisticaDelEquipo = new JMenuItem("Estadistica Del Equipo");
+		mntmEstadisticaDelEquipo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EstadisticaEquipo miestaEquip = new EstadisticaEquipo();
+				miestaEquip.setModal(true);
+				miestaEquip.setLocationRelativeTo(null);
+				miestaEquip.setVisible(true);
+			}
+		});
 		mnEstadisticas.add(mntmEstadisticaDelEquipo);
 		
 		JMenuItem mntmEstadisticaDelJugador = new JMenuItem("Estadistica Del Jugador");
@@ -739,7 +747,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				//btnIngresarAlCarro.setEnabled(true);
 				//spinner.setEnabled(true);
 				//btnEliminar.setEnabled(false);
-				nombreJugador = (String)table__Equip2.getModel().getValueAt(index, 0);
+				nombreJugador = (String)table__Equip2.getModel().getValueAt(index, 1);
 				equipoSeleccionado=1;
 				
 			}
