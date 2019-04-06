@@ -11,9 +11,6 @@ import javax.swing.ImageIcon;
 
 public class Equipo implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -9050316527821816246L;
 	private String nombre;
 	private ArrayList<Jugador> nominaJugadores;
@@ -23,6 +20,7 @@ public class Equipo implements Serializable {
 	private int puntos;
 	private ImageIcon logo;
 	private File logoEquipo;
+	private int juegosPerdidos;
 	
 	public Equipo(String nombre, String coach, String cancha, File logoEquipo) {
 		super();
@@ -121,6 +119,16 @@ public class Equipo implements Serializable {
 	public void setPuntos(int puntos) {
 		this.puntos = puntos;
 	}
+	
+	public int getJuegosPerdidos() {
+		return juegosPerdidos;
+	}
+
+
+	public void setJuegosPerdidos(int juegosPerdidos) {
+		this.juegosPerdidos = juegosPerdidos;
+	}
+
 
 	public boolean agregarJugador(Jugador aux){
 		boolean cant = false;
@@ -168,6 +176,16 @@ public class Equipo implements Serializable {
 			} 
 	     System.out.println("\tEl archivo ha sido copiado con éxito....\n");
 	     logo = new ImageIcon(archivoSalida.toString());
+	}
+	
+	public int cantPuntoDelEquipo() {
+		int tiro = 0;
+		
+		for (Jugador jugador : nominaJugadores) {
+			tiro += jugador.getPuntoJugador().cantPunto();
+		}
+		
+		return tiro;
 	}
 }
 	
