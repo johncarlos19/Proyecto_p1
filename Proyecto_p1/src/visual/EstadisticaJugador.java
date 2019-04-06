@@ -39,7 +39,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
-public class EstadisticaEquipo extends JDialog implements Runnable{
+public class EstadisticaJugador extends JDialog{
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
@@ -48,7 +48,7 @@ public class EstadisticaEquipo extends JDialog implements Runnable{
 	private JScrollPane scrollPane;
 	private JPanel panel;
 	private Equipo equiGrafica=null;
-	Thread h1;
+	//Thread h1;
 	/**
 	 * Launch the application.
 	 *//*
@@ -65,7 +65,7 @@ public class EstadisticaEquipo extends JDialog implements Runnable{
 	/**
 	 * Create the dialog.
 	 */
-	public EstadisticaEquipo() {
+	public EstadisticaJugador() {
 		setBounds(100, 100, 1234, 601);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -79,8 +79,8 @@ public class EstadisticaEquipo extends JDialog implements Runnable{
 		contentPanel.add(panel);
 		//panel.setLayout(new BorderLayout(0, 0));
 		
-		h1 = new Thread(this);
-		h1.start();
+		//h1 = new Thread(this);
+		//h1.start();
 		
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 310, 507);
@@ -94,6 +94,7 @@ public class EstadisticaEquipo extends JDialog implements Runnable{
 				String code = (String)table.getModel().getValueAt(index, 1);
 				//init(Baloncesto.getInstance().getMisEquipos().get(0));
 				equiGrafica=buscarEquipo(code);
+				init(equiGrafica);
 				
 			}
 		});
@@ -166,18 +167,18 @@ public class EstadisticaEquipo extends JDialog implements Runnable{
 		System.out.println(aux.getNombre());
 		return aux;
 	}
-	
+	/*
 	@Override
 	public void run() {
 		Thread ct = Thread.currentThread();
         while (ct == h1) {
-        	init(equiGrafica);
+        	
             try {
-                Thread.sleep(10);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
             }
         }
-	}
+	}*/
 	
     private void init(Equipo aux) {
         
@@ -220,6 +221,7 @@ public class EstadisticaEquipo extends JDialog implements Runnable{
         ChartPanel chartPanel = new ChartPanel(chart);
         chartPanel.setDisplayToolTips(false);
         panel.add(chartPanel);
+        chartPanel.setBounds(0, 0, 878, 507);
     	}
 	
 	private void cargarTabla() {

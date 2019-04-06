@@ -281,15 +281,21 @@ public class Principal extends JFrame implements Serializable {
 		JMenuItem mntmEstadisticaDelEquipo = new JMenuItem("Estadistica Del Equipo");
 		mntmEstadisticaDelEquipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				EstadisticaEquipo miestaEquip = new EstadisticaEquipo();
-				miestaEquip.setModal(true);
-				miestaEquip.setLocationRelativeTo(null);
-				miestaEquip.setVisible(true);
+				
 			}
 		});
 		mnEstadisticas.add(mntmEstadisticaDelEquipo);
 		
 		JMenuItem mntmEstadisticaDelJugador = new JMenuItem("Estadistica Del Jugador");
+		mntmEstadisticaDelJugador.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EstadisticaJugador miestaJuga = new EstadisticaJugador();
+				miestaJuga.setModal(true);
+				miestaJuga.setLocationRelativeTo(null);
+				miestaJuga.setVisible(true);
+			}
+		
+		});
 		mnEstadisticas.add(mntmEstadisticaDelJugador);
 		
 		JMenuItem mntmEstadisticaDelPartido = new JMenuItem("Estadistica Del Partido");
