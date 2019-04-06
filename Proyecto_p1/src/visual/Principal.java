@@ -1129,19 +1129,24 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 	
 	private String ganadorEquipo() {
 		String aux=null;
+		String auxPerdio=null;
 		int puntoEquip1=Integer.parseInt(lblpuntequip1.getText().toString());
 		int puntoEquip2=Integer.parseInt(lblpuntequip12.getText().toString());
 		int i=0;
 		if (puntoEquip1>puntoEquip2) {
 			aux = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre();
-			
-		}else {
+			auxPerdio = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre();
+		}else if (puntoEquip1<puntoEquip2) {
 			aux = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre();
+			auxPerdio = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre();
 		}
 		
 		while (i<Baloncesto.getInstance().getMisEquipos().size()) {
 			if (Baloncesto.getInstance().getMisEquipos().get(i).getNombre().equalsIgnoreCase(aux)) {
 				Baloncesto.getInstance().getMisEquipos().get(i).setPuntos(Baloncesto.getInstance().getMisEquipos().get(i).getPuntos()+1);
+			}
+			if (Baloncesto.getInstance().getMisEquipos().get(i).getNombre().equalsIgnoreCase(auxPerdio)) {
+				Baloncesto.getInstance().getMisEquipos().get(i).setJuegosPerdidos(Baloncesto.getInstance().getMisEquipos().get(i).getJuegosPerdidos()+1);
 			}
 			i++;
 		}

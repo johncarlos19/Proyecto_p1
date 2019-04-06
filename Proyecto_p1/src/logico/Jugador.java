@@ -16,6 +16,7 @@ public class Jugador implements Serializable{
 	private int numero;
 	private ArrayList<Lesion> lesionJugador;
 	private Estadistica puntoJugador;
+	private boolean jugando;
 	
 	public Jugador(String nombre, float peso, float estatura, String posicion, int numero) {
 		super();
@@ -26,6 +27,15 @@ public class Jugador implements Serializable{
 		this.numero = numero;
 		this.lesionJugador = new ArrayList<Lesion>();
 		this.puntoJugador = new Estadistica();
+		this.jugando=false;
+	}
+
+	public boolean isJugando() {
+		return jugando;
+	}
+
+	public void setJugando(boolean jugando) {
+		this.jugando = jugando;
 	}
 
 	public String getNombre() {

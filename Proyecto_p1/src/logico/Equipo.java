@@ -31,6 +31,7 @@ public class Equipo implements Serializable {
 		this.estado = true;
 		this.puntos = 0;
 		this.logoEquipo = logoEquipo;
+		this.juegosPerdidos=0;
 		//this.logo = new ImageIcon(logoEquipo.toString());
 		//logo.se
 	}
