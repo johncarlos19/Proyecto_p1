@@ -876,8 +876,12 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 			public void actionPerformed(ActionEvent e) {
 				Baloncesto.getInstance().setEnJuego(false);
 				Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).setJugo(true);
+				
 				agregarPuntoJugador(0);
 				agregarPuntoJugador(1);
+				JOptionPane.showMessageDialog(null, "El ganador es "+ganadorEquipo(), "Juego En Vivo", JOptionPane.INFORMATION_MESSAGE);
+				
+
 				Baloncesto.getInstance().setCantJuegos(Baloncesto.getInstance().getCantJuegos()+1);
 				btnJuego.setText("Iniciar\n Juego");
 				if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().isEnJuego()==false) {
@@ -1107,6 +1111,28 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				i++;
 			}
 		}
+	}
+	
+	private String ganadorEquipo() {
+		String aux=null;
+		int puntoEquip1=Integer.parseInt(lblpuntequip1.getText().toString());
+		int puntoEquip2=Integer.parseInt(lblpuntequip12.getText().toString());
+		int i=0;
+		if (puntoEquip1>puntoEquip2) {
+			aux = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre();
+			
+		}else {
+			aux = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre();
+		}
+		
+		while (i<Baloncesto.getInstance().getMisEquipos().size()) {
+			if (Baloncesto.getInstance().getMisEquipos().get(i).getNombre().equalsIgnoreCase(aux)) {
+				Baloncesto.getInstance().getMisEquipos().get(i).setPuntos(Baloncesto.getInstance().getMisEquipos().get(i).getPuntos()+1);
+			}
+			i++;
+		}
+		
+		return aux;
 	}
 	
 	private void cargarPantalla(int sele) {

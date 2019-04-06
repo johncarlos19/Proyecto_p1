@@ -137,7 +137,7 @@ public class Equipo implements Serializable {
 		boolean hecho = false;
 		int i=0;
 		while(i<nominaJugadores.size()){
-			if (nominaJugadores.get(i).getCode().equalsIgnoreCase(codeAux)) {
+			if (nominaJugadores.get(i).getNombre().equalsIgnoreCase(codeAux)) {
 				nominaJugadores.get(i).agregarLesiones(aux);
 				hecho=true;
 			}
