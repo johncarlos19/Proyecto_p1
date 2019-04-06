@@ -63,6 +63,7 @@ public class VerEquipo extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JPanel Jugadores = new JPanel();
+			Jugadores.setBorder(new TitledBorder(null, "Lista de jugadores:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			Jugadores.setBounds(266, 5, 228, 350);
 			contentPanel.add(Jugadores);
 			Jugadores.setLayout(new BorderLayout(0, 0));
@@ -70,15 +71,11 @@ public class VerEquipo extends JDialog {
 				JScrollPane scrollPane = new JScrollPane();
 				Jugadores.add(scrollPane, BorderLayout.CENTER);
 				{
-					String[] header = {"Nombre", "Número"/*, "Poscición", "Estatura", "Peso"*/};
+					String[] header = {"Nombre", "Número"};
 					model = new DefaultTableModel(null, header){
 						@Override
 						public boolean isCellEditable(int filas, int columnas) {
-							if(columnas == 3) {
-								return true;
-							}else {
 								return false;
-							}
 						}
 					};
 					
@@ -88,7 +85,6 @@ public class VerEquipo extends JDialog {
 						@Override
 						public void mouseClicked(MouseEvent e) {
 							if(table.getSelectedRow()>=0){
-								//btnVer.setEnabled(true);
 								int index = table.getSelectedRow();
 								identificador = (int) table.getModel().getValueAt(index, 1);
 								setInfo();
@@ -200,7 +196,7 @@ public class VerEquipo extends JDialog {
 				JLabel lblFoto = new JLabel("pic");
 				lblFoto.setHorizontalAlignment(SwingConstants.CENTER);
 				lblFoto.setHorizontalTextPosition(SwingConstants.CENTER);
-				lblFoto.setBounds(51, 27, 144, 144);
+				lblFoto.setBounds(51, 80, 144, 144);
 				InfoEquipo.add(lblFoto);
 				
 				lblFoto.setText(null);
@@ -210,7 +206,7 @@ public class VerEquipo extends JDialog {
 			JLabel lblNombreEquipo = new JLabel(equipo.getNombre());
 			lblNombreEquipo.setFont(new Font("Tahoma", Font.PLAIN, 23));
 			lblNombreEquipo.setHorizontalAlignment(SwingConstants.CENTER);
-			lblNombreEquipo.setBounds(10, 182, 226, 42);
+			lblNombreEquipo.setBounds(10, 27, 226, 42);
 			InfoEquipo.add(lblNombreEquipo);
 			
 			JLabel lblCoach = new JLabel("Coach:");
@@ -303,9 +299,6 @@ public class VerEquipo extends JDialog {
 		for (Jugador jugador : Baloncesto.getInstance().getMisEquipos().get(index).getNominaJugadores()) {
 			fila[0] = jugador.getNombre();
 			fila[1] = jugador.getNumero();
-			//fila[2] = jugador.getPosicion();
-			//fila[3] = Float.toString(jugador.getEstatura()) + " metros";
-			//fila[4] = Float.toString(jugador.getPeso()) + " kilogramos";
 			model.addRow(fila);
 		}
 	}

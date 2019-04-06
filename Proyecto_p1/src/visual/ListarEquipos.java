@@ -37,22 +37,6 @@ public class ListarEquipos extends JDialog {
 	
 	private JButton btnVer;
 
-	/**
-	 * Launch the application.
-	 *//*
-	public static void main(String[] args) {
-		try {
-			ListarEquipos dialog = new ListarEquipos();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}*/
-
-	/**
-	 * Create the dialog.
-	 */
 	public ListarEquipos() {
 		setTitle("Listar Equipos");
 		setResizable(false);
@@ -80,7 +64,13 @@ public class ListarEquipos extends JDialog {
 					String[] header = {"Logo","Nombre", "Coach", "Cancha"};
 					//Icon icono11 = new ImageIcon(Baloncesto.getInstance().getMisEquipos().get(0).getLogo().getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
 					
-					model = new DefaultTableModel(null,header);
+					model = new DefaultTableModel(null, header){
+						@Override
+						public boolean isCellEditable(int filas, int columnas) {
+								return false;
+						}
+					};
+					
 					table.addMouseListener(new MouseAdapter() {
 						@Override
 						public void mouseClicked(MouseEvent e) {
