@@ -171,8 +171,7 @@ public class Baloncesto implements Serializable{
 			float estatura = aux.getNominaJugadores().get(i).getEstatura();
 			String posicion = aux.getNominaJugadores().get(i).getPosicion();
 			int numero = aux.getNominaJugadores().get(i).getNumero();
-			String code = aux.getNominaJugadores().get(i).getCode();
-			Jugador clonJuga= new Jugador(nombre1, peso, estatura, posicion, numero, code);
+			Jugador clonJuga= new Jugador(nombre1, peso, estatura, posicion, numero);
 			clone.agregarJugador(clonJuga);
 			i++;
 		}

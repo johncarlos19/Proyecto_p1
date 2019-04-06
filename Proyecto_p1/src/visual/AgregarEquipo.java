@@ -58,7 +58,6 @@ public class AgregarEquipo extends JDialog {
 	private JTextField txtNombreJugador;
 	private JTextField txtPeso;
 	private JTextField txtEstatura;
-	private JTextField txtCodigo;
 	private JTable table;
 	private static DefaultTableModel model;
 	private static Object[] fila;
@@ -77,19 +76,13 @@ public class AgregarEquipo extends JDialog {
 	private ArrayList<Jugador> jugadores = new ArrayList<>();
 	private JButton btnBorrar;
 	
-	private int minJugadores = 1;
-	private int maxJugadores = 3;
+	private int minJugadores = 5;
+	private int maxJugadores = 15;
 
-	/**
-	 * Launch the application.
-	 */
-	/**
-	 * Create the dialog.
-	 */
 	public AgregarEquipo() {
 		setTitle("Registrar Equipo");
 		setResizable(false);
-		setBounds(100, 100, 702, 515);
+		setBounds(100, 100, 795, 439);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -147,7 +140,7 @@ public class AgregarEquipo extends JDialog {
 				public void actionPerformed(ActionEvent arg0) {
 					int resultado;
 					CargarImagen ventana = new CargarImagen();
-					FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPG y PNG y GIF", "JPG", "PNG", "GIF");
+					FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPEG y PNG y GIF", "JPEG", "PNG", "GIF");
 					ventana.fileChooser.setFileFilter(filtro);
 					resultado = ventana.fileChooser.showOpenDialog(null);
 					if(JFileChooser.APPROVE_OPTION == resultado/* && ventana.fileChooser.getSelectedFile().getPath().equalsIgnoreCase("JPG")*/) {
@@ -172,23 +165,23 @@ public class AgregarEquipo extends JDialog {
 		
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Informacion del jugador:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		panel.setBounds(5, 251, 362, 191);
+		panel.setBounds(5, 251, 362, 119);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		{
 			JLabel lblNombreDelJugador = new JLabel("Nombre:");
-			lblNombreDelJugador.setBounds(10, 68, 62, 14);
+			lblNombreDelJugador.setBounds(10, 27, 62, 14);
 			panel.add(lblNombreDelJugador);
 		}
 		{
 			txtNombreJugador = new JTextField();
-			txtNombreJugador.setBounds(66, 65, 251, 20);
+			txtNombreJugador.setBounds(76, 24, 276, 20);
 			panel.add(txtNombreJugador);
 			txtNombreJugador.setColumns(10);
 		}
 		{
-			JLabel lblPeso = new JLabel("Peso:");
-			lblPeso.setBounds(10, 104, 37, 14);
+			JLabel lblPeso = new JLabel("Peso (Kg):");
+			lblPeso.setBounds(10, 52, 62, 14);
 			panel.add(lblPeso);
 		}
 		{
@@ -209,13 +202,13 @@ public class AgregarEquipo extends JDialog {
 			        }
 			      }
 			    });
-			txtPeso.setBounds(66, 98, 70, 20);
+			txtPeso.setBounds(76, 49, 62, 20);
 			panel.add(txtPeso);
 			txtPeso.setColumns(10);
 		}
 		{
 			JLabel lblPosicin = new JLabel("Posici\u00F3n:");
-			lblPosicin.setBounds(146, 135, 54, 14);
+			lblPosicin.setBounds(148, 77, 54, 14);
 			panel.add(lblPosicin);
 		}
 		{
@@ -236,55 +229,42 @@ public class AgregarEquipo extends JDialog {
 			        }
 			      }
 			    });
-			txtEstatura.setBounds(210, 96, 107, 20);
+			txtEstatura.setBounds(237, 49, 115, 20);
 			panel.add(txtEstatura);
 			txtEstatura.setColumns(10);
 		}
 		{
-			JLabel lblEstatura = new JLabel("Estatura:");
-			lblEstatura.setBounds(146, 104, 54, 14);
+			JLabel lblEstatura = new JLabel("Estatura (m):");
+			lblEstatura.setBounds(148, 52, 86, 14);
 			panel.add(lblEstatura);
 		}
 		{
 			JLabel lblNmero = new JLabel("N\u00FAmero:");
-			lblNmero.setBounds(10, 135, 54, 14);
+			lblNmero.setBounds(10, 77, 54, 14);
 			panel.add(lblNmero);
 		}
 		
 		spnNumero = new JSpinner();
 		spnNumero.setModel(new SpinnerNumberModel(0, 0, 99, 1));
-		spnNumero.setBounds(66, 129, 70, 20);
+		spnNumero.setBounds(76, 74, 62, 20);
 		panel.add(spnNumero);
-		{
-			JLabel lblCdigo = new JLabel("C\u00F3digo:");
-			lblCdigo.setBounds(10, 34, 46, 14);
-			panel.add(lblCdigo);
-		}
-		{
-			txtCodigo = new JTextField();
-			txtCodigo.setEditable(false);
-			txtCodigo.setBounds(66, 31, 251, 20);
-			panel.add(txtCodigo);
-			txtCodigo.setColumns(10);
-		}
 		
 		cbxPosicion = new JComboBox();
 		String[] cbxPosi = {"<Seleccione>", "Base", "Escolta", "Alero", "Ala-Pivot", "Pivot"};
 		cbxPosicion.setModel(new DefaultComboBoxModel(cbxPosi));
-		cbxPosicion.setBounds(210, 129, 107, 20);
+		cbxPosicion.setBounds(237, 74, 115, 20);
 		panel.add(cbxPosicion);
-		//cargarCbxPos();
 		{
 			JPanel panel_1 = new JPanel();
 			panel_1.setBorder(new TitledBorder(null, "Jugadores:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			panel_1.setBounds(377, 11, 309, 431);
+			panel_1.setBounds(377, 11, 412, 359);
 			contentPanel.add(panel_1);
 			panel_1.setLayout(new BorderLayout(0, 0));
 			
 			JScrollPane scrollPane = new JScrollPane();
 			panel_1.add(scrollPane, BorderLayout.CENTER);
 			
-			String[] header = {"Nombre", "Número"};
+			String[] header = {"Nombre", "Número", "Poscición"};
 			model = new DefaultTableModel();
 			model.setColumnIdentifiers(header);
 			
@@ -325,9 +305,7 @@ public class AgregarEquipo extends JDialog {
 					}else {
 						ready = false;
 					}
-					
-					String code = txtCodigo.getText();
-					
+										
 					float estatura = 0;
 					if(!txtEstatura.getText().equalsIgnoreCase("")) {
 						estatura = (float) Double.parseDouble(txtEstatura.getText());
@@ -340,7 +318,7 @@ public class AgregarEquipo extends JDialog {
 					int numero = Integer.parseInt(spnNumero.getValue().toString());
 					
 					if(!nombreJugador.equalsIgnoreCase("") && !posicion.equalsIgnoreCase("<Seleccione>") && !checkNumero(numero) && ready) {
-						Jugador aux = new Jugador(nombreJugador, peso, estatura, posicion, numero, code);
+						Jugador aux = new Jugador(nombreJugador, peso, estatura, posicion, numero);
 						jugadores.add(aux);
 						System.out.println("Equi0aux "+jugadores.size());
 						JOptionPane.showMessageDialog(null, "Registro del jugador exitoso", "Información", JOptionPane.INFORMATION_MESSAGE);
@@ -376,7 +354,7 @@ public class AgregarEquipo extends JDialog {
 						String nombreCoach = txtNombreCoach.getText();
 						String nombreCancha = txtNombreCancha.getText();
 						
-						if((fichero != null) && !nombreEquipo.equalsIgnoreCase("") && !nombreCoach.equalsIgnoreCase("") && !nombreCancha.equalsIgnoreCase("") && !checkEquipos(nombreEquipo)) {
+						if(checkPosJugadores() && (fichero != null) && !nombreEquipo.equalsIgnoreCase("") && !nombreCoach.equalsIgnoreCase("") && !nombreCancha.equalsIgnoreCase("") && !checkEquipos(nombreEquipo)) {
 							Equipo aux = new Equipo(nombreEquipo, nombreCoach, nombreCancha, fichero);
 							int i=0;
 							while (i<jugadores.size()) {
@@ -407,6 +385,8 @@ public class AgregarEquipo extends JDialog {
 							
 						}else if(checkEquipos(nombreEquipo)) {
 							JOptionPane.showMessageDialog(null, "Ya existe un equipo con el mismo nombre", "Revise los campos", JOptionPane.WARNING_MESSAGE);
+						}else if(!checkPosJugadores()) {
+							JOptionPane.showMessageDialog(null, "Debe haber minimo un jugador para cada posición", "Revise los campos", JOptionPane.WARNING_MESSAGE);
 						}else {
 							JOptionPane.showMessageDialog(null, "Llene correctamente los campos", "Revise los campos", JOptionPane.WARNING_MESSAGE);
 						}
@@ -459,6 +439,28 @@ public class AgregarEquipo extends JDialog {
 		}
 	}
 
+	protected boolean checkPosJugadores() {
+		boolean listo = true;
+		String[] pos = {"Base", "Escolta", "Alero", "Ala-Pivot", "Pivot"};
+		boolean[] posReady = {false, false, false, false, false};
+		
+		for (Jugador jugador : jugadores) {
+			for(int i = 0; i < 5; i++) {
+				if(pos[i].equalsIgnoreCase(jugador.getPosicion())) {
+					posReady[i] = true;
+				}
+			}
+		}
+		
+		for(int i = 0; i < 5; i++) {
+			if(!posReady[i]) {
+				listo = false;
+			}
+		}
+		
+		return listo;
+	}
+
 	protected void setBtn() {
 		if(jugadores.size() >= minJugadores) {
 			btnRegistrar.setEnabled(true);
@@ -495,35 +497,11 @@ public class AgregarEquipo extends JDialog {
 		for (int i = 0; i < jugadores.size(); i++) {
 			fila[0] = jugadores.get(i).getNombre();
 			fila[1] = jugadores.get(i).getNumero();
+			fila[2] = jugadores.get(i).getPosicion();
 			model.addRow(fila);
 		}
 		
 	}
-
-	/*private void cargarCbxPos() {
-		cbxPosicion.removeAllItems();
-		String[] cbxPos = {"<Seleccione>", "Base", "Escolta", "Alero", "Ala-Pivot", "Pivot"};
-		cbxPosicion.addItem(cbxPos[0]);
-		boolean encontrado = false;
-		int y = 0;
-		
-		for(int i = 1; i <= 5; i++) {
-			while(!encontrado && i < jugadores.size()) {
-				if(jugadores.get(y).getPosicion().equalsIgnoreCase(cbxPos[i])) {
-					encontrado = true;
-				}
-				y++;
-			}
-			
-			y = 0;
-			
-			if(!encontrado) {
-				cbxPosicion.addItem(cbxPos[i]);
-			}else {
-				encontrado = false;
-			}
-		}
-	}*/
 
 	protected void cleanPlantillaEquipo() {
 		txtNombreEquipo.setText("");
@@ -537,7 +515,6 @@ public class AgregarEquipo extends JDialog {
 	protected void cleanPlantillaJugadores() {
 		txtNombreJugador.setText("");
 		txtPeso.setText("");
-		txtCodigo.setText("");
 		txtEstatura.setText("");
 		cbxPosicion.setSelectedIndex(0);
 		spnNumero.setValue(Integer.parseInt("0"));
