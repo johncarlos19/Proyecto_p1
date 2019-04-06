@@ -383,7 +383,7 @@ public class Principal extends JFrame implements Serializable {
 		//btnJuego.setBorderPainted(false);
 		btnJuego.setForeground(Color.WHITE);
 		btnJuego.setHorizontalTextPosition(SwingConstants.CENTER);
-		btnJuego.setBounds(561, 221, 197, 197);
+		btnJuego.setBounds(551, 221, 197, 197);
 		Icon iconn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd1221i.gif")).getImage().getScaledInstance(187, 161, Image.SCALE_DEFAULT));
 		
 		btnJuego.setIcon(iconn);
@@ -411,7 +411,7 @@ public class Principal extends JFrame implements Serializable {
 		lblLogoequipo22 = new JLabel("logoEquipo2");
 		lblLogoequipo22.setForeground(Color.WHITE);
 		lblLogoequipo22.setHorizontalAlignment(SwingConstants.CENTER);
-		lblLogoequipo22.setBounds(578, 35, 183, 178);
+		lblLogoequipo22.setBounds(562, 35, 183, 178);
 		panelEquipoAJugar.add(lblLogoequipo22);
 		
 		
@@ -420,14 +420,14 @@ public class Principal extends JFrame implements Serializable {
 		lblNombre1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombre1.setForeground(Color.WHITE);
 		lblNombre1.setFont(new Font("Alien Encounters", Font.PLAIN, 18));
-		lblNombre1.setBounds(66, 233, 121, 33);
+		lblNombre1.setBounds(0, 233, 263, 33);
 		panelEquipoAJugar.add(lblNombre1);
 		
 		lblNombre2 = new JLabel("nombre2");
 		lblNombre2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNombre2.setForeground(Color.WHITE);
 		lblNombre2.setFont(new Font("Alien Encounters", Font.PLAIN, 18));
-		lblNombre2.setBounds(608, 233, 121, 33);
+		lblNombre2.setBounds(534, 233, 246, 33);
 		panelEquipoAJugar.add(lblNombre2);
 		
 		lblHoyFecha = new JLabel("example");
