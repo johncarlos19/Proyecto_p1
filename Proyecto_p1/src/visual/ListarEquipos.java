@@ -56,7 +56,7 @@ public class ListarEquipos extends JDialog {
 	public ListarEquipos() {
 		setTitle("Listar Equipos");
 		setResizable(false);
-		setBounds(100, 100, 705, 496);
+		setBounds(100, 100, 790, 496);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

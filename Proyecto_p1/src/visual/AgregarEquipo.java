@@ -265,8 +265,16 @@ public class AgregarEquipo extends JDialog {
 			panel_1.add(scrollPane, BorderLayout.CENTER);
 			
 			String[] header = {"Nombre", "Número", "Poscición"};
-			model = new DefaultTableModel();
-			model.setColumnIdentifiers(header);
+			model = new DefaultTableModel(null, header){
+				@Override
+				public boolean isCellEditable(int filas, int columnas) {
+					if(columnas == 4) {
+						return true;
+					}else {
+						return false;
+					}
+				}
+			};
 			
 			table = new JTable();
 			table.addMouseListener(new MouseAdapter() {
