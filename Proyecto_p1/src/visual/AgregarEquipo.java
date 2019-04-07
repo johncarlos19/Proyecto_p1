@@ -140,10 +140,10 @@ public class AgregarEquipo extends JDialog {
 				public void actionPerformed(ActionEvent arg0) {
 					int resultado;
 					CargarImagen ventana = new CargarImagen();
-					FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPEG y PNG y GIF", "JPEG", "PNG", "GIF");
+					FileNameExtensionFilter filtro = new FileNameExtensionFilter("JPEG", "JPEG");
 					ventana.fileChooser.setFileFilter(filtro);
 					resultado = ventana.fileChooser.showOpenDialog(null);
-					if(JFileChooser.APPROVE_OPTION == resultado/* && ventana.fileChooser.getSelectedFile().getPath().equalsIgnoreCase("JPG")*/) {
+					if(JFileChooser.APPROVE_OPTION == resultado && ventana.fileChooser.getSelectedFile().getAbsolutePath().toLowerCase().endsWith(".jpeg")) {
 						fichero = ventana.fileChooser.getSelectedFile();
 						ficheroListo = true;
 						try {
@@ -154,9 +154,10 @@ public class AgregarEquipo extends JDialog {
 						}catch(Exception ex) {
 							JOptionPane.showMessageDialog(null, "Error cargando la imagen "+ ex);
 						}
-					}/*else {
-						JOptionPane.showMessageDialog(null, "La imagen debe ser JPG o PNG", "Formato incorrecto", JOptionPane.WARNING_MESSAGE);
-					}*/
+					}else {
+						JOptionPane.showMessageDialog(null, "La imagen debe ser JPEG", "Formato incorrecto", JOptionPane.WARNING_MESSAGE);
+						ficheroListo = false;
+					}
 				}
 			});
 			btnCargar.setBounds(199, 188, 144, 22);
@@ -362,7 +363,7 @@ public class AgregarEquipo extends JDialog {
 						String nombreCoach = txtNombreCoach.getText();
 						String nombreCancha = txtNombreCancha.getText();
 						
-						if(checkPosJugadores() && (fichero != null) && !nombreEquipo.equalsIgnoreCase("") && !nombreCoach.equalsIgnoreCase("") && !nombreCancha.equalsIgnoreCase("") && !checkEquipos(nombreEquipo)) {
+						if(checkPosJugadores() && ficheroListo && !nombreEquipo.equalsIgnoreCase("") && !nombreCoach.equalsIgnoreCase("") && !nombreCancha.equalsIgnoreCase("") && !checkEquipos(nombreEquipo)) {
 							Equipo aux = new Equipo(nombreEquipo, nombreCoach, nombreCancha, fichero);
 							int i=0;
 							while (i<jugadores.size()) {
