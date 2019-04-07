@@ -116,6 +116,8 @@ public class ListarEquipos extends JDialog {
 								ver.setModal(true);
 								ver.setVisible(true);
 							}
+							
+							cargarTabla();
 						}
 					});
 					btnVer.setEnabled(false);
