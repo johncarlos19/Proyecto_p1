@@ -269,11 +269,7 @@ public class AgregarEquipo extends JDialog {
 			model = new DefaultTableModel(null, header){
 				@Override
 				public boolean isCellEditable(int filas, int columnas) {
-					if(columnas == 4) {
-						return true;
-					}else {
-						return false;
-					}
+					return false;
 				}
 			};
 			
@@ -517,6 +513,7 @@ public class AgregarEquipo extends JDialog {
 		txtNombreCoach.setText("");
 		txtNombreCancha.setText("");
 		fichero = null;
+		ficheroListo = false;
 		lblImagen.setIcon(null);
 		lblImagen.setText("Imagen");
 	}
