@@ -185,7 +185,9 @@ public class EstadisticaJugador extends JDialog{
         // Fuente de Datos
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (int i = 0; i < aux.getNominaJugadores().size(); i++) {
-        	dataset.setValue(aux.getNominaJugadores().get(i).getPuntoJugador().cantPunto(),"Jugador",aux.getNominaJugadores().get(i).getNombre());
+        	dataset.setValue(aux.getNominaJugadores().get(i).getPuntoJugador().getTiroLibre(),"Tiro Libre",aux.getNominaJugadores().get(i).getNombre());
+        	dataset.setValue(aux.getNominaJugadores().get(i).getPuntoJugador().getTiroDoble(),"Tiro Doble",aux.getNominaJugadores().get(i).getNombre());
+        	dataset.setValue(aux.getNominaJugadores().get(i).getPuntoJugador().getTiroTriple(),"Tiro Triple",aux.getNominaJugadores().get(i).getNombre());
 		}
 /*        dataset.setValue(8, "Mujeres", "Lunes");
         dataset.setValue(7, "Hombres", "Lunes");

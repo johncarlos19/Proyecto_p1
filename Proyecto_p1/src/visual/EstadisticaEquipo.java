@@ -160,6 +160,7 @@ public class EstadisticaEquipo extends JDialog{
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         for (Equipo aux : Baloncesto.getInstance().getMisEquipos()) {
         	dataset.setValue(aux.getPuntos(),"Juegos Ganados",aux.getNombre());
+        	dataset.setValue(aux.getJuegosPerdidos(),"Juegos Perdidos",aux.getNombre());
 		}
 
         // Creando el Grafico
