@@ -25,6 +25,7 @@ import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -48,6 +49,12 @@ public class VerEquipo extends JDialog {
 	private JLabel lblPosiscione;
 	private JLabel lblName;
 	private JLabel lblNumber;
+	private JButton btnEliminarJugador;
+	private JButton btnAadirJugador;
+	
+	private boolean cambio = false;
+	private JLabel lblCoach_1;
+	private JTextField txtCoach;
 
 	public VerEquipo(Equipo equipo) {
 		index1 = getIndiceEquipo(equipo);
@@ -88,13 +95,14 @@ public class VerEquipo extends JDialog {
 								int index = table.getSelectedRow();
 								identificador = (int) table.getModel().getValueAt(index, 1);
 								setInfo();
+								setEliminar(Baloncesto.getInstance().getMisEquipos().get(index1).getNominaJugadores().get(indexPorNumero(identificador)).getPosicion());
 							}
 						}
 					});
 					
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 					table.setModel(model);
-					cargarTabla(index1);
+					cargarTabla();
 					
 					scrollPane.setViewportView(table);
 				}
@@ -221,9 +229,18 @@ public class VerEquipo extends JDialog {
 			lblCanchaE.setBounds(66, 289, 170, 14);
 			InfoEquipo.add(lblCanchaE);
 			
-			JLabel lblCoach_1 = new JLabel(equipo.getCoach());
+			lblCoach_1 = new JLabel(equipo.getCoach());
 			lblCoach_1.setBounds(66, 250, 170, 14);
 			InfoEquipo.add(lblCoach_1);
+			lblCoach_1.setEnabled(true);
+			
+			txtCoach = new JTextField();
+			txtCoach.setEditable(false);
+			txtCoach.setEnabled(false);
+			txtCoach.setVisible(false);
+			txtCoach.setBounds(66, 247, 170, 20);
+			InfoEquipo.add(txtCoach);
+			txtCoach.setColumns(10);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -236,10 +253,102 @@ public class VerEquipo extends JDialog {
 						dispose();
 					}
 				});
+				
+				btnAadirJugador = new JButton("A\u00F1adir Jugador");
+				btnAadirJugador.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						AñadirJugador yeet = new AñadirJugador(index1);
+						yeet.setModal(true);
+						yeet.setLocationRelativeTo(null);
+						yeet.setVisible(true);
+						Baloncesto.getInstance().escribirDatos();
+						cargarTabla();
+						setAnnadir();
+					}
+				});
+				
+				JButton btnCambiarCoach = new JButton("Cambiar Coach");
+				btnCambiarCoach.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						if(cambio) {
+							cambio = false;
+							txtCoach.setEditable(false);
+							txtCoach.setEnabled(false);
+							txtCoach.setVisible(false);
+							lblCoach_1.setEnabled(true);
+							equipo.setCoach(txtCoach.getText());
+							Baloncesto.getInstance().escribirDatos();
+							lblCoach_1.setText(equipo.getCoach());
+						}else {
+							cambio = true;
+							lblCoach_1.setEnabled(false);
+							txtCoach.setEditable(true);
+							txtCoach.setEnabled(true);
+							txtCoach.setVisible(true);
+							txtCoach.setText(equipo.getCoach());
+						}
+					}
+				});
+				buttonPane.add(btnCambiarCoach);
+				buttonPane.add(btnAadirJugador);
+				setAnnadir();
+				
+				btnEliminarJugador = new JButton("Eliminar Jugador");
+				btnEliminarJugador.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						int option = JOptionPane.showConfirmDialog(null, "¿Está segur@ que desea eliminar el jugador?","Información",JOptionPane.WARNING_MESSAGE);
+						if(option == JOptionPane.OK_OPTION) {
+							Baloncesto.getInstance().getMisEquipos().get(index1).getNominaJugadores().remove(indexPorNumero(identificador));
+							Baloncesto.getInstance().escribirDatos();
+							cargarTabla();
+							btnEliminarJugador.setEnabled(false);
+							btnAadirJugador.setEnabled(true);
+						}
+					}
+				});
+				btnEliminarJugador.setEnabled(false);
+				buttonPane.add(btnEliminarJugador);
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
+				
 			}
 		}
+	}
+
+
+	private void setAnnadir() {
+		if(Baloncesto.getInstance().getMisEquipos().get(index1).getNominaJugadores().size() >= 15) {
+			btnAadirJugador.setEnabled(false);
+		}else {
+			btnAadirJugador.setEnabled(true);
+		}
+		
+	}
+	
+	private void setEliminar(String pos) {
+		if(!checkPosJugadores(pos)) {
+			btnEliminarJugador.setEnabled(false);
+		}else {
+			btnEliminarJugador.setEnabled(true);
+		}
+		
+	}
+	
+	protected boolean checkPosJugadores(String pos) {
+		boolean listo = true;
+		int cant = 0;
+		
+		for (Jugador jugador : Baloncesto.getInstance().getMisEquipos().get(index1).getNominaJugadores()) {
+			if(pos.equalsIgnoreCase(jugador.getPosicion())) {
+				cant += 1;
+			}
+		}
+		
+		if(cant == 1) {
+			listo = false;
+		}
+		
+		return listo;
 	}
 
 
@@ -293,10 +402,10 @@ public class VerEquipo extends JDialog {
 		return index;
 	}
 
-	protected void cargarTabla(int index) {
+	protected void cargarTabla() {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
-		for (Jugador jugador : Baloncesto.getInstance().getMisEquipos().get(index).getNominaJugadores()) {
+		for (Jugador jugador : Baloncesto.getInstance().getMisEquipos().get(index1).getNominaJugadores()) {
 			fila[0] = jugador.getNombre();
 			fila[1] = jugador.getNumero();
 			model.addRow(fila);
