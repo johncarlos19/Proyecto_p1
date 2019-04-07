@@ -286,7 +286,10 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		JMenuItem mntmEstadisticaDelEquipo = new JMenuItem("Estadistica Del Equipo");
 		mntmEstadisticaDelEquipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				EstadisticaEquipo estadisticaEquipo = new EstadisticaEquipo();
+				estadisticaEquipo.setModal(true);
+				estadisticaEquipo.setLocationRelativeTo(null);
+				estadisticaEquipo.setVisible(true);
 			}
 		});
 		mnEstadisticas.add(mntmEstadisticaDelEquipo);
