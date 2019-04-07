@@ -892,6 +892,15 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		btnCambio = new JButton("Cambio");
 		btnCambio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Cambios micambi= new Cambios(posisionJugador, equipoSeleccionado, nombreJugador);
+				micambi.setModal(true);
+				micambi.setLocationRelativeTo(null);
+				micambi.setVisible(true);
+				btnCambio.setEnabled(false);
+				cargarPantalla(0);
+				cargarPantalla(1);
+				cargarTabla(0);
+				cargarTabla(1);
 			}
 		});
 		btnCambio.setVisible(false);
