@@ -66,7 +66,8 @@ public class EstadisticaJugador extends JDialog{
 	 * Create the dialog.
 	 */
 	public EstadisticaJugador() {
-		setBounds(100, 100, 1234, 601);
+		setTitle("Estadisticas De Jugadores");
+		setBounds(100, 100, 338, 601);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -92,6 +93,7 @@ public class EstadisticaJugador extends JDialog{
 			public void mouseClicked(MouseEvent e) {
 				int index = table.getSelectedRow();
 				String code = (String)table.getModel().getValueAt(index, 1);
+				setBounds(100, 100, 1234, 601);
 				//init(Baloncesto.getInstance().getMisEquipos().get(0));
 				equiGrafica=buscarEquipo(code);
 				init(equiGrafica);
@@ -178,6 +180,7 @@ public class EstadisticaJugador extends JDialog{
         
 			
 		panel.setVisible(true);
+		panel.setOpaque(false);
     	//getContentPane().add(panel);
         // Fuente de Datos
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
@@ -196,9 +199,9 @@ public class EstadisticaJugador extends JDialog{
         dataset.setValue(8, "Hombres", "Viernes");*/
         // Creando el Grafico
         JFreeChart chart = ChartFactory.createBarChart3D
-        ("Estadisticas De Jugadores","Jugadores", "Puntos", 
+        ("Puntos Acumulado VS Jugadores","Jugadores", "Puntos", 
         dataset, PlotOrientation.VERTICAL, true,true, false);
-        chart.setBackgroundPaint(Color.WHITE);
+        //chart.setBackgroundPaint(Color.WHITE);
         chart.getTitle().setPaint(Color.black); 
         CategoryPlot p = chart.getCategoryPlot(); 
         p.setRangeGridlinePaint(Color.BLUE);
