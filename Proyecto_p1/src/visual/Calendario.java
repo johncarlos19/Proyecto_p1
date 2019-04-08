@@ -55,6 +55,8 @@ public class Calendario extends JDialog {
 	public Calendario() {
 		setFont(new Font("Lucida Fax", Font.BOLD, 12));
 		setTitle("Calendario");
+		setResizable(false);
+		setLocationRelativeTo(null);
 		setBounds(100, 100, 629, 462);
 		
 		getContentPane().setLayout(new BorderLayout());
