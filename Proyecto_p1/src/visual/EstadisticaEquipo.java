@@ -130,9 +130,10 @@ public class EstadisticaEquipo extends JDialog{
 		}
 	}
 
-	private void setArray() {
+    private void setArray() {
 		int j;
 		int juegosGanados;
+		int primerosLugares = 0;
 		Equipo temp;
 		
 		clonarEquipo();
@@ -141,6 +142,23 @@ public class EstadisticaEquipo extends JDialog{
 			juegosGanados = rankEquipos.get(i).getPuntos();
 			j = i - 1;
 			while(j >= 0 && juegosGanados > rankEquipos.get(j).getPuntos()) {
+				temp = rankEquipos.get(j);
+				rankEquipos.set(j, rankEquipos.get(j + 1));
+				rankEquipos.set(j + 1, temp);
+				j--;
+			}
+		}
+		
+		for (Equipo team : rankEquipos) {
+			if(rankEquipos.get(0).getPuntos() == team.getPuntos()) {
+				primerosLugares++;
+			}
+		}
+		
+		for (int i = 1; i < primerosLugares; i++) {
+			juegosGanados = rankEquipos.get(i).cantPuntoDelEquipo();
+			j = i - 1;
+			while(j >= 0 && juegosGanados > rankEquipos.get(j).cantPuntoDelEquipo()) {
 				temp = rankEquipos.get(j);
 				rankEquipos.set(j, rankEquipos.get(j + 1));
 				rankEquipos.set(j + 1, temp);
