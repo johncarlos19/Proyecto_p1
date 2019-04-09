@@ -25,6 +25,4 @@ public class ImgTabla extends DefaultTableCellRenderer {
 		return super.getTableCellRendererComponent(jtable, o, bln, bln1, i, i1);
 	}
 	
-	
-	
 }

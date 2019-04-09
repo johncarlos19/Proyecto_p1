@@ -188,5 +188,26 @@ public class Equipo implements Serializable {
 		
 		return tiro;
 	}
+	public int cantTiro(int aux) {
+		int tiro = 0;
+		
+		if (aux==1) {
+			for (Jugador jugador : nominaJugadores) {
+				tiro += jugador.getPuntoJugador().getTiroLibre();
+			}
+		}
+		if (aux==2) {
+			for (Jugador jugador : nominaJugadores) {
+				tiro += jugador.getPuntoJugador().getTiroDoble();
+			}
+		}
+		if (aux==3) {
+			for (Jugador jugador : nominaJugadores) {
+				tiro += jugador.getPuntoJugador().getTiroTriple();
+			}
+		}
+		
+		return tiro;
+	}
 }
 	

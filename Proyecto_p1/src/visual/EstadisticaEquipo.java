@@ -2,6 +2,7 @@ package visual;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
@@ -180,4 +181,6 @@ public class EstadisticaEquipo extends JDialog{
         Grafico.add(chartPanel);
         chartPanel.setBounds(0, 0, 878, 507);
     	}
+
 }
+

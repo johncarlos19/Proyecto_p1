@@ -307,6 +307,14 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		mnEstadisticas.add(mntmEstadisticaDelJugador);
 		
 		JMenuItem mntmEstadisticaDelPartido = new JMenuItem("Estadistica Del Partido");
+		mntmEstadisticaDelPartido.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EstadisticaPartido miestPartido = new EstadisticaPartido();
+				miestPartido.setModal(true);
+				miestPartido.setLocationRelativeTo(null);
+				miestPartido.setVisible(true);
+			}
+		});
 		mnEstadisticas.add(mntmEstadisticaDelPartido);
 		
 		
@@ -878,7 +886,14 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		btnFalta = new JButton("Falta");
 		btnFalta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				anotarPuntos(1, true);
+				Jugador aux=anotarPuntos(1, true);
+				if (aux!=null) {
+					JOptionPane.showMessageDialog(null, "El jugador "+aux.getNombre()+" Ha cometido 5 falta, el jugador será expulsado del juego, por favor elegir el jugador con quien desea cambiar", "Juego En Vivo", JOptionPane.INFORMATION_MESSAGE);
+					Cambios micambi= new Cambios(aux.getPosicion(), equipoSeleccionado, aux.getNombre());
+					micambi.setModal(true);
+					micambi.setLocationRelativeTo(null);
+					micambi.setVisible(true);
+				}
 				cargarPantalla(0);
 				cargarPantalla(1);
 				cargarTabla(0);
@@ -1156,8 +1171,9 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		
 	}
 	
-	private void anotarPuntos(int punt, Boolean falta) {
+	private Jugador anotarPuntos(int punt, Boolean falta) {
 		int i=0;
+		Jugador aux = null;
 		if (equipoSeleccionado!=-1) {
 			while (i<Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().size()) {
 				if (Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getNombre().equalsIgnoreCase(nombreJugador)) {
@@ -1166,6 +1182,9 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 					}
 					if (punt==1 && falta==true) {
 						Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().setCantFalta(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().getCantFalta()+1);
+						if (Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().getCantFalta()==5) {
+							aux=Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i);
+						}
 					}
 					if (punt==2 && falta==false) {
 						Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().setTiroDoble(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().getTiroDoble()+1);
@@ -1177,6 +1196,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				i++;
 			}
 		}
+		return aux;
 	}
 	
 	private String ganadorEquipo() {

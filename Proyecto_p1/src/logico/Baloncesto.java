@@ -269,6 +269,8 @@ public class Baloncesto implements Serializable{
 		
 	}
 	
+	
+	
 	// agregar punto de lesión 
 	
 	public void agregarLesion(String codeAux, String equipo, Lesion lesion) {
