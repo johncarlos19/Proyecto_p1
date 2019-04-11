@@ -49,6 +49,11 @@ public class EstadisticaPartido extends JDialog {
 	private JLabel lblDoble2;
 	private JLabel lblLibre2;
 	private JLabel lblLibre1;
+	private JLabel lblMejoresJugadores;
+	private JLabel lblJugador1;
+	private JLabel lblJugador2;
+	private JLabel lblPuntoJugador;
+	private JLabel lblPuntoJugador2;
 	
 	
 	/**
@@ -166,6 +171,7 @@ public class EstadisticaPartido extends JDialog {
 		panelEquipo.add(lblpunto1);
 		
 		 lblTriple = new JLabel("Triple");
+		 lblTriple.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTriple.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblTriple.setBounds(242, 194, 63, 32);
 		panelEquipo.add(lblTriple);
@@ -192,6 +198,7 @@ public class EstadisticaPartido extends JDialog {
 		panelEquipo.add(lblDoble1);
 		
 		JLabel lblDoble = new JLabel("Doble");
+		lblDoble.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDoble.setFont(new Font("Tahoma", Font.BOLD, 18));
 		lblDoble.setBounds(242, 257, 63, 32);
 		panelEquipo.add(lblDoble);
@@ -211,8 +218,9 @@ public class EstadisticaPartido extends JDialog {
 		panelEquipo.add(lblLibre1);
 		
 		JLabel lblLibre = new JLabel("Libre");
+		lblLibre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLibre.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblLibre.setBounds(242, 314, 63, 32);
+		lblLibre.setBounds(248, 314, 51, 32);
 		panelEquipo.add(lblLibre);
 		
 		 lblLibre2 = new JLabel("0");
@@ -221,6 +229,36 @@ public class EstadisticaPartido extends JDialog {
 		lblLibre2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblLibre2.setBounds(349, 310, 39, 40);
 		panelEquipo.add(lblLibre2);
+		
+		lblMejoresJugadores = new JLabel("Mejores Jugadores");
+		lblMejoresJugadores.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMejoresJugadores.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblMejoresJugadores.setBounds(188, 366, 171, 22);
+		panelEquipo.add(lblMejoresJugadores);
+		
+		lblJugador1 = new JLabel("lJugador1");
+		lblJugador1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblJugador1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblJugador1.setBounds(30, 366, 122, 22);
+		panelEquipo.add(lblJugador1);
+		
+		lblJugador2 = new JLabel("lJugador1");
+		lblJugador2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblJugador2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblJugador2.setBounds(397, 366, 122, 22);
+		panelEquipo.add(lblJugador2);
+		
+		lblPuntoJugador = new JLabel("0");
+		lblPuntoJugador.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPuntoJugador.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPuntoJugador.setBounds(69, 397, 46, 32);
+		panelEquipo.add(lblPuntoJugador);
+		
+		lblPuntoJugador2 = new JLabel("0");
+		lblPuntoJugador2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPuntoJugador2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblPuntoJugador2.setBounds(434, 397, 46, 32);
+		panelEquipo.add(lblPuntoJugador2);
 		{
 			JPanel buttonPane = new JPanel();
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -259,6 +297,9 @@ public class EstadisticaPartido extends JDialog {
 		lblDoble2.setText(Integer.toString(aux.getEquipoJuego()[1].cantTiro(2)));
 		lblLibre1.setText(Integer.toString(aux.getEquipoJuego()[0].cantTiro(1)));
 		lblLibre2.setText(Integer.toString(aux.getEquipoJuego()[1].cantTiro(1)));
+		lblJugador1.setText(mejorJugador(0, aux));
+		lblJugador2.setText(mejorJugador(1, aux));
+
 	}
 	private void cargarTabla() {
 		model.setRowCount(0);
@@ -306,6 +347,27 @@ public class EstadisticaPartido extends JDialog {
 		
 		
 	}
+	
+	private String mejorJugador(int posi,Juego auxJueg) {
+		int cant=0,i=0;
+		String nombre1=null;
+		while (i<auxJueg.getEquipoJuego()[posi].getNominaJugadores().size()) {
+			if (auxJueg.getEquipoJuego()[posi].getNominaJugadores().get(i).getPuntoJugador().cantPunto()>cant) {
+				cant=auxJueg.getEquipoJuego()[posi].getNominaJugadores().get(i).getPuntoJugador().cantPunto();
+				nombre1=auxJueg.getEquipoJuego()[posi].getNominaJugadores().get(i).getNombre();
+			}
+			i++;
+		}
+		if (posi==0) {
+			lblPuntoJugador.setText(Integer.toString(cant)+"/"+Integer.toString(auxJueg.getEquipoJuego()[0].cantPuntoDelEquipo()));
+		}else {
+			lblPuntoJugador2.setText(Integer.toString(cant)+"/"+Integer.toString(auxJueg.getEquipoJuego()[1].cantPuntoDelEquipo()));
+		}
+		
+		
+		return nombre1;
+	}
+	
 	private class ImgTabla11 extends DefaultTableCellRenderer {
 
 		@Override

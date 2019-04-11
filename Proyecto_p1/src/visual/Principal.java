@@ -50,6 +50,8 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Toolkit;
+import java.applet.AudioClip;
 
 public class Principal extends JFrame /*implements Runnable*/ {
 
@@ -165,6 +167,8 @@ public class Principal extends JFrame /*implements Runnable*/ {
 
 	 
 	public Principal() throws IOException  {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/imagen/logoprincipal2.png")));
+		setTitle("Baloncesto");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1351, 797);
@@ -282,7 +286,9 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		
 		JMenu mnEstadisticas = new JMenu("Estadisticas");
 		menuBar.add(mnEstadisticas);
-		
+		AudioClip ssound;
+		ssound = java.applet.Applet.newAudioClip(getClass().getResource("/imagen/mixmusic.wav"));
+		ssound.play();
 		JMenuItem mntmEstadisticaDelEquipo = new JMenuItem("Estadistica Del Equipo");
 		mntmEstadisticaDelEquipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -382,6 +388,7 @@ public class Principal extends JFrame /*implements Runnable*/ {
 					lblLogoequip2.setText(null);
 					Baloncesto.getInstance().setEnJuego(true);
 				}else if (btnJuego.getText().toString().equalsIgnoreCase("Renaudar\n Juego") && Baloncesto.getInstance().isEnJuego()==true) {
+					
 					panelMenuPrinc.setVisible(false);
 					panelInicioJuego.setVisible(true);
 					btnCambio.setVisible(true);
@@ -588,8 +595,6 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		
 		fondoPrin.setIcon(icon1o);
 		panelMenuPrinc.add(fondoPrin);
-
-		
 		
 		
 		
