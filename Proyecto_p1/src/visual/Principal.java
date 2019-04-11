@@ -249,8 +249,13 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		JMenu mnEquipo = new JMenu("Equipo");
 		menuBar.add(mnEquipo);
 		btnReiniciarTorneo = new JButton("Reiniciar Torneo");
+		btnReiniciarTorneo.setForeground(Color.WHITE);
+		btnReiniciarTorneo.setHorizontalTextPosition(SwingConstants.CENTER);
+		btnReiniciarTorneo.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnReiniciarTorneo.setEnabled(false);
 		btnReiniciarTorneo.setVisible(false);
+		btnReiniciarTorneo.setOpaque(false);
+		btnReiniciarTorneo.setContentAreaFilled(false);
 		btnReiniciarTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Baloncesto.getInstance().setCantJuegos(0);
@@ -263,7 +268,9 @@ public class Principal extends JFrame /*implements Runnable*/ {
 			}
 		});
 		btnReiniciarTorneo.setFont(new Font("Swis721 BdCnOul BT", Font.BOLD, 24));
-		btnReiniciarTorneo.setBounds(551, 419, 206, 46);
+		btnReiniciarTorneo.setBounds(536, 429, 226, 147);
+		Icon iconnn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/scoreboard.png")).getImage().getScaledInstance(140, 120, Image.SCALE_DEFAULT));
+		btnReiniciarTorneo.setIcon(iconnn);
 		panelMenuPrinc.add(btnReiniciarTorneo);
 		
 		JMenuItem mntmRegistrar = new JMenuItem("Registrar");
@@ -342,6 +349,20 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		
 		
 		btnJuego = new JButton("Juego");
+		btnJuego.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				Icon iconn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd1221i.gif")).getImage().getScaledInstance(197, 171, Image.SCALE_DEFAULT));
+				
+				btnJuego.setIcon(iconn);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				Icon iconn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd1221i.gif")).getImage().getScaledInstance(187, 161, Image.SCALE_DEFAULT));
+				
+				btnJuego.setIcon(iconn);
+			}
+		});
 		btnJuego.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnJuego.setEnabled(false);
 		if (Baloncesto.getInstance().getJuegoRecord().size()==0 && Baloncesto.getInstance().getCantJuegos()==0) {
@@ -443,7 +464,7 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		});
 		btnJuego.setOpaque(false);
 		btnJuego.setContentAreaFilled(false);
-		//btnJuego.setBorderPainted(false);
+		btnJuego.setBorderPainted(false);
 		btnJuego.setForeground(Color.WHITE);
 		btnJuego.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnJuego.setBounds(551, 221, 197, 197);
