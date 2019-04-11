@@ -49,6 +49,11 @@ public class VerEquipo extends JDialog {
 	private JLabel lblPosiscione;
 	private JLabel lblName;
 	private JLabel lblNumber;
+	private JLabel lblNumRebotes;
+	private JLabel lblNumAsis;
+	private JLabel lblNumBloq;
+	private JLabel lblNumRobos;
+	
 	private JButton btnEliminarJugador;
 	private JButton btnAadirJugador;
 	
@@ -62,7 +67,7 @@ public class VerEquipo extends JDialog {
 		setResizable(false);
 		String titulo = equipo.getNombre();
 		setTitle(titulo + "\r\n");
-		setBounds(100, 100, 756, 428);
+		setBounds(100, 100, 756, 507);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -71,7 +76,7 @@ public class VerEquipo extends JDialog {
 		{
 			JPanel Jugadores = new JPanel();
 			Jugadores.setBorder(new TitledBorder(null, "Lista de jugadores:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			Jugadores.setBounds(266, 5, 228, 350);
+			Jugadores.setBounds(266, 5, 228, 438);
 			contentPanel.add(Jugadores);
 			Jugadores.setLayout(new BorderLayout(0, 0));
 			{
@@ -111,7 +116,7 @@ public class VerEquipo extends JDialog {
 		
 		JPanel InfoJugador = new JPanel();
 		InfoJugador.setBorder(new TitledBorder(null, "Informaci\u00F3n del jugador seleccionado:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		InfoJugador.setBounds(504, 5, 236, 350);
+		InfoJugador.setBounds(504, 5, 236, 438);
 		contentPanel.add(InfoJugador);
 		InfoJugador.setLayout(null);
 		
@@ -120,71 +125,43 @@ public class VerEquipo extends JDialog {
 		InfoJugador.add(lblNombre);
 		
 		JLabel lblNmero = new JLabel("N\u00FAmero:");
-		lblNmero.setBounds(10, 57, 94, 14);
+		lblNmero.setBounds(10, 55, 94, 14);
 		InfoJugador.add(lblNmero);
 		
 		JLabel lblPosicin = new JLabel("Posici\u00F3n:");
-		lblPosicin.setBounds(10, 89, 94, 14);
+		lblPosicin.setBounds(10, 85, 94, 14);
 		InfoJugador.add(lblPosicin);
 		
 		JLabel lblPeso = new JLabel("Peso:");
-		lblPeso.setBounds(10, 121, 94, 14);
+		lblPeso.setBounds(10, 115, 94, 14);
 		InfoJugador.add(lblPeso);
 		
 		JLabel lblEstatura = new JLabel("Estatura:");
-		lblEstatura.setBounds(10, 153, 94, 14);
+		lblEstatura.setBounds(10, 145, 94, 14);
 		InfoJugador.add(lblEstatura);
 		
 		JLabel lblTirosLibres = new JLabel("Tiros Libres:");
-		lblTirosLibres.setBounds(10, 185, 94, 14);
+		lblTirosLibres.setBounds(10, 175, 94, 14);
 		InfoJugador.add(lblTirosLibres);
 		
 		JLabel lblTirosDobles = new JLabel("Tiros Dobles:");
-		lblTirosDobles.setBounds(10, 217, 94, 14);
+		lblTirosDobles.setBounds(10, 205, 94, 14);
 		InfoJugador.add(lblTirosDobles);
 		
-		JLabel lblTirosTriple = new JLabel("Tiros Triple:");
-		lblTirosTriple.setBounds(10, 249, 94, 14);
-		InfoJugador.add(lblTirosTriple);
-		
-		JLabel lblPuntosTotales = new JLabel("Puntos Totales:");
-		lblPuntosTotales.setBounds(10, 281, 94, 14);
-		InfoJugador.add(lblPuntosTotales);
-		
-		JLabel lblFaltas = new JLabel("Faltas:");
-		lblFaltas.setBounds(10, 313, 94, 14);
-		InfoJugador.add(lblFaltas);
-		
-		lblTotal = new JLabel("<Seleccione>");
-		lblTotal.setBounds(114, 281, 112, 14);
-		InfoJugador.add(lblTotal);
-		
-		lblTriples = new JLabel("<Seleccione>");
-		lblTriples.setBounds(114, 249, 112, 14);
-		InfoJugador.add(lblTriples);
-		
-		lblDobles = new JLabel("<Seleccione>");
-		lblDobles.setBounds(114, 217, 112, 14);
-		InfoJugador.add(lblDobles);
-		
 		lblLibres = new JLabel("<Seleccione>");
-		lblLibres.setBounds(114, 185, 112, 14);
+		lblLibres.setBounds(114, 175, 112, 14);
 		InfoJugador.add(lblLibres);
 		
-		lblNumfaltas = new JLabel("<Seleccione>");
-		lblNumfaltas.setBounds(114, 313, 112, 14);
-		InfoJugador.add(lblNumfaltas);
-		
 		lblAltura = new JLabel("<Seleccione>");
-		lblAltura.setBounds(114, 153, 112, 14);
+		lblAltura.setBounds(114, 145, 112, 14);
 		InfoJugador.add(lblAltura);
 		
 		lblMasa = new JLabel("<Seleccione>");
-		lblMasa.setBounds(114, 121, 112, 14);
+		lblMasa.setBounds(114, 115, 112, 14);
 		InfoJugador.add(lblMasa);
 		
 		lblPosiscione = new JLabel("<Seleccione>");
-		lblPosiscione.setBounds(114, 89, 112, 14);
+		lblPosiscione.setBounds(114, 85, 112, 14);
 		InfoJugador.add(lblPosiscione);
 		
 		lblName = new JLabel("<Seleccione>");
@@ -192,19 +169,79 @@ public class VerEquipo extends JDialog {
 		InfoJugador.add(lblName);
 		
 		lblNumber = new JLabel("<Seleccione>");
-		lblNumber.setBounds(114, 57, 112, 14);
+		lblNumber.setBounds(114, 55, 112, 14);
 		InfoJugador.add(lblNumber);
+		
+		JLabel lblTirosTriple = new JLabel("Tiros Triple:");
+		lblTirosTriple.setBounds(10, 235, 94, 14);
+		InfoJugador.add(lblTirosTriple);
+		
+		JLabel lblPuntosTotales = new JLabel("Puntos Totales:");
+		lblPuntosTotales.setBounds(10, 265, 94, 14);
+		InfoJugador.add(lblPuntosTotales);
+		
+		JLabel lblFaltas = new JLabel("Faltas:");
+		lblFaltas.setBounds(10, 295, 94, 14);
+		InfoJugador.add(lblFaltas);
+		
+		lblTotal = new JLabel("<Seleccione>");
+		lblTotal.setBounds(114, 265, 112, 14);
+		InfoJugador.add(lblTotal);
+		
+		lblTriples = new JLabel("<Seleccione>");
+		lblTriples.setBounds(114, 235, 112, 14);
+		InfoJugador.add(lblTriples);
+		
+		lblDobles = new JLabel("<Seleccione>");
+		lblDobles.setBounds(114, 205, 112, 14);
+		InfoJugador.add(lblDobles);
+		
+		lblNumfaltas = new JLabel("<Seleccione>");
+		lblNumfaltas.setBounds(114, 295, 112, 14);
+		InfoJugador.add(lblNumfaltas);
+		
+		JLabel lblRebotes = new JLabel("Rebotes:");
+		lblRebotes.setBounds(10, 325, 94, 14);
+		InfoJugador.add(lblRebotes);
+		
+		JLabel lblAsistencia = new JLabel("Asistencia:");
+		lblAsistencia.setBounds(10, 355, 94, 14);
+		InfoJugador.add(lblAsistencia);
+		
+		JLabel lblBloqueos = new JLabel("Bloqueos:");
+		lblBloqueos.setBounds(10, 385, 94, 14);
+		InfoJugador.add(lblBloqueos);
+		
+		JLabel lblRobos = new JLabel("Robos:");
+		lblRobos.setBounds(10, 415, 94, 14);
+		InfoJugador.add(lblRobos);
+		
+		lblNumRebotes = new JLabel("<Seleccione>");
+		lblNumRebotes.setBounds(114, 325, 112, 14);
+		InfoJugador.add(lblNumRebotes);
+		
+		lblNumAsis = new JLabel("<Seleccione>");
+		lblNumAsis.setBounds(114, 355, 112, 14);
+		InfoJugador.add(lblNumAsis);
+		
+		lblNumBloq = new JLabel("<Seleccione>");
+		lblNumBloq.setBounds(114, 385, 112, 14);
+		InfoJugador.add(lblNumBloq);
+		
+		lblNumRobos = new JLabel("<Seleccione>");
+		lblNumRobos.setBounds(114, 415, 112, 14);
+		InfoJugador.add(lblNumRobos);
 		{
 			JPanel InfoEquipo = new JPanel();
 			InfoEquipo.setBorder(new TitledBorder(null, "Informaci\u00F3n del equipo:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-			InfoEquipo.setBounds(10, 5, 246, 350);
+			InfoEquipo.setBounds(10, 5, 246, 438);
 			contentPanel.add(InfoEquipo);
 			InfoEquipo.setLayout(null);
 			{
 				JLabel lblFoto = new JLabel("pic");
 				lblFoto.setHorizontalAlignment(SwingConstants.CENTER);
 				lblFoto.setHorizontalTextPosition(SwingConstants.CENTER);
-				lblFoto.setBounds(51, 80, 144, 144);
+				lblFoto.setBounds(51, 97, 144, 144);
 				InfoEquipo.add(lblFoto);
 				
 				lblFoto.setText(null);
@@ -218,19 +255,19 @@ public class VerEquipo extends JDialog {
 			InfoEquipo.add(lblNombreEquipo);
 			
 			JLabel lblCoach = new JLabel("Coach:");
-			lblCoach.setBounds(10, 250, 46, 14);
+			lblCoach.setBounds(10, 298, 46, 14);
 			InfoEquipo.add(lblCoach);
 			
 			JLabel lblCancha = new JLabel("Cancha:");
-			lblCancha.setBounds(10, 289, 46, 14);
+			lblCancha.setBounds(10, 337, 46, 14);
 			InfoEquipo.add(lblCancha);
 			
 			JLabel lblCanchaE = new JLabel(equipo.getCancha());
-			lblCanchaE.setBounds(66, 289, 170, 14);
+			lblCanchaE.setBounds(66, 337, 170, 14);
 			InfoEquipo.add(lblCanchaE);
 			
 			lblCoach_1 = new JLabel(equipo.getCoach());
-			lblCoach_1.setBounds(66, 250, 170, 14);
+			lblCoach_1.setBounds(66, 298, 170, 14);
 			InfoEquipo.add(lblCoach_1);
 			lblCoach_1.setEnabled(true);
 			
@@ -238,7 +275,7 @@ public class VerEquipo extends JDialog {
 			txtCoach.setEditable(false);
 			txtCoach.setEnabled(false);
 			txtCoach.setVisible(false);
-			txtCoach.setBounds(66, 247, 170, 20);
+			txtCoach.setBounds(66, 295, 170, 20);
 			InfoEquipo.add(txtCoach);
 			txtCoach.setColumns(10);
 		}
@@ -364,6 +401,10 @@ public class VerEquipo extends JDialog {
 		lblMasa.setText(Float.toString(Baloncesto.getInstance().getMisEquipos().get(index1).getNominaJugadores().get(index2).getPeso()) + " Kg");
 		lblTotal.setText(Integer.toString(Baloncesto.getInstance().getMisEquipos().get(index1).getNominaJugadores().get(index2).getPuntoJugador().cantPunto()));
 		lblNumfaltas.setText(Integer.toString(Baloncesto.getInstance().getMisEquipos().get(index1).getNominaJugadores().get(index2).getPuntoJugador().getCantFalta()));
+		lblNumRebotes.setText(Integer.toString(Baloncesto.getInstance().getMisEquipos().get(index1).getNominaJugadores().get(index2).getPuntoJugador().getRebotes()));
+		lblNumAsis.setText(Integer.toString(Baloncesto.getInstance().getMisEquipos().get(index1).getNominaJugadores().get(index2).getPuntoJugador().getAsistencias()));
+		lblNumBloq.setText(Integer.toString(Baloncesto.getInstance().getMisEquipos().get(index1).getNominaJugadores().get(index2).getPuntoJugador().getBloqueos()));
+		lblNumRobos.setText(Integer.toString(Baloncesto.getInstance().getMisEquipos().get(index1).getNominaJugadores().get(index2).getPuntoJugador().getRobos()));	
 	}	
 
 

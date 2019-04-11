@@ -11,6 +11,11 @@ public class Estadistica implements Serializable{
 	private int tiroLibre;
 	private int tiroTriple;
 	private int cantFalta;
+	
+	private int rebotes;
+	private int asistencias;
+	private int bloqueos;
+	private int robos;
 	/**
 	 * @param asistencia
 	 * @param cantebote
@@ -25,6 +30,11 @@ public class Estadistica implements Serializable{
 		this.tiroLibre = 0;
 		this.tiroTriple = 0;;
 		this.cantFalta = 0;
+		
+		this.rebotes = 0;
+		this.asistencias = 0;
+		this.bloqueos = 0;
+		this.robos = 0;
 	}
 	public int getTiroDoble() {
 		return tiroDoble;
@@ -49,6 +59,30 @@ public class Estadistica implements Serializable{
 	}
 	public void setCantFalta(int cantFalta) {
 		this.cantFalta = cantFalta;
+	}
+	public int getRebotes() {
+		return rebotes;
+	}
+	public void setRebotes(int rebotes) {
+		this.rebotes = rebotes;
+	}
+	public int getAsistencias() {
+		return asistencias;
+	}
+	public void setAsistencias(int asistencias) {
+		this.asistencias = asistencias;
+	}
+	public int getBloqueos() {
+		return bloqueos;
+	}
+	public void setBloqueos(int bloqueos) {
+		this.bloqueos = bloqueos;
+	}
+	public int getRobos() {
+		return robos;
+	}
+	public void setRobos(int robos) {
+		this.robos = robos;
 	}
 	public int cantPunto() {
 		int tiro=0;
