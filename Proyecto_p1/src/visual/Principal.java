@@ -254,9 +254,11 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		btnReiniciarTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Baloncesto.getInstance().reiniciarTorneo();
+				Baloncesto.getInstance().setCantJuegos(0);
 				btnJuego.setText("Crear Torneo");
 				btnJuego.setEnabled(true);
 				btnReiniciarTorneo.setVisible(false);
+				menuPrincipalJuegoMostrar();
 			}
 		});
 		btnReiniciarTorneo.setFont(new Font("Swis721 BdCnOul BT", Font.BOLD, 24));
@@ -295,6 +297,7 @@ public class Principal extends JFrame /*implements Runnable*/ {
 			miCalen.setModal(true);
 			miCalen.setLocationRelativeTo(null);
 			miCalen.setVisible(true);
+			
 			}
 		});
 		mnCalendario.add(mntmVerCalendario);
