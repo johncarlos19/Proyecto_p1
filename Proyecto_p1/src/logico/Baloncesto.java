@@ -114,6 +114,11 @@ public class Baloncesto implements Serializable{
 	
 	//crear nuevo partido a partir de la fecha colocada y ya.
 	
+	public void reiniciarTorneo() {
+		juegoRecord.clear();
+		escribirDatos();
+	}
+	
 	public void crearPartido(ArrayList<Equipo> equipoTor, Date fechaInicio) {
 		int i=0;
 		int j=0;

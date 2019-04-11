@@ -106,6 +106,7 @@ public class Principal extends JFrame /*implements Runnable*/ {
 	private int equipoSeleccionado=-1;
 	private JLabel lblpuntequip1;
 	private JLabel lblpuntequip12;
+	private JButton btnReiniciarTorneo;
 	
 	//asignacion de equipo en el campo
 	private JLabel lblPivot;
@@ -247,6 +248,20 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		
 		JMenu mnEquipo = new JMenu("Equipo");
 		menuBar.add(mnEquipo);
+		btnReiniciarTorneo = new JButton("Reiniciar Torneo");
+		btnReiniciarTorneo.setEnabled(false);
+		btnReiniciarTorneo.setVisible(false);
+		btnReiniciarTorneo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Baloncesto.getInstance().reiniciarTorneo();
+				btnJuego.setText("Crear Torneo");
+				btnJuego.setEnabled(true);
+				btnReiniciarTorneo.setVisible(false);
+			}
+		});
+		btnReiniciarTorneo.setFont(new Font("Swis721 BdCnOul BT", Font.BOLD, 24));
+		btnReiniciarTorneo.setBounds(551, 419, 206, 46);
+		panelMenuPrinc.add(btnReiniciarTorneo);
 		
 		JMenuItem mntmRegistrar = new JMenuItem("Registrar");
 		mntmRegistrar.addActionListener(new ActionListener() {
@@ -328,11 +343,17 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		if (Baloncesto.getInstance().getJuegoRecord().size()==0 && Baloncesto.getInstance().getCantJuegos()==0) {
 			btnJuego.setText("Crear Torneo");
 			btnJuego.setEnabled(true);
+			btnReiniciarTorneo.setEnabled(false);
+			btnReiniciarTorneo.setVisible(false);
 		}else if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().isEnJuego()==false) {
 			btnJuego.setText("Iniciar\n Juego");
+			btnReiniciarTorneo.setEnabled(true);
+			btnReiniciarTorneo.setVisible(true);
 		}else if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().isEnJuego()==true) {
 			btnJuego.setText("Renaudar\n Juego");
 			btnJuego.setEnabled(true);
+			btnReiniciarTorneo.setEnabled(true);
+			btnReiniciarTorneo.setVisible(true);
 		}
 		btnJuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -347,6 +368,7 @@ public class Principal extends JFrame /*implements Runnable*/ {
 					spinnerAno.setVisible(true);
 					spinnerDia.setVisible(true);
 					spinnerMes.setVisible(true);
+					btnReiniciarTorneo.setVisible(false);
 					
 					btnCrear.setEnabled(true);
 					lblIngreseLaFecha.setEnabled(true);
@@ -476,6 +498,8 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		lblHoyFecha.setBounds(284, 11, 236, 41);
 		panelEquipoAJugar.add(lblHoyFecha);
 		
+		
+		
 		lblIngreseLaFecha.setForeground(Color.WHITE);
 		lblIngreseLaFecha.setBackground(Color.WHITE);
 		lblIngreseLaFecha.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -530,6 +554,8 @@ public class Principal extends JFrame /*implements Runnable*/ {
 					spinnerDia.setVisible(false);
 					spinnerMes.setVisible(false);
 					btnJuego.setText("Iniciar\n Juego");
+					btnReiniciarTorneo.setEnabled(true);
+					btnReiniciarTorneo.setVisible(true);
 					
 					btnCrear.setEnabled(false);
 					lblIngreseLaFecha.setEnabled(false);
@@ -595,6 +621,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		panelMenuPrinc.add(fondoPrin);
 		
 		
+		/*
 		
 		panelInicioJuego = new JPanel();
 		panelInicioJuego.setBounds(5, 5, 1340, 792);
@@ -1037,6 +1064,8 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		lblfondojuego.setIcon(icono);
 		panelInicioJuego.add(lblfondojuego);
 		}
+		
+		*/
 		//Este codigo listo para modificar al equipo
 		
 		//File ic;
@@ -1356,22 +1385,4 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		
 		
 	}
-
-
-
-/*
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		Thread ct = Thread.currentThread();
-        while (ct == h1) {
-        	fechaActual=new Date();
-        	fechaActual.setMonth(fechaActual.getMonth()+1);
-        	menuPrincipalJuegoMostrar();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-            }
-        }
-	}*/
 }
