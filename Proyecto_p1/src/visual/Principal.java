@@ -253,8 +253,9 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		btnReiniciarTorneo.setVisible(false);
 		btnReiniciarTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Baloncesto.getInstance().reiniciarTorneo();
 				Baloncesto.getInstance().setCantJuegos(0);
+				Baloncesto.getInstance().setEnJuego(false);
+				Baloncesto.getInstance().reiniciarTorneo();
 				btnJuego.setText("Crear Torneo");
 				btnJuego.setEnabled(true);
 				btnReiniciarTorneo.setVisible(false);
@@ -624,7 +625,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		panelMenuPrinc.add(fondoPrin);
 		
 		
-		/*
+		
 		
 		panelInicioJuego = new JPanel();
 		panelInicioJuego.setBounds(5, 5, 1340, 792);
@@ -1068,7 +1069,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		panelInicioJuego.add(lblfondojuego);
 		}
 		
-		*/
+		
 		//Este codigo listo para modificar al equipo
 		
 		//File ic;
