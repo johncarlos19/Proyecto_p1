@@ -286,9 +286,7 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		
 		JMenu mnEstadisticas = new JMenu("Estadisticas");
 		menuBar.add(mnEstadisticas);
-		AudioClip ssound;
-		ssound = java.applet.Applet.newAudioClip(getClass().getResource("/imagen/mixmusic.wav"));
-		ssound.play();
+
 		JMenuItem mntmEstadisticaDelEquipo = new JMenuItem("Estadistica Del Equipo");
 		mntmEstadisticaDelEquipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
