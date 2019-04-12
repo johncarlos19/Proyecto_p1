@@ -137,7 +137,7 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					System.out.println("Fecha1 "+fechaActual.getMonth());
+					//System.out.println("Fecha1 "+fechaActual.getMonth());
 						FileInputStream f= new FileInputStream("src/Baloncesto.dat");
 						ObjectInputStream os = new ObjectInputStream(f);
 						int punt = os.readInt();
