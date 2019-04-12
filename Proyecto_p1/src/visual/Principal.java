@@ -425,6 +425,11 @@ public class Principal extends JFrame /*implements Runnable*/ {
 			btnJuego.setEnabled(true);
 			btnReiniciarTorneo.setEnabled(true);
 			btnReiniciarTorneo.setVisible(true);
+		}else if (Baloncesto.getInstance().getJuegoRecord().size()==Baloncesto.getInstance().getCantJuegos()) {
+			btnJuego.setText("Torneo Finalizado");
+			btnJuego.setEnabled(true);
+			btnReiniciarTorneo.setEnabled(true);
+			btnReiniciarTorneo.setVisible(true);
 		}
 		btnJuego.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
