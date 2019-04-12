@@ -116,6 +116,26 @@ public class Baloncesto implements Serializable{
 	
 	public void reiniciarTorneo() {
 		juegoRecord.clear();
+		int i =0;
+		while (i<misEquipos.size()) {
+			
+			misEquipos.get(i).setPuntos(0);
+			misEquipos.get(i).setJuegosPerdidos(0);
+			int k=0;
+			while (k<misEquipos.get(i).getNominaJugadores().size()) {
+				misEquipos.get(i).getNominaJugadores().get(k).getPuntoJugador().setAsistencias(0);
+				misEquipos.get(i).getNominaJugadores().get(k).getPuntoJugador().setBloqueos(0);
+				misEquipos.get(i).getNominaJugadores().get(k).getPuntoJugador().setCantFalta(0);
+				misEquipos.get(i).getNominaJugadores().get(k).getPuntoJugador().setRebotes(0);
+				misEquipos.get(i).getNominaJugadores().get(k).getPuntoJugador().setRobos(0);
+				misEquipos.get(i).getNominaJugadores().get(k).getPuntoJugador().setTiroDoble(0);
+				misEquipos.get(i).getNominaJugadores().get(k).getPuntoJugador().setTiroLibre(0);
+				misEquipos.get(i).getNominaJugadores().get(k).getPuntoJugador().setTiroTriple(0);
+				
+				k++;
+			}
+			i++;
+		}
 		escribirDatos();
 	}
 	

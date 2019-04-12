@@ -84,6 +84,7 @@ public class Principal extends JFrame /*implements Runnable*/ {
 	private JButton btnAsisten;
 	private JButton btnBloqueos;
 	private JButton btnRobos;
+	private int[] puntoCancha= new int[2];
 	
 	private JButton btnJuego;
 	private JButton buttonBackSpace;
@@ -175,7 +176,7 @@ public class Principal extends JFrame /*implements Runnable*/ {
 
 	 
 	public Principal() throws IOException  {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/imagen/logoprincipal2.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(Principal.class.getResource("/logo_equipo/NBA-logo-png-download-free.png")));
 		setTitle("Baloncesto");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -254,6 +255,8 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		panelMenuPrinc.add(menuBar);
 		
 		JMenu mnEquipo = new JMenu("Equipo");
+		Icon iconnn141 = new ImageIcon(new ImageIcon(Principal.class.getResource("/logo_equipo/jugador-de-equipo.png")).getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT));
+		mnEquipo.setIcon(iconnn141);
 		menuBar.add(mnEquipo);
 		btnReiniciarTorneo = new JButton("Reiniciar Torneo");
 		btnReiniciarTorneo.addMouseListener(new MouseAdapter() {
@@ -297,6 +300,8 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		panelMenuPrinc.add(btnReiniciarTorneo);
 		
 		JMenuItem mntmRegistrar = new JMenuItem("Registrar");
+		Icon iconnn1412 = new ImageIcon(new ImageIcon(Principal.class.getResource("/logo_equipo/equipo.png")).getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
+		mntmRegistrar.setIcon(iconnn1412);
 		mntmRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AgregarEquipo agreEquipo = new AgregarEquipo();
@@ -308,6 +313,8 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		mnEquipo.add(mntmRegistrar);
 		
 		JMenuItem mntmLista = new JMenuItem("Lista");
+		Icon iconnn14123 = new ImageIcon(new ImageIcon(Principal.class.getResource("/logo_equipo/equipos-de-baloncesto.png")).getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
+		mntmLista.setIcon(iconnn14123);
 		mntmLista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ListarEquipos listequip = new ListarEquipos();
@@ -319,9 +326,12 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		mnEquipo.add(mntmLista);
 		
 		JMenu mnCalendario = new JMenu("Calendario");
+		Icon iconnn1 = new ImageIcon(new ImageIcon(Principal.class.getResource("/logo_equipo/calendario.png")).getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT));
+		mnCalendario.setIcon(iconnn1);
 		menuBar.add(mnCalendario);
 		
 		JMenuItem mntmVerCalendario = new JMenuItem("Ver Calendario");
+		mntmVerCalendario.setIcon(new ImageIcon(new ImageIcon(Principal.class.getResource("/logo_equipo/calendario.png")).getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT)));
 		mntmVerCalendario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			Calendario miCalen = new Calendario();
@@ -334,9 +344,13 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		mnCalendario.add(mntmVerCalendario);
 		
 		JMenu mnEstadisticas = new JMenu("Estadisticas");
+		Icon iconnn12 = new ImageIcon(new ImageIcon(Principal.class.getResource("/logo_equipo/carta-de-barras.png")).getImage().getScaledInstance(16, 16, Image.SCALE_DEFAULT));
+		mnEstadisticas.setIcon(iconnn12);
 		menuBar.add(mnEstadisticas);
 
 		JMenuItem mntmEstadisticaDelEquipo = new JMenuItem("Estadistica Del Equipo");
+		Icon iconnn123 = new ImageIcon(new ImageIcon(Principal.class.getResource("/logo_equipo/jugador-de-baloncesto (1).png")).getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
+		mntmEstadisticaDelEquipo.setIcon(iconnn123);
 		mntmEstadisticaDelEquipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EstadisticaEquipo estadisticaEquipo = new EstadisticaEquipo();
@@ -348,6 +362,8 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		mnEstadisticas.add(mntmEstadisticaDelEquipo);
 		
 		JMenuItem mntmEstadisticaDelJugador = new JMenuItem("Estadistica Del Jugador");
+		Icon iconnn124 = new ImageIcon(new ImageIcon(Principal.class.getResource("/logo_equipo/jugador-de-baloncesto.png")).getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
+		mntmEstadisticaDelJugador.setIcon(iconnn124);
 		mntmEstadisticaDelJugador.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EstadisticaJugador miestaJuga = new EstadisticaJugador();
@@ -360,6 +376,8 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		mnEstadisticas.add(mntmEstadisticaDelJugador);
 		
 		JMenuItem mntmEstadisticaDelPartido = new JMenuItem("Estadistica Del Partido");
+		Icon iconnn1243 = new ImageIcon(new ImageIcon(Principal.class.getResource("/logo_equipo/pista-de-baloncesto.png")).getImage().getScaledInstance(32, 32, Image.SCALE_DEFAULT));
+		mntmEstadisticaDelPartido.setIcon(iconnn1243);
 		mntmEstadisticaDelPartido.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EstadisticaPartido miestPartido = new EstadisticaPartido();
@@ -667,7 +685,7 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		spinnerMes.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				if (Integer.parseInt(spinnerDia.getValue().toString())>mesDia(Integer.parseInt(spinnerMes.getValue().toString()), Integer.parseInt(spinnerAno.getValue().toString()))) {
-					spinnerDia.setModel(new SpinnerNumberModel(30, 1, mesDia(Integer.parseInt(spinnerMes.getValue().toString()), Integer.parseInt(spinnerAno.getValue().toString())), 1));
+					spinnerDia.setModel(new SpinnerNumberModel(1, 1, mesDia(Integer.parseInt(spinnerMes.getValue().toString()), Integer.parseInt(spinnerAno.getValue().toString())), 1));
 				}else {
 					spinnerDia.setModel(new SpinnerNumberModel(Integer.parseInt(spinnerDia.getValue().toString()), 1, mesDia(Integer.parseInt(spinnerMes.getValue().toString()), Integer.parseInt(spinnerAno.getValue().toString())), 1));
 				}
@@ -796,6 +814,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				//btnEliminar.setEnabled(false);
 				nombreJugador = (String)table_Equip1.getModel().getValueAt(index, 0);
 				posisionJugador = (String)table_Equip1.getModel().getValueAt(index, 2);
+				btnLibre.setEnabled(true);
+				btnDoble.setEnabled(true);
+				btnTriple.setEnabled(true);
+				btnFalta.setEnabled(true);
 				btnCambio.setEnabled(true);
 				btnRebote.setEnabled(true);
 				btnRobos.setEnabled(true);
@@ -885,6 +907,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				//btnEliminar.setEnabled(false);
 				nombreJugador = (String)table__Equip2.getModel().getValueAt(index, 0);
 				posisionJugador = (String)table_Equip1.getModel().getValueAt(index, 2);
+				btnLibre.setEnabled(true);
+				btnDoble.setEnabled(true);
+				btnTriple.setEnabled(true);
+				btnFalta.setEnabled(true);
 				btnCambio.setEnabled(true);
 				btnRebote.setEnabled(true);
 				btnRobos.setEnabled(true);
@@ -946,6 +972,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		Icon icono = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/fondo-pvk-team-carbono-rojo-negro-1900x1092.jpg")).getImage().getScaledInstance(lblfondojuego.getWidth(), lblfondojuego.getHeight(), Image.SCALE_DEFAULT));
 		
 		btnTriple = new JButton("Triple");
+		btnTriple.setEnabled(false);
 		btnTriple.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anotarPuntos(3, false);
@@ -953,6 +980,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				cargarPantalla(1);
 				cargarTabla(0);
 				cargarTabla(1);
+				btnLibre.setEnabled(false);
+				btnDoble.setEnabled(false);
+				btnTriple.setEnabled(false);
+				btnFalta.setEnabled(false);
 				btnCambio.setEnabled(false);
 				btnRebote.setEnabled(false);
 				btnRobos.setEnabled(false);
@@ -962,11 +993,12 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		});
 		btnTriple.setVisible(false);
 		btnTriple.setBackground(new Color(255, 99, 71));
-		btnTriple.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnTriple.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		btnTriple.setBounds(744, 258, 141, 54);
 		panelInicioJuego.add(btnTriple);
 		
 		btnDoble = new JButton("Doble");
+		btnDoble.setEnabled(false);
 		btnDoble.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anotarPuntos(2, false);
@@ -974,6 +1006,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				cargarPantalla(1);
 				cargarTabla(0);
 				cargarTabla(1);
+				btnLibre.setEnabled(false);
+				btnDoble.setEnabled(false);
+				btnTriple.setEnabled(false);
+				btnFalta.setEnabled(false);
 				btnCambio.setEnabled(false);
 				btnRebote.setEnabled(false);
 				btnRobos.setEnabled(false);
@@ -983,11 +1019,12 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		});
 		btnDoble.setVisible(false);
 		btnDoble.setBackground(new Color(255, 99, 71));
-		btnDoble.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnDoble.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		btnDoble.setBounds(593, 258, 141, 54);
 		panelInicioJuego.add(btnDoble);
 		
 		btnLibre = new JButton("Libre");
+		btnLibre.setEnabled(false);
 		btnLibre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anotarPuntos(1, false);
@@ -995,6 +1032,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				cargarPantalla(1);
 				cargarTabla(0);
 				cargarTabla(1);
+				btnLibre.setEnabled(false);
+				btnDoble.setEnabled(false);
+				btnTriple.setEnabled(false);
+				btnFalta.setEnabled(false);
 				btnCambio.setEnabled(false);
 				btnRebote.setEnabled(false);
 				btnRobos.setEnabled(false);
@@ -1004,7 +1045,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		});
 		btnLibre.setVisible(false);
 		btnLibre.setBackground(new Color(255, 99, 71));
-		btnLibre.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnLibre.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		btnLibre.setBounds(442, 258, 141, 54);
 		panelInicioJuego.add(btnLibre);
 		
@@ -1018,6 +1059,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				cargarPantalla(1);
 				cargarTabla(0);
 				cargarTabla(1);
+				btnLibre.setEnabled(false);
+				btnDoble.setEnabled(false);
+				btnTriple.setEnabled(false);
+				btnFalta.setEnabled(false);
 				btnCambio.setEnabled(false);
 				btnRebote.setEnabled(false);
 				btnRobos.setEnabled(false);
@@ -1027,11 +1072,12 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		});
 		btnRebote.setVisible(false);
 		btnRebote.setBackground(new Color(255, 99, 71));
-		btnRebote.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnRebote.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		btnRebote.setBounds(442, 323, 141, 49);
 		panelInicioJuego.add(btnRebote);
 		
 		btnFalta = new JButton("Falta");
+		btnFalta.setEnabled(false);
 		btnFalta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Jugador aux=anotarPuntos(1, true);
@@ -1046,6 +1092,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				cargarPantalla(1);
 				cargarTabla(0);
 				cargarTabla(1);
+				btnLibre.setEnabled(false);
+				btnDoble.setEnabled(false);
+				btnTriple.setEnabled(false);
+				btnFalta.setEnabled(false);
 				btnCambio.setEnabled(false);
 				btnRebote.setEnabled(false);
 				btnRobos.setEnabled(false);
@@ -1055,7 +1105,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		});
 		btnFalta.setVisible(false);
 		btnFalta.setBackground(new Color(255, 99, 71));
-		btnFalta.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnFalta.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		btnFalta.setBounds(593, 323, 141, 49);
 		panelInicioJuego.add(btnFalta);
 		
@@ -1068,6 +1118,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				cargarPantalla(1);
 				cargarTabla(0);
 				cargarTabla(1);
+				btnLibre.setEnabled(false);
+				btnDoble.setEnabled(false);
+				btnTriple.setEnabled(false);
+				btnFalta.setEnabled(false);
 				btnCambio.setEnabled(false);
 				btnRebote.setEnabled(false);
 				btnRobos.setEnabled(false);
@@ -1077,7 +1131,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		});
 		btnAsisten.setVisible(false);
 		btnAsisten.setBackground(new Color(255, 99, 71));
-		btnAsisten.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnAsisten.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		btnAsisten.setBounds(744, 323, 141, 49);
 		panelInicioJuego.add(btnAsisten);
 		
@@ -1090,6 +1144,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				cargarPantalla(1);
 				cargarTabla(0);
 				cargarTabla(1);
+				btnLibre.setEnabled(false);
+				btnDoble.setEnabled(false);
+				btnTriple.setEnabled(false);
+				btnFalta.setEnabled(false);
 				btnCambio.setEnabled(false);
 				btnRebote.setEnabled(false);
 				btnRobos.setEnabled(false);
@@ -1099,7 +1157,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		});
 		btnRobos.setVisible(false);
 		btnRobos.setBackground(new Color(255, 99, 71));
-		btnRobos.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnRobos.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		btnRobos.setBounds(744, 383, 141, 49);
 		panelInicioJuego.add(btnRobos);
 		
@@ -1110,6 +1168,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				micambi.setModal(true);
 				micambi.setLocationRelativeTo(null);
 				micambi.setVisible(true);
+				btnLibre.setEnabled(false);
+				btnDoble.setEnabled(false);
+				btnTriple.setEnabled(false);
+				btnFalta.setEnabled(false);
 				btnCambio.setEnabled(false);
 				btnRebote.setEnabled(false);
 				btnRobos.setEnabled(false);
@@ -1124,13 +1186,13 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		btnCambio.setVisible(false);
 		btnCambio.setEnabled(false);
 		btnCambio.setBackground(new Color(255, 99, 71));
-		btnCambio.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnCambio.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		btnCambio.setBounds(593, 383, 141, 49);
 		panelInicioJuego.add(btnCambio);
 		
 		btnBloqueos = new JButton("Bloqueo");
 		btnBloqueos.setEnabled(false);
-		btnBloqueos.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnBloqueos.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		btnBloqueos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				anotarPuntos(5, false);
@@ -1138,6 +1200,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				cargarPantalla(1);
 				cargarTabla(0);
 				cargarTabla(1);
+				btnLibre.setEnabled(false);
+				btnDoble.setEnabled(false);
+				btnTriple.setEnabled(false);
+				btnFalta.setEnabled(false);
 				btnCambio.setEnabled(false);
 				btnRebote.setEnabled(false);
 				btnRobos.setEnabled(false);
@@ -1151,6 +1217,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		panelInicioJuego.add(btnBloqueos);
 		
 		btnFin = new JButton("Fin");
+		btnFin.setEnabled(false);
 		btnFin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Baloncesto.getInstance().setEnJuego(false);
@@ -1193,7 +1260,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		});
 		btnFin.setVisible(false);
 		btnFin.setBackground(new Color(255, 99, 71));
-		btnFin.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnFin.setFont(new Font("Tahoma", Font.PLAIN, 23));
 		btnFin.setBounds(593, 443, 141, 49);
 		panelInicioJuego.add(btnFin);
 		
@@ -1517,13 +1584,20 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 			}
 			if (sele==0) {
 				lblpuntequip1.setText(Integer.toString(sumaPunto));
+				puntoCancha[0]=sumaPunto;
 			}
 			if (sele==1) {
 				lblpuntequip12.setText(Integer.toString(sumaPunto));
+				puntoCancha[1]=sumaPunto;
 			}
 		}
 		equipoSeleccionado=-1;
 		nombreJugador=null;
+		if (puntoCancha[0]!=puntoCancha[1]) {
+			btnFin.setEnabled(true);
+		}else {
+			btnFin.setEnabled(false);
+		}
 		Baloncesto.getInstance().escribirDatos();
 	}
 	
@@ -1670,6 +1744,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				
 			}
 		}
+		
 		
 		
 	}
