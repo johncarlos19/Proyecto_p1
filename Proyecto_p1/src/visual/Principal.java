@@ -285,16 +285,20 @@ public class Principal extends JFrame /*implements Runnable*/ {
 
 		btnReiniciarTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Baloncesto.getInstance().setCantJuegos(0);
-				Baloncesto.getInstance().setEnJuego(false);
-				Baloncesto.getInstance().reiniciarTorneo();
-				Icon iconn7 = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd1221i.gif")).getImage().getScaledInstance(187, 161, Image.SCALE_DEFAULT));
+				int option1 = JOptionPane.showConfirmDialog(null, "¿Esta seguro que desea reiniciar el torneo? ","Torneo",JOptionPane.YES_NO_OPTION);
+				  if(option1 == JOptionPane.OK_OPTION){
+					  Baloncesto.getInstance().setCantJuegos(0);
+						Baloncesto.getInstance().setEnJuego(false);
+						Baloncesto.getInstance().reiniciarTorneo();
+						Icon iconn7 = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd1221i.gif")).getImage().getScaledInstance(187, 161, Image.SCALE_DEFAULT));
+						
+						btnJuego.setIcon(iconn7);
+						btnJuego.setText("Crear Torneo");
+						btnJuego.setEnabled(true);
+						btnReiniciarTorneo.setVisible(false);
+						menuPrincipalJuegoMostrar();
+				  }
 				
-				btnJuego.setIcon(iconn7);
-				btnJuego.setText("Crear Torneo");
-				btnJuego.setEnabled(true);
-				btnReiniciarTorneo.setVisible(false);
-				menuPrincipalJuegoMostrar();
 			}
 		});
 		btnReiniciarTorneo.setFont(new Font("Swis721 BdCnOul BT", Font.BOLD, 24));
