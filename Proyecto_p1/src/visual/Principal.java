@@ -85,6 +85,7 @@ public class Principal extends JFrame /*implements Runnable*/ {
 	private JButton btnBloqueos;
 	private JButton btnRobos;
 	private int[] puntoCancha= new int[2];
+	private ImageIcon fondGana;
 	
 	private JButton btnJuego;
 	private JButton buttonBackSpace;
@@ -287,6 +288,9 @@ public class Principal extends JFrame /*implements Runnable*/ {
 				Baloncesto.getInstance().setCantJuegos(0);
 				Baloncesto.getInstance().setEnJuego(false);
 				Baloncesto.getInstance().reiniciarTorneo();
+				Icon iconn7 = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd1221i.gif")).getImage().getScaledInstance(187, 161, Image.SCALE_DEFAULT));
+				
+				btnJuego.setIcon(iconn7);
 				btnJuego.setText("Crear Torneo");
 				btnJuego.setEnabled(true);
 				btnReiniciarTorneo.setVisible(false);
@@ -393,15 +397,34 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		btnJuego.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
-				Icon iconn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd1221i.gif")).getImage().getScaledInstance(197, 171, Image.SCALE_DEFAULT));
+				if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() || (Baloncesto.getInstance().getJuegoRecord().size()==0 && Baloncesto.getInstance().getCantJuegos()==0)) {
+					Icon iconn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd1221i.gif")).getImage().getScaledInstance(197, 171, Image.SCALE_DEFAULT));
+					
+					btnJuego.setIcon(iconn);
+				}else if (Baloncesto.getInstance().getJuegoRecord().size()==Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().getJuegoRecord().size()!=0) {
+					Icon iconn = new ImageIcon(fondGana.getImage().getScaledInstance(197, 171, Image.SCALE_DEFAULT));
+					
+					btnJuego.setIcon(iconn);
+					
+					
+				}
 				
-				btnJuego.setIcon(iconn);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
-				Icon iconn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd1221i.gif")).getImage().getScaledInstance(187, 161, Image.SCALE_DEFAULT));
 				
-				btnJuego.setIcon(iconn);
+				if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() || (Baloncesto.getInstance().getJuegoRecord().size()==0 && Baloncesto.getInstance().getCantJuegos()==0)) {
+					Icon iconn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/botoninhhddddddddddddd1221i.gif")).getImage().getScaledInstance(187, 161, Image.SCALE_DEFAULT));
+					
+					btnJuego.setIcon(iconn);
+				}else if (Baloncesto.getInstance().getJuegoRecord().size()==Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().getJuegoRecord().size()!=0) {
+					Icon iconn = new ImageIcon(fondGana.getImage().getScaledInstance(187, 161, Image.SCALE_DEFAULT));
+					
+					btnJuego.setIcon(iconn);
+					
+					
+				}
+				
 			}
 		});
 		btnJuego.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -1234,21 +1257,30 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				
 
 				Baloncesto.getInstance().setCantJuegos(Baloncesto.getInstance().getCantJuegos()+1);
-				btnJuego.setText("Iniciar\n Juego");
+				
 				if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().isEnJuego()==false) {
 					btnJuego.setText("Iniciar\n Juego");
+					if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && fechaActual.getDate()==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate() && Baloncesto.getInstance().getJuegoRecord().size()!=0) {
+						btnJuego.setEnabled(true);
+					}else {
+						btnJuego.setEnabled(false);
+					}
+					cargarPantalla(0);
+					cargarPantalla(1);
+					cargarTabla(0);
+					cargarTabla(1);
+				
+				
+				}else if (Baloncesto.getInstance().getJuegoRecord().size()==Baloncesto.getInstance().getCantJuegos() && (Baloncesto.getInstance().getJuegoRecord().size()!=0 && Baloncesto.getInstance().getCantJuegos()!=0)) {
+					
+					btnJuego.setText("Torneo Finalizado");
+					Baloncesto.getInstance().escribirDatos();
 				}
 				menuPrincipalJuegoMostrar();
 				btnJuego.setVisible(true);
-				if (fechaActual.getDate()==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate() && Baloncesto.getInstance().getJuegoRecord().size()!=0) {
-					btnJuego.setEnabled(true);
-				}else {
-					btnJuego.setEnabled(false);
-				}
-				cargarPantalla(0);
-				cargarPantalla(1);
-				cargarTabla(0);
-				cargarTabla(1);
+				
+
+				
 				buttonBackSpace.setVisible(false);
 				buttonBackSpace.setEnabled(false);
 				panelMenuPrinc.setVisible(true);
@@ -1417,73 +1449,129 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 	}
 	
 	private void menuPrincipalJuegoMostrar() {
+		System.out.println("vamos bien");
+		boolean nofun=true;
 		try {
-			if (fechaActual.getDate()==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate() && Baloncesto.getInstance().getJuegoRecord().size()!=0) {
+				try {
+					if (fechaActual.getDate()==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate() && Baloncesto.getInstance().getJuegoRecord().size()!=0 && Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos()) {
+						panelEquipoAJugar.setVisible(true);
+						btnJuego.setEnabled(true);
+						lblHoyFecha.setText("Hoy");
+						System.out.println("entro");
+						//Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo()
+						Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
+						lblLogoequipo11.setIcon(icono);
+						lblLogoequipo11.setText(null);
+						lblNombre1.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre());
+						Icon icono1 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
+						lblLogoequipo22.setIcon(icono1);
+						lblLogoequipo22.setText(null);
+						lblNombre2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
+					}else if(fechaActual.getDate()+1==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate() || (1==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate() && fechaActual.getMonth()+1==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth()) && Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos()) {
+						panelEquipoAJugar.setVisible(true);
+						lblHoyFecha.setText("Mañana");
+						btnJuego.setEnabled(false);
+						//Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo()
+						Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
+						lblLogoequipo11.setIcon(icono);
+						lblLogoequipo11.setText(null);
+						lblNombre1.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre());
+						Icon icono1 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
+						lblLogoequipo22.setIcon(icono1);
+						lblLogoequipo22.setText(null);
+						lblNombre2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
+					
+					}else if(Baloncesto.getInstance().getJuegoRecord().size()!=0 && btnJuego.getText().equalsIgnoreCase("Asignar otro\n Día") && Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos()) {
+						int dia = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate();
+						int mes = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth();
+						int year = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getYear();
+						panelEquipoAJugar.setVisible(true);
+						lblHoyFecha.setText(Integer.toString(dia)+"/"+Integer.toString(mes)+"/"+Integer.toString(year));
+						//Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo()
+						Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
+						lblLogoequipo11.setIcon(icono);
+						lblLogoequipo11.setText(null);
+						lblNombre1.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre());
+						Icon icono1 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
+						lblLogoequipo22.setIcon(icono1);
+						lblLogoequipo22.setText(null);
+						System.out.println("aqui no");
+
+						lblNombre2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
+						btnJuego.setEnabled(true);
+					}else if(Baloncesto.getInstance().getJuegoRecord().size()!=0 && !btnJuego.getText().toString().equalsIgnoreCase("Renaudar\n Juego") && Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() ) {
+						int dia = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate();
+						int mes = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth();
+						int year = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getYear();
+						panelEquipoAJugar.setVisible(true);
+						btnJuego.setEnabled(false);
+						lblHoyFecha.setText(Integer.toString(dia)+"/"+Integer.toString(mes)+"/"+Integer.toString(year));
+						//Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo()
+						Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
+						lblLogoequipo11.setIcon(icono);
+						lblLogoequipo11.setText(null);
+						System.out.println("aqui no");
+
+						lblNombre1.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre());
+						Icon icono1 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
+						lblLogoequipo22.setIcon(icono1);
+						lblLogoequipo22.setText(null);
+						lblNombre2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
+					
+					}else {
+						nofun=false;
+					}
+				} catch (IndexOutOfBoundsException e) {
+					// TODO: handle exception
+					panelEquipoAJugar.setVisible(false);
+					/*lblHoyFecha.setVisible(false);
+					lblLogoequipo11.setVisible(false);
+					lblLogoequipo11.setVisible(false);
+					lblNombre1.setVisible(false);
+					lblLogoequipo22.setVisible(false);
+					lblLogoequipo22.setVisible(false);
+					lblNombre2.setVisible(false);*/
+					// TODO: handle exception
+					//e.printStackTrace();
+				}
+			
+			
+			
+			
+			
+			
+			
+			
+			if(Baloncesto.getInstance().getJuegoRecord().size()==Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().getJuegoRecord().size()!=0 && btnJuego.getText().toString().equalsIgnoreCase("Torneo Finalizado")) {
+				System.out.println("biennn");
 				panelEquipoAJugar.setVisible(true);
 				btnJuego.setEnabled(true);
-				lblHoyFecha.setText("Hoy");
-				
+				lblHoyFecha.setText("Ganador");
+				Equipo aux =setArray();
 				//Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo()
-				Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
-				lblLogoequipo11.setIcon(icono);
+				//Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
+				lblLogoequipo11.setIcon(null);
 				lblLogoequipo11.setText(null);
-				lblNombre1.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre());
-				Icon icono1 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
-				lblLogoequipo22.setIcon(icono1);
+				lblLogoequipo11.setVisible(false);
+				lblNombre1.setText(null);
+				lblNombre1.setVisible(false);
+				//Icon icono1 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
+				lblLogoequipo22.setIcon(null);
+				lblLogoequipo22.setVisible(false);
 				lblLogoequipo22.setText(null);
-				lblNombre2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
-			}else if(fechaActual.getDate()+1==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate() || (1==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate() && fechaActual.getMonth()+1==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth())) {
-				panelEquipoAJugar.setVisible(true);
-				lblHoyFecha.setText("Mañana");
-				btnJuego.setEnabled(false);
-				//Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo()
-				Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
-				lblLogoequipo11.setIcon(icono);
-				lblLogoequipo11.setText(null);
-				lblNombre1.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre());
-				Icon icono1 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
-				lblLogoequipo22.setIcon(icono1);
-				lblLogoequipo22.setText(null);
-				lblNombre2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
+				lblNombre2.setText(null);
+				lblNombre2.setVisible(false);
+				Icon icono1 = new ImageIcon(aux.getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
+				fondGana=aux.getLogo();
+				btnJuego.setIcon(icono1);
+				btnJuego.setText(aux.getNombre());
 			
-			}else if(Baloncesto.getInstance().getJuegoRecord().size()!=0 && btnJuego.getText().equalsIgnoreCase("Asignar otro\n Día")) {
+			}else if(Baloncesto.getInstance().getJuegoRecord().size()!=0 && nofun==false) {
 				int dia = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate();
 				int mes = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth();
 				int year = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getYear();
 				panelEquipoAJugar.setVisible(true);
-				lblHoyFecha.setText(Integer.toString(dia)+"/"+Integer.toString(mes)+"/"+Integer.toString(year));
-				//Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo()
-				Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
-				lblLogoequipo11.setIcon(icono);
-				lblLogoequipo11.setText(null);
-				lblNombre1.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre());
-				Icon icono1 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
-				lblLogoequipo22.setIcon(icono1);
-				lblLogoequipo22.setText(null);
-				lblNombre2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
-				btnJuego.setEnabled(true);
-			}else if(Baloncesto.getInstance().getJuegoRecord().size()!=0 && !btnJuego.getText().toString().equalsIgnoreCase("Renaudar\n Juego")) {
-				int dia = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate();
-				int mes = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth();
-				int year = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getYear();
-				panelEquipoAJugar.setVisible(true);
-				btnJuego.setEnabled(false);
-				lblHoyFecha.setText(Integer.toString(dia)+"/"+Integer.toString(mes)+"/"+Integer.toString(year));
-				//Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo()
-				Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
-				lblLogoequipo11.setIcon(icono);
-				lblLogoequipo11.setText(null);
-				lblNombre1.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre());
-				Icon icono1 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
-				lblLogoequipo22.setIcon(icono1);
-				lblLogoequipo22.setText(null);
-				lblNombre2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
-			
-			}else if(Baloncesto.getInstance().getJuegoRecord().size()!=0) {
-				int dia = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate();
-				int mes = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth();
-				int year = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getYear();
-				panelEquipoAJugar.setVisible(true);
+				System.out.println("aqui no");
 				lblHoyFecha.setText(Integer.toString(dia)+"/"+Integer.toString(mes)+"/"+Integer.toString(year));
 				//Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo()
 				Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
@@ -1506,7 +1594,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 			lblLogoequipo22.setVisible(false);
 			lblNombre2.setVisible(false);*/
 			// TODO: handle exception
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
 		
 	}
@@ -1643,6 +1731,60 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		}
 		Baloncesto.getInstance().escribirDatos();
 	}
+	
+	
+	
+    private Equipo setArray() {
+		int j;
+		int juegosGanados;
+		int primerosLugares = 0;
+		Equipo temp;
+		ArrayList<Equipo> rankEquipos = clonarEquipo();
+		
+		;
+		
+		for (int i = 1; i < rankEquipos.size(); i++) {
+			juegosGanados = rankEquipos.get(i).getPuntos();
+			j = i - 1;
+			while(j >= 0 && juegosGanados > rankEquipos.get(j).getPuntos()) {
+				temp = rankEquipos.get(j);
+				rankEquipos.set(j, rankEquipos.get(j + 1));
+				rankEquipos.set(j + 1, temp);
+				j--;
+			}
+		}
+		
+		for (Equipo team : rankEquipos) {
+			if(rankEquipos.get(0).getPuntos() == team.getPuntos()) {
+				primerosLugares++;
+			}
+		}
+		
+		for (int i = 1; i < primerosLugares; i++) {
+			juegosGanados = rankEquipos.get(i).cantPuntoDelEquipo();
+			j = i - 1;
+			while(j >= 0 && juegosGanados > rankEquipos.get(j).cantPuntoDelEquipo()) {
+				temp = rankEquipos.get(j);
+				rankEquipos.set(j, rankEquipos.get(j + 1));
+				rankEquipos.set(j + 1, temp);
+				j--;
+			}
+		}
+		
+		temp = rankEquipos.get(0);
+		return temp;
+	}
+	
+	private ArrayList<Equipo> clonarEquipo() {
+		ArrayList<Equipo> rankEquipos = new ArrayList<Equipo>();
+		for (Equipo aux : Baloncesto.getInstance().getMisEquipos()) {
+			rankEquipos.add(aux);
+		}
+		return rankEquipos;
+	}
+	
+	
+	
 	
 	private void cargarTabla(int equip) {
 		if (equip==1) {
