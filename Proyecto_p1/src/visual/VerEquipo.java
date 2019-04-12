@@ -11,6 +11,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import logico.Baloncesto;
 import logico.Equipo;
@@ -467,5 +468,12 @@ public class VerEquipo extends JDialog {
 			fila[1] = jugador.getNumero();
 			model.addRow(fila);
 		}
+		
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+		table.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = table.getColumnModel();
+		columnModel.getColumn(0).setPreferredWidth(170);
+		columnModel.getColumn(0).setResizable(false);
+		columnModel.getColumn(1).setResizable(false);
 	}
 }

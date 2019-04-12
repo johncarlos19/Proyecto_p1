@@ -155,6 +155,14 @@ public class ListarEquipos extends JDialog {
 			fila[2] = Baloncesto.getInstance().getMisEquipos().get(i).getCoach();
 			fila[3] = Baloncesto.getInstance().getMisEquipos().get(i).getCancha();
 			model.addRow(fila);
+			
+			table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+			table.getTableHeader().setReorderingAllowed(false);
+			TableColumnModel columnModel = table.getColumnModel();
+			columnModel.getColumn(0).setResizable(false);
+			columnModel.getColumn(1).setResizable(false);
+			columnModel.getColumn(2).setResizable(false);
+			columnModel.getColumn(3).setResizable(false);
 		}
 		
 		

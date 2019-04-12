@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import logico.Baloncesto;
 import logico.Equipo;
@@ -506,6 +507,12 @@ public class AgregarEquipo extends JDialog {
 			model.addRow(fila);
 		}
 		
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+		table.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = table.getColumnModel();
+		columnModel.getColumn(0).setResizable(false);
+		columnModel.getColumn(1).setResizable(false);
+		columnModel.getColumn(2).setResizable(false);	
 	}
 
 	protected void cleanPlantillaEquipo() {

@@ -58,7 +58,7 @@ public class EstadisticaEquipo extends JDialog{
 	
 	public EstadisticaEquipo() {
 		setTitle("Estadisticas De Equipos");
-		setBounds(100, 100, 871, 601);
+		setBounds(100, 100, 888, 601);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
@@ -72,7 +72,7 @@ public class EstadisticaEquipo extends JDialog{
 		
 		JPanel Ranking = new JPanel();
 		Ranking.setBorder(new TitledBorder(null, "Ranking:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		Ranking.setBounds(660, 11, 185, 507);
+		Ranking.setBounds(660, 11, 212, 507);
 		contentPanel.add(Ranking);
 		Ranking.setLayout(new BorderLayout(0, 0));
 		{
@@ -128,6 +128,13 @@ public class EstadisticaEquipo extends JDialog{
 			
 			i++;
 		}
+		
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+		table.getTableHeader().setReorderingAllowed(false);
+		TableColumnModel columnModel = table.getColumnModel();
+		columnModel.getColumn(0).setPreferredWidth(1);
+		columnModel.getColumn(0).setResizable(false);
+		columnModel.getColumn(1).setResizable(false);
 	}
 
     private void setArray() {
