@@ -8,7 +8,7 @@ public class Lesion implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -1550564490440332723L;
-	private String tipoLesion;
+	private int tipoLesion;
 	private Date fechaLesion;
 	private String detalleLesion;
 	/**
@@ -16,16 +16,16 @@ public class Lesion implements Serializable{
 	 * @param fechaLesion
 	 * @param detalleLesion
 	 */
-	public Lesion(String tipoLesion, Date fechaLesion, String detalleLesion) {
+	public Lesion(int tipoLesion, Date fechaLesion, String detalleLesion) {
 		super();
 		this.tipoLesion = tipoLesion;
 		this.fechaLesion = fechaLesion;
 		this.detalleLesion = detalleLesion;
 	}
-	public String getTipoLesion() {
+	public int getTipoLesion() {
 		return tipoLesion;
 	}
-	public void setTipoLesion(String tipoLesion) {
+	public void setTipoLesion(int tipoLesion) {
 		this.tipoLesion = tipoLesion;
 	}
 	public Date getFechaLesion() {

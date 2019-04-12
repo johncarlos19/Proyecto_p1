@@ -56,6 +56,7 @@ public class VerEquipo extends JDialog {
 	
 	private JButton btnEliminarJugador;
 	private JButton btnAadirJugador;
+	private JButton btnLesiones;
 	
 	private boolean cambio = false;
 	private JLabel lblCoach_1;
@@ -101,6 +102,7 @@ public class VerEquipo extends JDialog {
 								identificador = (int) table.getModel().getValueAt(index, 1);
 								setInfo();
 								setEliminar(Baloncesto.getInstance().getMisEquipos().get(index1).getNominaJugadores().get(indexPorNumero(identificador)).getPosicion());
+								btnLesiones.setEnabled(true);
 							}
 						}
 					});
@@ -326,6 +328,20 @@ public class VerEquipo extends JDialog {
 						}
 					}
 				});
+				
+				btnLesiones = new JButton("Lesiones");
+				btnLesiones.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						Lesiones lesion = new Lesiones(index1, indexPorNumero(identificador));
+						lesion.setModal(true);
+						lesion.setLocationRelativeTo(null);
+						lesion.setVisible(true);
+						//Baloncesto.getInstance().escribirDatos();
+						btnLesiones.setEnabled(false);
+					}
+				});
+				btnLesiones.setEnabled(false);
+				buttonPane.add(btnLesiones);
 				buttonPane.add(btnCambiarCoach);
 				buttonPane.add(btnAadirJugador);
 				setAnnadir();
