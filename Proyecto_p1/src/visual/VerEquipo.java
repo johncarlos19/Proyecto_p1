@@ -54,6 +54,7 @@ public class VerEquipo extends JDialog {
 	private JLabel lblNumAsis;
 	private JLabel lblNumBloq;
 	private JLabel lblNumRobos;
+	private JLabel lblCantjugadores;
 	
 	private JButton btnEliminarJugador;
 	private JButton btnAadirJugador;
@@ -281,6 +282,14 @@ public class VerEquipo extends JDialog {
 			txtCoach.setBounds(66, 295, 170, 20);
 			InfoEquipo.add(txtCoach);
 			txtCoach.setColumns(10);
+			
+			JLabel lblCantidadJugadores = new JLabel("Cantidad jugadores:");
+			lblCantidadJugadores.setBounds(10, 377, 118, 14);
+			InfoEquipo.add(lblCantidadJugadores);
+			
+			lblCantjugadores = new JLabel(Integer.toString(equipo.getNominaJugadores().size()));
+			lblCantjugadores.setBounds(138, 377, 98, 14);
+			InfoEquipo.add(lblCantjugadores);
 		}
 		{
 			JPanel buttonPane = new JPanel();
@@ -304,6 +313,7 @@ public class VerEquipo extends JDialog {
 						Baloncesto.getInstance().escribirDatos();
 						cargarTabla();
 						setAnnadir();
+						lblCantjugadores.setText(Integer.toString(equipo.getNominaJugadores().size()));
 					}
 				});
 				
@@ -337,7 +347,6 @@ public class VerEquipo extends JDialog {
 						lesion.setModal(true);
 						lesion.setLocationRelativeTo(null);
 						lesion.setVisible(true);
-						//Baloncesto.getInstance().escribirDatos();
 						btnLesiones.setEnabled(false);
 					}
 				});
@@ -357,6 +366,7 @@ public class VerEquipo extends JDialog {
 							cargarTabla();
 							btnEliminarJugador.setEnabled(false);
 							btnAadirJugador.setEnabled(true);
+							lblCantjugadores.setText(Integer.toString(equipo.getNominaJugadores().size()));
 						}
 					}
 				});
