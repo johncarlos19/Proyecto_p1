@@ -260,24 +260,25 @@ public class Principal extends JFrame /*implements Runnable*/ {
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				btnReiniciarTorneo.setBounds(5, 591, 236, 165);
-				Icon iconnn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/scoreboard.png")).getImage().getScaledInstance(150, 130, Image.SCALE_DEFAULT));
+				Icon iconnn = new ImageIcon(new ImageIcon(Principal.class.getResource("/logo_equipo/reajustar (1).png")).getImage().getScaledInstance(140, 130, Image.SCALE_DEFAULT));
 				btnReiniciarTorneo.setIcon(iconnn);
 			}
 			@Override
 			public void mouseExited(MouseEvent e) {
 				btnReiniciarTorneo.setBounds(10, 596, 226, 155);
-				Icon iconnn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/scoreboard.png")).getImage().getScaledInstance(140, 120, Image.SCALE_DEFAULT));
+				Icon iconnn = new ImageIcon(new ImageIcon(Principal.class.getResource("/logo_equipo/reajustar (1).png")).getImage().getScaledInstance(130, 120, Image.SCALE_DEFAULT));
 				btnReiniciarTorneo.setIcon(iconnn);
 			}
 		});
+		btnReiniciarTorneo.setOpaque(false);
+		btnReiniciarTorneo.setContentAreaFilled(false);
+		btnReiniciarTorneo.setBorderPainted(false);
 		btnReiniciarTorneo.setForeground(Color.WHITE);
 		btnReiniciarTorneo.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnReiniciarTorneo.setVerticalTextPosition(SwingConstants.BOTTOM);
 		btnReiniciarTorneo.setEnabled(false);
 		btnReiniciarTorneo.setVisible(false);
-		btnReiniciarTorneo.setOpaque(false);
-		btnReiniciarTorneo.setContentAreaFilled(false);
-		btnReiniciarTorneo.setBorderPainted(false);
+
 		btnReiniciarTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Baloncesto.getInstance().setCantJuegos(0);
@@ -291,7 +292,7 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		});
 		btnReiniciarTorneo.setFont(new Font("Swis721 BdCnOul BT", Font.BOLD, 24));
 		btnReiniciarTorneo.setBounds(10, 596, 226, 155);
-		Icon iconnn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/scoreboard.png")).getImage().getScaledInstance(140, 120, Image.SCALE_DEFAULT));
+		Icon iconnn = new ImageIcon(new ImageIcon(Principal.class.getResource("/logo_equipo/reajustar (1).png")).getImage().getScaledInstance(130, 120, Image.SCALE_DEFAULT));
 		btnReiniciarTorneo.setIcon(iconnn);
 		panelMenuPrinc.add(btnReiniciarTorneo);
 		
