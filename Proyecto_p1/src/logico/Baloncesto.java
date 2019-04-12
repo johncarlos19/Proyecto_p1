@@ -278,6 +278,19 @@ public class Baloncesto implements Serializable{
 	
 	// agregar punto de lesión 
 	
+	public void asignarOtroDia() {
+		Juego aux = juegoRecord.get(cantJuegosTorneo);
+		for (int i = 0; i < juegoRecord.size(); i++) {
+			if (i>=cantJuegosTorneo && i!=juegoRecord.size()-1) {
+				juegoRecord.set(i, juegoRecord.get(i+1));
+			}
+			if (i==juegoRecord.size()-1) {
+				juegoRecord.set(i, aux);
+				juegoRecord.get(i).setFechaJuego(fechaTorneo(juegoRecord.get(i-1).getFechaJuego(), 0));
+			}
+		}
+	}
+	
 	public void agregarLesion(String codeAux, String equipo, Lesion lesion) {
 		boolean found = false;
 		int i = 0;

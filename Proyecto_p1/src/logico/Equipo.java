@@ -206,6 +206,29 @@ public class Equipo implements Serializable {
 				tiro += jugador.getPuntoJugador().getTiroTriple();
 			}
 		}
+		if (aux==4) {
+			for (Jugador jugador : nominaJugadores) {
+				tiro += jugador.getPuntoJugador().getRebotes();
+			}
+		}
+		if (aux==5) {
+			for (Jugador jugador : nominaJugadores) {
+				tiro += jugador.getPuntoJugador().getAsistencias();
+			}
+
+		}
+		
+		if (aux==6) {
+			for (Jugador jugador : nominaJugadores) {
+				tiro += jugador.getPuntoJugador().getRobos();
+			}
+		}
+		if (aux==7) {
+			for (Jugador jugador : nominaJugadores) {
+				tiro += jugador.getPuntoJugador().getBloqueos();
+			}
+
+		}
 		
 		return tiro;
 	}

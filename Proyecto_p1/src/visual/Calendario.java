@@ -187,7 +187,7 @@ public class Calendario extends JDialog {
 	private void cargarTabla() {
 		model.setRowCount(0);
 		fila = new Object[model.getColumnCount()];
-		for (int i = 0; i < Baloncesto.getInstance().getJuegoRecord().size(); i++) {
+		for (int i = Baloncesto.getInstance().getCantJuegos(); i < Baloncesto.getInstance().getJuegoRecord().size(); i++) {
 			//
 					//.getImage().getScaledInstance(ColumnConst, lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
 			Icon icono111 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(i).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(80, 80, Image.SCALE_DEFAULT));

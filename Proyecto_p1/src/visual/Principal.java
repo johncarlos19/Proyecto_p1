@@ -37,6 +37,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 import logico.Baloncesto;
 import logico.Equipo;
@@ -52,6 +53,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Toolkit;
 import java.applet.AudioClip;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 
 public class Principal extends JFrame /*implements Runnable*/ {
 
@@ -77,6 +80,10 @@ public class Principal extends JFrame /*implements Runnable*/ {
 	private JLabel lblEquipo2;
 	private JLabel lblLogoequip;
 	private JLabel lblLogoequip2;
+	private JButton btnRebote;
+	private JButton btnAsisten;
+	private JButton btnBloqueos;
+	private JButton btnRobos;
 	
 	private JButton btnJuego;
 	private JButton buttonBackSpace;
@@ -249,6 +256,20 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		JMenu mnEquipo = new JMenu("Equipo");
 		menuBar.add(mnEquipo);
 		btnReiniciarTorneo = new JButton("Reiniciar Torneo");
+		btnReiniciarTorneo.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				btnReiniciarTorneo.setBounds(5, 591, 236, 165);
+				Icon iconnn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/scoreboard.png")).getImage().getScaledInstance(150, 130, Image.SCALE_DEFAULT));
+				btnReiniciarTorneo.setIcon(iconnn);
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				btnReiniciarTorneo.setBounds(10, 596, 226, 155);
+				Icon iconnn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/scoreboard.png")).getImage().getScaledInstance(140, 120, Image.SCALE_DEFAULT));
+				btnReiniciarTorneo.setIcon(iconnn);
+			}
+		});
 		btnReiniciarTorneo.setForeground(Color.WHITE);
 		btnReiniciarTorneo.setHorizontalTextPosition(SwingConstants.CENTER);
 		btnReiniciarTorneo.setVerticalTextPosition(SwingConstants.BOTTOM);
@@ -256,6 +277,7 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		btnReiniciarTorneo.setVisible(false);
 		btnReiniciarTorneo.setOpaque(false);
 		btnReiniciarTorneo.setContentAreaFilled(false);
+		btnReiniciarTorneo.setBorderPainted(false);
 		btnReiniciarTorneo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Baloncesto.getInstance().setCantJuegos(0);
@@ -268,7 +290,7 @@ public class Principal extends JFrame /*implements Runnable*/ {
 			}
 		});
 		btnReiniciarTorneo.setFont(new Font("Swis721 BdCnOul BT", Font.BOLD, 24));
-		btnReiniciarTorneo.setBounds(536, 429, 226, 147);
+		btnReiniciarTorneo.setBounds(10, 596, 226, 155);
 		Icon iconnn = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/scoreboard.png")).getImage().getScaledInstance(140, 120, Image.SCALE_DEFAULT));
 		btnReiniciarTorneo.setIcon(iconnn);
 		panelMenuPrinc.add(btnReiniciarTorneo);
@@ -370,12 +392,17 @@ public class Principal extends JFrame /*implements Runnable*/ {
 			btnJuego.setEnabled(true);
 			btnReiniciarTorneo.setEnabled(false);
 			btnReiniciarTorneo.setVisible(false);
-		}else if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().isEnJuego()==false) {
+		}else if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().isEnJuego()==false && (Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate()>=fechaActual.getDate() && Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth()>=fechaActual.getMonth())) {
 			btnJuego.setText("Iniciar\n Juego");
 			btnReiniciarTorneo.setEnabled(true);
 			btnReiniciarTorneo.setVisible(true);
 		}else if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().isEnJuego()==true) {
 			btnJuego.setText("Renaudar\n Juego");
+			btnJuego.setEnabled(true);
+			btnReiniciarTorneo.setEnabled(true);
+			btnReiniciarTorneo.setVisible(true);
+		}else if (Baloncesto.getInstance().getJuegoRecord().size()!=Baloncesto.getInstance().getCantJuegos() && Baloncesto.getInstance().isEnJuego()==false && (Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate()<fechaActual.getDate() || Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth()<fechaActual.getMonth())) {
+			btnJuego.setText("Asignar otro\n Día");
 			btnJuego.setEnabled(true);
 			btnReiniciarTorneo.setEnabled(true);
 			btnReiniciarTorneo.setVisible(true);
@@ -413,6 +440,10 @@ public class Principal extends JFrame /*implements Runnable*/ {
 					btnFalta.setVisible(true);
 					btnLibre.setVisible(true);
 					btnTriple.setVisible(true);
+					btnRebote.setVisible(true);
+					btnRobos.setVisible(true);
+					btnAsisten.setVisible(true);
+					btnBloqueos.setVisible(true);
 					buttonBackSpace.setVisible(true);
 					buttonBackSpace.setEnabled(true);
 					btnJuego.setText("Renaudar\n Juego");
@@ -442,6 +473,10 @@ public class Principal extends JFrame /*implements Runnable*/ {
 					btnFalta.setVisible(true);
 					btnLibre.setVisible(true);
 					btnTriple.setVisible(true);
+					btnRebote.setVisible(true);
+					btnRobos.setVisible(true);
+					btnAsisten.setVisible(true);
+					btnBloqueos.setVisible(true);
 					cargarTabla(0);
 					cargarTabla(1);
 					cargarPantalla(0);
@@ -457,6 +492,12 @@ public class Principal extends JFrame /*implements Runnable*/ {
 					lblLogoequip2.setText(null);
 					buttonBackSpace.setVisible(true);
 					buttonBackSpace.setEnabled(true);
+				}else if (btnJuego.getText().toString().equalsIgnoreCase("Asignar otro\n Día")) {
+					Baloncesto.getInstance().asignarOtroDia();
+					JOptionPane.showMessageDialog(null, "Fecha Cambiada", "Torneo", JOptionPane.INFORMATION_MESSAGE);
+					btnJuego.setText("Iniciar\n Juego");
+					menuPrincipalJuegoMostrar();
+					
 				}
 				
 				
@@ -622,6 +663,15 @@ public class Principal extends JFrame /*implements Runnable*/ {
 		panelMenuPrinc.add(spinnerDia);
 		
 		spinnerMes = new JSpinner();
+		spinnerMes.addChangeListener(new ChangeListener() {
+			public void stateChanged(ChangeEvent e) {
+				if (Integer.parseInt(spinnerDia.getValue().toString())>mesDia(Integer.parseInt(spinnerMes.getValue().toString()), Integer.parseInt(spinnerAno.getValue().toString()))) {
+					spinnerDia.setModel(new SpinnerNumberModel(30, 1, mesDia(Integer.parseInt(spinnerMes.getValue().toString()), Integer.parseInt(spinnerAno.getValue().toString())), 1));
+				}else {
+					spinnerDia.setModel(new SpinnerNumberModel(Integer.parseInt(spinnerDia.getValue().toString()), 1, mesDia(Integer.parseInt(spinnerMes.getValue().toString()), Integer.parseInt(spinnerAno.getValue().toString())), 1));
+				}
+			}
+		});
 		spinnerMes.setEnabled(false);
 		spinnerMes.setVisible(false);
 		System.out.println("Fecha "+fechaActual.getMonth());
@@ -657,52 +707,52 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		{
 			lblPivot = new JLabel("Example");
 			lblPivot.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-			lblPivot.setBounds(408, 574, 73, 34);
+			lblPivot.setBounds(408, 574, 116, 34);
 			panelInicioJuego.add(lblPivot);
 			
 			lblPivotequip2 = new JLabel("Example");
 			lblPivotequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-			lblPivotequip2.setBounds(882, 574, 73, 34);
+			lblPivotequip2.setBounds(840, 574, 124, 34);
 			panelInicioJuego.add(lblPivotequip2);
 			
 			lblAlas_Pivot = new JLabel("Example");
 			lblAlas_Pivot.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-			lblAlas_Pivot.setBounds(471, 631, 73, 38);
+			lblAlas_Pivot.setBounds(471, 631, 112, 38);
 			panelInicioJuego.add(lblAlas_Pivot);
 			
 			lblAla_Pivotequip2 = new JLabel("Example");
 			lblAla_Pivotequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-			lblAla_Pivotequip2.setBounds(845, 631, 73, 38);
+			lblAla_Pivotequip2.setBounds(839, 631, 111, 38);
 			panelInicioJuego.add(lblAla_Pivotequip2);
 			
 			lblEscolta = new JLabel("Example");
 			lblEscolta.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-			lblEscolta.setBounds(491, 548, 73, 38);
+			lblEscolta.setBounds(491, 548, 116, 38);
 			panelInicioJuego.add(lblEscolta);
 			
 			lblEscoltaequip2 = new JLabel("Example");
 			lblEscoltaequip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-			lblEscoltaequip2.setBounds(766, 550, 73, 34);
+			lblEscoltaequip2.setBounds(766, 550, 111, 34);
 			panelInicioJuego.add(lblEscoltaequip2);
 			
 			lblBase = new JLabel("Example");
 			lblBase.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-			lblBase.setBounds(554, 600, 73, 34);
+			lblBase.setBounds(554, 600, 111, 34);
 			panelInicioJuego.add(lblBase);
 			
 			lblBaseEquip2 = new JLabel("Example");
 			lblBaseEquip2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-			lblBaseEquip2.setBounds(722, 595, 73, 38);
+			lblBaseEquip2.setBounds(722, 595, 113, 38);
 			panelInicioJuego.add(lblBaseEquip2);
 			
 			lblAlero = new JLabel("Example");
 			lblAlero.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-			lblAlero.setBounds(365, 660, 100, 38);
+			lblAlero.setBounds(365, 660, 116, 38);
 			panelInicioJuego.add(lblAlero);
 			
 			lblAleroequi2 = new JLabel("Example");
 			lblAleroequi2.setIcon(new ImageIcon(Principal.class.getResource("/imagen/usuario.png")));
-			lblAleroequi2.setBounds(899, 659, 73, 41);
+			lblAleroequi2.setBounds(899, 659, 100, 41);
 			panelInicioJuego.add(lblAleroequi2);
 			
 		JPanel panel_equipo1 = new JPanel();
@@ -727,7 +777,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		JPanel panel_jugador_principal1 = new JPanel();
 		panel_jugador_principal1.setOpaque(false);
 		panel_jugador_principal1.setForeground(Color.WHITE);
-		panel_jugador_principal1.setBounds(42, 281, 355, 189);
+		panel_jugador_principal1.setBounds(42, 281, 357, 189);
 		panel_equipo1.add(panel_jugador_principal1);
 		panel_jugador_principal1.setLayout(new BorderLayout(0, 0));
 		
@@ -746,6 +796,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				nombreJugador = (String)table_Equip1.getModel().getValueAt(index, 0);
 				posisionJugador = (String)table_Equip1.getModel().getValueAt(index, 2);
 				btnCambio.setEnabled(true);
+				btnRebote.setEnabled(true);
+				btnRobos.setEnabled(true);
+				btnAsisten.setEnabled(true);
+				btnBloqueos.setEnabled(true);
 				equipoSeleccionado=0;
 			}
 		});
@@ -831,6 +885,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				nombreJugador = (String)table__Equip2.getModel().getValueAt(index, 0);
 				posisionJugador = (String)table_Equip1.getModel().getValueAt(index, 2);
 				btnCambio.setEnabled(true);
+				btnRebote.setEnabled(true);
+				btnRobos.setEnabled(true);
+				btnAsisten.setEnabled(true);
+				btnBloqueos.setEnabled(true);
 				equipoSeleccionado=1;
 				
 			}
@@ -895,11 +953,15 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				cargarTabla(0);
 				cargarTabla(1);
 				btnCambio.setEnabled(false);
+				btnRebote.setEnabled(false);
+				btnRobos.setEnabled(false);
+				btnAsisten.setEnabled(false);
+				btnBloqueos.setEnabled(false);
 			}
 		});
 		btnTriple.setVisible(false);
 		btnTriple.setBackground(new Color(255, 99, 71));
-		btnTriple.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnTriple.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnTriple.setBounds(744, 258, 141, 54);
 		panelInicioJuego.add(btnTriple);
 		
@@ -912,11 +974,15 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				cargarTabla(0);
 				cargarTabla(1);
 				btnCambio.setEnabled(false);
+				btnRebote.setEnabled(false);
+				btnRobos.setEnabled(false);
+				btnAsisten.setEnabled(false);
+				btnBloqueos.setEnabled(false);
 			}
 		});
 		btnDoble.setVisible(false);
 		btnDoble.setBackground(new Color(255, 99, 71));
-		btnDoble.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnDoble.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnDoble.setBounds(593, 258, 141, 54);
 		panelInicioJuego.add(btnDoble);
 		
@@ -929,14 +995,40 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				cargarTabla(0);
 				cargarTabla(1);
 				btnCambio.setEnabled(false);
+				btnRebote.setEnabled(false);
+				btnRobos.setEnabled(false);
+				btnAsisten.setEnabled(false);
+				btnBloqueos.setEnabled(false);
 			}
 		});
 		btnLibre.setVisible(false);
 		btnLibre.setBackground(new Color(255, 99, 71));
-		btnLibre.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnLibre.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnLibre.setBounds(442, 258, 141, 54);
 		panelInicioJuego.add(btnLibre);
 		
+		
+		btnRebote = new JButton("Rebote");
+		btnRebote.setEnabled(false);
+		btnRebote.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Jugador aux=anotarPuntos(6, false);
+				cargarPantalla(0);
+				cargarPantalla(1);
+				cargarTabla(0);
+				cargarTabla(1);
+				btnCambio.setEnabled(false);
+				btnRebote.setEnabled(false);
+				btnRobos.setEnabled(false);
+				btnAsisten.setEnabled(false);
+				btnBloqueos.setEnabled(false);
+			}
+		});
+		btnRebote.setVisible(false);
+		btnRebote.setBackground(new Color(255, 99, 71));
+		btnRebote.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnRebote.setBounds(442, 323, 141, 49);
+		panelInicioJuego.add(btnRebote);
 		
 		btnFalta = new JButton("Falta");
 		btnFalta.addActionListener(new ActionListener() {
@@ -954,13 +1046,61 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				cargarTabla(0);
 				cargarTabla(1);
 				btnCambio.setEnabled(false);
+				btnRebote.setEnabled(false);
+				btnRobos.setEnabled(false);
+				btnAsisten.setEnabled(false);
+				btnBloqueos.setEnabled(false);
 			}
 		});
 		btnFalta.setVisible(false);
 		btnFalta.setBackground(new Color(255, 99, 71));
-		btnFalta.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnFalta.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnFalta.setBounds(593, 323, 141, 49);
 		panelInicioJuego.add(btnFalta);
+		
+		btnAsisten = new JButton("Asistencia");
+		btnAsisten.setEnabled(false);
+		btnAsisten.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Jugador aux=anotarPuntos(4, false);
+				cargarPantalla(0);
+				cargarPantalla(1);
+				cargarTabla(0);
+				cargarTabla(1);
+				btnCambio.setEnabled(false);
+				btnRebote.setEnabled(false);
+				btnRobos.setEnabled(false);
+				btnAsisten.setEnabled(false);
+				btnBloqueos.setEnabled(false);
+			}
+		});
+		btnAsisten.setVisible(false);
+		btnAsisten.setBackground(new Color(255, 99, 71));
+		btnAsisten.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnAsisten.setBounds(744, 323, 141, 49);
+		panelInicioJuego.add(btnAsisten);
+		
+		btnRobos = new JButton("Robo");
+		btnRobos.setEnabled(false);
+		btnRobos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				anotarPuntos(7, false);
+				cargarPantalla(0);
+				cargarPantalla(1);
+				cargarTabla(0);
+				cargarTabla(1);
+				btnCambio.setEnabled(false);
+				btnRebote.setEnabled(false);
+				btnRobos.setEnabled(false);
+				btnAsisten.setEnabled(false);
+				btnBloqueos.setEnabled(false);
+			}
+		});
+		btnRobos.setVisible(false);
+		btnRobos.setBackground(new Color(255, 99, 71));
+		btnRobos.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnRobos.setBounds(744, 383, 141, 49);
+		panelInicioJuego.add(btnRobos);
 		
 		btnCambio = new JButton("Cambio");
 		btnCambio.addActionListener(new ActionListener() {
@@ -970,6 +1110,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				micambi.setLocationRelativeTo(null);
 				micambi.setVisible(true);
 				btnCambio.setEnabled(false);
+				btnRebote.setEnabled(false);
+				btnRobos.setEnabled(false);
+				btnAsisten.setEnabled(false);
+				btnBloqueos.setEnabled(false);
 				cargarPantalla(0);
 				cargarPantalla(1);
 				cargarTabla(0);
@@ -979,9 +1123,31 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		btnCambio.setVisible(false);
 		btnCambio.setEnabled(false);
 		btnCambio.setBackground(new Color(255, 99, 71));
-		btnCambio.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnCambio.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnCambio.setBounds(593, 383, 141, 49);
 		panelInicioJuego.add(btnCambio);
+		
+		btnBloqueos = new JButton("Bloqueo");
+		btnBloqueos.setEnabled(false);
+		btnBloqueos.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		btnBloqueos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				anotarPuntos(5, false);
+				cargarPantalla(0);
+				cargarPantalla(1);
+				cargarTabla(0);
+				cargarTabla(1);
+				btnCambio.setEnabled(false);
+				btnRebote.setEnabled(false);
+				btnRobos.setEnabled(false);
+				btnAsisten.setEnabled(false);
+				btnBloqueos.setEnabled(false);
+			}
+		});
+		btnBloqueos.setVisible(false);
+		btnBloqueos.setBackground(new Color(255, 99, 71));
+		btnBloqueos.setBounds(442, 383, 141, 49);
+		panelInicioJuego.add(btnBloqueos);
 		
 		btnFin = new JButton("Fin");
 		btnFin.addActionListener(new ActionListener() {
@@ -1026,7 +1192,7 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		});
 		btnFin.setVisible(false);
 		btnFin.setBackground(new Color(255, 99, 71));
-		btnFin.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		btnFin.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		btnFin.setBounds(593, 443, 141, 49);
 		panelInicioJuego.add(btnFin);
 		
@@ -1078,6 +1244,10 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				btnFalta.setVisible(false);
 				btnLibre.setVisible(false);
 				btnTriple.setVisible(false);
+				btnRebote.setVisible(false);
+				btnRobos.setVisible(false);
+				btnAsisten.setVisible(false);
+				btnBloqueos.setVisible(false);
 			}
 		});
 		buttonBackSpace.setIcon(new ImageIcon(Principal.class.getResource("/com/sun/javafx/scene/control/skin/caspian/fxvk-backspace-button.png")));
@@ -1149,6 +1319,30 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 		return listo;
 	}
 	
+	private int mesDia(int mes, int anyo) {
+		int numDias=0;
+		switch (mes) {
+        case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+            numDias = 31;
+            break;
+        case 4: case 6: case 9: case 11:
+            numDias = 30;
+            break;
+        case 2:
+            if((anyo%4==0 && anyo%100!=0) || anyo%400==0){
+                numDias = 29;
+            }
+            else{
+                numDias = 28;
+            }
+            break;
+        default:
+            System.out.println("\nEl mes " + mes + " es incorrecto.");
+            break;
+    }
+		return numDias;
+	}
+	
 	private void menuPrincipalJuegoMostrar() {
 		try {
 			if (fechaActual.getDate()==Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate() && Baloncesto.getInstance().getJuegoRecord().size()!=0) {
@@ -1179,6 +1373,22 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 				lblLogoequipo22.setText(null);
 				lblNombre2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
 			
+			}else if(Baloncesto.getInstance().getJuegoRecord().size()!=0 && btnJuego.getText().equalsIgnoreCase("Asignar otro\n Día")) {
+				int dia = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate();
+				int mes = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth();
+				int year = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getYear();
+				panelEquipoAJugar.setVisible(true);
+				lblHoyFecha.setText(Integer.toString(dia)+"/"+Integer.toString(mes)+"/"+Integer.toString(year));
+				//Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo()
+				Icon icono = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getLogo().getImage().getScaledInstance(lblLogoequipo11.getWidth(), lblLogoequipo11.getHeight(), Image.SCALE_DEFAULT));
+				lblLogoequipo11.setIcon(icono);
+				lblLogoequipo11.setText(null);
+				lblNombre1.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNombre());
+				Icon icono1 = new ImageIcon(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getLogo().getImage().getScaledInstance(lblLogoequipo22.getWidth(), lblLogoequipo22.getHeight(), Image.SCALE_DEFAULT));
+				lblLogoequipo22.setIcon(icono1);
+				lblLogoequipo22.setText(null);
+				lblNombre2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[1].getNombre());
+				btnJuego.setEnabled(true);
 			}else if(Baloncesto.getInstance().getJuegoRecord().size()!=0 && !btnJuego.getText().toString().equalsIgnoreCase("Renaudar\n Juego")) {
 				int dia = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getDate();
 				int mes = Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getFechaJuego().getMonth();
@@ -1249,6 +1459,18 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 					if (punt==3 && falta==false) {
 						Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().setTiroTriple(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().getTiroTriple()+1);
 					}
+					if (punt==4 && falta==false) {//asisten
+						Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().setAsistencias(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().getAsistencias()+1);
+					}
+					if (punt==5 && falta==false) {//bloque
+						Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().setBloqueos(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().getBloqueos()+1);
+					}
+					if (punt==6 && falta==false) {//rebote
+						Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().setRebotes(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().getRebotes()+1);
+					}
+					if (punt==7 && falta==false) {//robo
+						Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().setRobos(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equipoSeleccionado].getNominaJugadores().get(i).getPuntoJugador().getRobos()+1);
+					}
 				}
 				i++;
 			}
@@ -1317,11 +1539,19 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 							int tiroDoble=Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().getTiroDoble();
 							int tiroTriple=Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().getTiroTriple();
 							int cantFalta=Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().getCantFalta();
+							int rebote =Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().getRebotes();
+							int asis = Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().getAsistencias();
+							int robo = Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().getRobos();
+							int block = Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().getBloqueos();
 							
 							Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().setTiroLibre(tiroLibre+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNominaJugadores().get(j).getPuntoJugador().getTiroLibre());
 							Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().setTiroDoble(tiroDoble+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNominaJugadores().get(j).getPuntoJugador().getTiroDoble());
 							Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().setTiroTriple(tiroTriple+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNominaJugadores().get(j).getPuntoJugador().getTiroTriple());
 							Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().setCantFalta(cantFalta+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNominaJugadores().get(j).getPuntoJugador().getCantFalta());
+							Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().setRebotes(rebote+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNominaJugadores().get(j).getPuntoJugador().getRebotes());
+							Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().setAsistencias(asis+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNominaJugadores().get(j).getPuntoJugador().getAsistencias());
+							Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().setRobos(robo+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNominaJugadores().get(j).getPuntoJugador().getRobos());
+							Baloncesto.getInstance().getMisEquipos().get(i).getNominaJugadores().get(k).getPuntoJugador().setBloqueos(block+Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[posi].getNominaJugadores().get(j).getPuntoJugador().getBloqueos());
 							
 						}
 						j++;
@@ -1374,7 +1604,23 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 					lblPivotequip2.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getNombre());
 				}
 				
-	
+				table__Equip2.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+				table__Equip2.getTableHeader().setReorderingAllowed(false);
+				TableColumnModel columnModel = table__Equip2.getColumnModel();
+				columnModel.getColumn(0).setPreferredWidth(126);
+				columnModel.getColumn(1).setPreferredWidth(48);
+				columnModel.getColumn(2).setPreferredWidth(50);
+				columnModel.getColumn(3).setPreferredWidth(30);
+				columnModel.getColumn(4).setPreferredWidth(35);
+				columnModel.getColumn(5).setPreferredWidth(35);
+				columnModel.getColumn(6).setPreferredWidth(30);
+				columnModel.getColumn(0).setResizable(false);
+				columnModel.getColumn(1).setResizable(false);
+				columnModel.getColumn(2).setResizable(false);
+				columnModel.getColumn(3).setResizable(false);
+				columnModel.getColumn(4).setResizable(false);
+				columnModel.getColumn(5).setResizable(false);
+				columnModel.getColumn(6).setResizable(false);
 				
 			}else if (equip==0 && (Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Base") || Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Escolta") || Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Alero") || Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Ala-Pivot") || Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getPosicion().equalsIgnoreCase("Pivot")) && Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).isJugando()==true) {
 				fila_Equip1[0]= Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[0].getNominaJugadores().get(i).getNombre();
@@ -1403,7 +1649,23 @@ Icon icon1o = new ImageIcon(new ImageIcon(Principal.class.getResource("/imagen/v
 					lblPivot.setText(Baloncesto.getInstance().getJuegoRecord().get(Baloncesto.getInstance().getCantJuegos()).getEquipoJuego()[equip].getNominaJugadores().get(i).getNombre());
 				}
 				
-				
+				table_Equip1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+				table_Equip1.getTableHeader().setReorderingAllowed(false);
+				TableColumnModel columnModel = table_Equip1.getColumnModel();
+				columnModel.getColumn(0).setPreferredWidth(126);
+				columnModel.getColumn(1).setPreferredWidth(48);
+				columnModel.getColumn(2).setPreferredWidth(50);
+				columnModel.getColumn(3).setPreferredWidth(30);
+				columnModel.getColumn(4).setPreferredWidth(35);
+				columnModel.getColumn(5).setPreferredWidth(35);
+				columnModel.getColumn(6).setPreferredWidth(30);
+				columnModel.getColumn(0).setResizable(false);
+				columnModel.getColumn(1).setResizable(false);
+				columnModel.getColumn(2).setResizable(false);
+				columnModel.getColumn(3).setResizable(false);
+				columnModel.getColumn(4).setResizable(false);
+				columnModel.getColumn(5).setResizable(false);
+				columnModel.getColumn(6).setResizable(false);
 				
 			}
 		}
